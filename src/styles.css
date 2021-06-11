@@ -1,1 +1,264 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    --sakura: #F49B9B;
+    --lavender: #A29BF4;
+    --lila: #F4F3FE;
+    --sunflower:  #FECA22;
+    --sunflowerL:  #FEDD6F;/*rgba(254,221,111,1)*/
+    --sunflowerL50:  rgba(254,221,111,0.5);
+
+    --lightChocolate: #6B4C2E;
+    --chocolate: #503821;
+    --darkChocolate: #2C1F12;
+    --aqua: #16A2B9;
+    --darkAqua: #07717D;
+    --lightAqua: #7FCCD9;
+    --gold: #FBB025;
+    --lightGold: #FDD385;
+    --sand: #D8BA84;
+    --moka: #BE8F3C;
+    --poison: #9D7B81;
+    --olive: #ABBE3C;
+    --lightOlive: #CCD884;
+
+    --cherry: #DC3545;
+    --darkCherry: #A92531;
+
+    --charcoal: #1D1E21;
+    --lightCharcoal: #2F2F33;
+    --ashes:#5F5F5F;
+    --graybone:#D1D1D1;
+    --seashore: #caf7e9;/*#97efd5;*/
+    --shadow:rgba(0,0,0,0.2);
+    --darks:rgba(0,0,0,0.7);
+    --flash: rgba(255,255,255,0.5);
+    --syrup: rgba(75,56,24,0.7);
+
+    --gradientPastel: linear-gradient(to right, #A29BF4, #F49B9B, #FED85C);
+    --gradientPunk: linear-gradient(to right, #5043EA, #DC3545, #F6BD02);
+    --gradientJaguar: linear-gradient(to right, #FBB025, #503821, #2C1F12);
+    --gradientForest: linear-gradient(to right, #24C339, #3CABBE, #16A2B9);
+    --gradientSunset: linear-gradient(to right, #FBB025, #DC3545);
+    --gradientSunrise: linear-gradient(to right, #16A2B9, #FBB025);
+    --gradientPrimary: linear-gradient(to right, #16A2B9, #DC3545, #FBB025);
+    --gradient3D: linear-gradient(to right, #16A2B9, #DC3545);
+
+    /*--header_height: 4.5rem;
+    --footer_height: 2rem;
+    --filter_height: 6.2rem;
+    --content_height: calc(100vh - var(--header_height) - var(--footer_height));/*total screen height minus header's minus footer's*/
+}
+/*.content{height: var(--content_height)!important;}
+.content2{height: calc(var(--content_height) - var(--filter_height))!important;}*/
+
+/*FONTS*/
+body{color: var(--charcoal)!important;}
+/*colors*/
+.text-pink{color: var(--sakura);}
+.text-purple{color: var(--lavender);}
+.text-yellow{color: var(--sunflower);}
+.text-green{color: var(--olive);}
+.text-red{color: var(--cherry);}
+.text-graybone{color: var(--graybone);}
+.text-ashes{color: var(--ashes);}
+.text-gradientPunk{
+    background: var(--gradientPunk);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+.font-xs{font-size: x-small!important;}
+.font-sm{font-size: small!important;}
+.font-lg{font-size: larger!important;}
+
+/*links and material design icons*/
+.mdi-xl{font-size: 3.5rem!important; line-height: 2.5rem}
+.mdi-lg{font-size: 2rem!important;}
+.mdi{font-size: 1.3rem;}
+.btn-link.mdi:hover,a.mdi:hover{text-decoration: none!important;}
+
+/*webkit*/
+::selection{background: var(--olive)!important;}/*WebKit/Blink Browsers*/
+::-moz-selection{background:  var(--sunflower)!important; /*Gecko Browsers */}
+:focus{outline: transparent;}
+
+/*BACKGROUNDS*/
+.backg-white{background-color: white;}
+.backg-white50{background-color: rgba(255,255,255,255.3)}
+.backg-charcoal50{background-color: rgba(0,0,0,0.3)}
+.backg-charcoal{background-color: var(--charcoal);}
+.backg-graybone{background-color: var(--graybone);}
+.backg-sand{background-color: var(--sand);}
+.shadow{box-shadow: 0 .2rem .2rem var(--shadow) !important;}
+
+/*LINE AND BORDERS*/
+.bb-gray{border-bottom: solid 1px var(--shadow);}
+.by-gray{border-bottom: solid 1px var(--shadow);border-top: solid 1px var(--shadow);}
+.bb-shadow-dotted{border-bottom: dotted 2px var(--shadow)}
+.bb-white-dotted{border-bottom: dotted 2px white}
+.b-radius-25{border-radius: .25rem}
+hr{border: 1px dashed var(--flash)}
+
+/*SPACING: CUSTOM PADDING AND MARGIN*/
+.w-10{width:10%}
+
+.show-element{display: block!important; visibility: visible!important;}
+.hide-element{display: none!important; visibility: hidden!important;}
+
+
+/*******************************************************************************************************************************/
+
+/*OVERRIDE - BUTTONS*/
+.btn-trans{background-color: transparent;}
+.btn-trans:focus,.btn-trans.focus {text-decoration: unset;box-shadow:unset!important;}
+.btn:hover:disabled{cursor: not-allowed}
+.btn.circle{border-radius: 100px!important;}
+
+/*TOGGLE BUTTON*/
+.switch {position: relative; display: inline-block; width: 3rem; height: 1.5rem;}
+.switch input {opacity: 0; width: 0; height: 0;}
+.slider {position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; -webkit-transition: .4s; transition: .4s;}
+.slider:before {position: absolute; content: ""; height: 1rem; width: 1rem; left: 4px; bottom: 4px; background-color: white; -webkit-transition: .4s; transition: .4s;}
+input:checked + .slider{background-image: var(--gradientPunk);}
+input:focus + .slider {box-shadow: 0 0 0 0.2rem var(--lavenderL50)!important;}
+input:checked + .slider:before {-webkit-transform: translateX(26px); -ms-transform: translateX(26px); transform: translateX(26px);}
+/* Rounded sliders */
+.slider.round {border-radius: 1.5rem;}
+.slider.round:before {border-radius: 50%;}
+input:disabled + .slider{opacity: 0.5; cursor: not-allowed}
+
+
+/*gradient 3D BUTTON*/
+.btn-3D,
+.btn-3D:hover,
+.btn-3D:focus, .btn-3D.focus,
+.btn-3D.disabled, .btn-3D:disabled,
+.btn-3D:not(:disabled):not(.disabled):active, .btn-3D:not(:disabled):not(.disabled).active,
+.show > .btn-3D.dropdown-toggle
+{color: #fff!important;}
+.btn-3D, .btn-3D.disabled, .btn-3D:disabled
+{border: 2px solid!important;border-image-source: var(--gradient3D)!important;border-image-slice: 9!important;}
+.btn-3D, .btn-3D.disabled, .btn-3D:disabled,
+.btn-3D:hover, .btn-3D:focus, .btn-3D.focus,
+.btn-3D:not(:disabled):not(.disabled):active, .btn-3D:not(:disabled):not(.disabled).active,
+.show > .btn-3D.dropdown-toggle
+{background-color: transparent;background-image: var(--gradient3D);border-color: transparent!important;}
+.btn-3D:focus, .btn-3D.focus,
+.btn-3D:not(:disabled):not(.disabled):active:focus, .btn-3D:not(:disabled):not(.disabled).active:focus,
+.show > .btn-3D.dropdown-toggle:focus
+{box-shadow: 0 0 0 0.2rem var(--flash)!important;}
+
+/*gradient PRIMARY BUTTON*/
+.btn-ryb{
+    background-image: var(--gradientPrimary);
+    /*margin: 10px;*/
+    /*padding: 15px 45px;*/
+    text-align: center;
+    /*text-transform: uppercase;*/
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: #fff;
+    /*box-shadow: 0 0 20px #eee;*/
+    /*border-radius: 10px;*/
+    display: block;
+}
+.btn-ryb:hover{
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+/*gradient FOREST BUTTON*/
+.btn-forest{
+    background-image: var(--gradientForest);
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: #fff;
+    display: block;
+}
+.btn-forest:hover{
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+
+
+/*JAGUAR BUTTON*/
+.btn-jaguar,
+.btn-jaguar:hover,
+.btn-jaguar:focus, .btn-jaguar.focus,
+.btn-jaguar.disabled, .btn-jaguar:disabled,
+.btn-jaguar:not(:disabled):not(.disabled):active, .btn-jaguar:not(:disabled):not(.disabled).active,
+.show > .btn-jaguar.dropdown-toggle
+{color: #fff!important;}
+.btn-jaguar, .btn-jaguar.disabled, .btn-jaguar:disabled
+{background-color: var(--lightChocolate)!important; border-color: var(--lightChocolate)!important;}
+.btn-jaguar:hover, .btn-jaguar:focus, .btn-jaguar.focus
+{background-color: var(--chocolate)!important;border-color: var(--chocolate)!important;}
+.btn-jaguar:not(:disabled):not(.disabled):active, .btn-jaguar:not(:disabled):not(.disabled).active,
+.show > .btn-jaguar.dropdown-toggle
+{background-color: var(--darkChocolate)!important;border-color: var(--darkChocolate)!important;}
+.btn-jaguar:focus, .btn-jaguar.focus,
+.btn-jaguar:not(:disabled):not(.disabled):active:focus, .btn-jaguar:not(:disabled):not(.disabled).active:focus,
+.show > .btn-jaguar.dropdown-toggle:focus
+{box-shadow: 0 0 0 0.2rem var(--moka)!important;}
+
+/*YELLOW BUTTON*/
+.btn-yellow,
+.btn-yellow:hover,
+.btn-yellow:focus, .btn-yellow.focus,
+.btn-yellow.disabled, .btn-yellow:disabled,
+.btn-yellow:not(:disabled):not(.disabled):active, .btn-yellow:not(:disabled):not(.disabled).active,
+.show > .btn-yellow.dropdown-toggle
+{color: #fff!important;}
+.btn-yellow, .btn-yellow.disabled, .btn-yellow:disabled
+{background-color: var(--gold)!important; border-color: var(--gold)!important;}
+.btn-yellow:hover, .btn-yellow:focus, .btn-yellow.focus
+{background-color: var(--sunflower)!important;border-color: var(--gold)!important;}
+.btn-yellow:not(:disabled):not(.disabled):active, .btn-yellow:not(:disabled):not(.disabled).active,
+.show > .btn-yellow.dropdown-toggle
+{background-color: var(--gold)!important;border-color: var(--gold)!important;}
+.btn-yellow:focus, .btn-yellow.focus,
+.btn-yellow:not(:disabled):not(.disabled):active:focus, .btn-yellow:not(:disabled):not(.disabled).active:focus,
+.show > .btn-yellow.dropdown-toggle:focus
+{box-shadow: 0 0 0 0.2rem var(--sunflowerL50)!important;}
+
+
+/*OVERRIDE - INPUTS*/
+.form-control,.form-control:focus{background-color: var(--lightCharcoal)!important;border-color: transparent!important;}
+.form-control{color: var(--graybone);}
+.form-control:focus {color: #fff;box-shadow: 0 0 0 0.2rem var(--shadow)!important;}
+option:hover{
+    background-color: var(--lightAqua);
+    color: #495057;
+}
+
+
+/*OVERRIDE - TABLES*/
+.table th, .table td{vertical-align: middle!important;}
+.table .thead-aqua th {
+    color: #fff;
+    background-color: var(--aqua);
+    border-color: transparent;
+}
+/*.table-container{display: block; max-height: calc(var(--content_height) * .65)!important; overflow-y: scroll/*hidden*}*/
+/*.table-container .table tbody{height: calc(var(--content_height) * .2); overflow-y: scroll!important;}
+table{display: block; width: 100%}
+thead, tbody{display: inline-block; width: 100%}
+tr{width: 100%}*/
+
+/*OVERRIDE - MODALS AND OTHER CARD CONTAINERS*/
+.modal-content{
+    border: 5px solid!important;
+    border-image-source: var(--gradient3D)!important;
+    border-image-slice: 9!important;
+    border-radius: 0!important;
+}
+.modal-content{background-color: var(--darks)!important;color: white;}
+.modal-header{border-bottom: unset}
+.modal-footer{border-top: unset}
+button.close:focus{border: none;}
+.close,.close:focus,.close:hover{color: white}
+.card{border-color: var(--lila)!important;}

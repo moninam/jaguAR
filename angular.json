@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "jaguAr"
+  "defaultProject": "jaguAr",
+  "cli": {
+    "analytics": false
+  }
 }

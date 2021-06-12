@@ -12,5 +12,5 @@ export class AppComponent {
 
   router: string = '';
   constructor(private location: Location){ this.router = this.location.path(); }
-  shouldShow(){ return !(this.router === '/admin' || this.router === '/view'); }
+  shouldShow(){ return !(this.router === '/admin' || this.router === '/visor'); }
 }

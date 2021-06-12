@@ -28,6 +28,7 @@
 
     --charcoal: #1D1E21;
     --lightCharcoal: #2F2F33;
+    --blue-gray: #8F9198;
     --ashes:#5F5F5F;
     --graybone:#D1D1D1;
     --seashore: #caf7e9;/*#97efd5;*/
@@ -45,11 +46,12 @@
     --gradientPrimary: linear-gradient(to right, #16A2B9, #DC3545, #FBB025);
     --gradient3D: linear-gradient(to right, #16A2B9, #DC3545);
 
-    /*--header_height: 4.5rem;
-    --footer_height: 2rem;
+    --header_height: 5rem;
+    --footer_height: 10rem;
     --filter_height: 6.2rem;
     --content_height: calc(100vh - var(--header_height) - var(--footer_height));/*total screen height minus header's minus footer's*/
 }
+.content{overflow-x: hidden;}
 /*.content{height: var(--content_height)!important;}
 .content2{height: calc(var(--content_height) - var(--filter_height))!important;}*/
 

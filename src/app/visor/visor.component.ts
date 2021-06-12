@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisorComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(){
   }
+  ngOnInit(): void {
 
+
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
 
 
@@ -7,10 +7,16 @@ import { Location } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'jaguAr';
+  private router = '';
+  private header;
+  private footer;
+  constructor(private location: Location){ this.router = this.location.path();
+      this.header = document.getElementById('app-navbar');
+      this.footer = document.getElementById('app-footer');}
+  ngOnInit(): void {
 
-  router: string = '';
-  constructor(private location: Location){ this.router = this.location.path(); }
-  shouldShow(){ return !(this.router === '/admin' || this.router === '/visor'); }
+  }
+  shouldShow(){ return !(this.router === '/visor'); }
 }

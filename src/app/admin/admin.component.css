@@ -2,3 +2,12 @@
     text-align: left;
     padding-left: 3rem;
 }
+#adminContent{
+    height: 100vh;
+    overflow-y: scroll;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--blue-gray);
+    background-image: url('../../assets/img/admin/admin_05.jpg');
+}

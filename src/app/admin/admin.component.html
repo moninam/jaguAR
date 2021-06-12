@@ -1,23 +1,31 @@
 <div class="row">
     <div class="col-3 px-0">
-        <div class="container-fluid h-100 backg-sand px-0">
+        <div class="container-fluid h-100 backg-charcoal px-0">
             <div class="col bb-gray">
                 <div class="p-3">
-                    <a id="admin_nav_services" href="/admin" class="font-lg btn btn-link w-100 text-white">Modelos 3D</a>
+                    <a id="admin-grupos" routerLink="grupos" class="font-lg btn btn-trans btn-link w-100 text-white">Grupos</a>
                 </div>
             </div>
             <div class="col bb-gray">
                 <div class="p-3">
-                    <a id="admin_nav_users" href="/admin" class="font-lg btn btn-link w-100 text-white">Grupos</a>
+                    <a id="admin-componentes" routerLink="componentes" class="font-lg btn btn-trans btn-link w-100 text-white">Componentes</a>
+                </div>
+                <div class="px-3">
+                    <div class="ps-4">
+                        <a id="admin-modelos" routerLink="modelos" class="font-lg btn btn-trans btn-link w-100 text-white">Modelos</a>
+                    </div>
+                    <div class="ps-4 pb-3">
+                        <a id="admin-marcadores" routerLink="marcadores" class="font-lg btn btn-trans btn-link w-100 text-white">Marcadores</a>
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="p-3">
-                    <a id="admin_nav_labs" href="/admin" class="font-lg btn btn-link w-100 text-white">Otros</a>
-                </div>
-            </div>
+
         </div>
     </div>
     <div id="adminContent" class="col-9 px-0">
+        <router-outlet>
+            <img class="back_img" src="../../assets/img/admin/admin_01.jpg">
+        </router-outlet>
     </div>
 </div>
+<app-footer></app-footer>

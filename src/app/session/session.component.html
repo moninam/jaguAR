@@ -1,19 +1,22 @@
 <div class="row">
     <div class="col-lg-5 col-md-5 col-sm-12 p-0">
-        <img width="100%" height="auto" src="../../../assets/img/jaguar_skin.png">
+        <img class="back_img" src="../../assets/img/admin/admin_02.jpg">
     </div>
-    <div class="col-lg-7 col-md-7 col-sm-12 p-4 mx-auto backg-charcoal text-center text-white">
-        <img class="" width="40%" height="auto" src="../../../assets/img/jaguAR_logo.png"/>
-        <div id="login_navigation">
-            <h2 class="">Panel Administrador</h2>
+    <div class="col-lg-7 col-md-7 col-sm-12 p-4 mx-auto backg-charcoal text-white">
+        <div class="text-center">
+            <img width="40%" height="auto" src="../../assets/img/jaguAR_logo.png"/>
+        </div>
+        <div id="login_navigation" class="show-element">
+            <h2 class="text-center">Panel Administrador</h2>
             <div class="col-6 mx-auto my-4">
-                <button class="w-100 mb-2 btn btn-ryb">Iniciar sesión</button>
-                <button class="w-100 btn btn-yellow">Registrarse</button>
+                <button class="w-100 mb-2 btn btn-ryb" (click)="showContent(2)" >Iniciar sesión</button>
+                <button class="w-100 btn btn-yellow" (click)="showContent(3)">Registrarse</button>
             </div>
         </div>
-        <div id="login_section">
-            <h2 class="">Inicio de sesión</h2>
-            <div class="col-6 mx-auto my-4 text-left">
+
+        <div id="login_section" class="hide-element">
+            <h2 class="text-center">Inicio de sesión</h2>
+            <div class="col-8 mx-auto my-4">
                 <form>
                     <div class="form-group w-100 mb-2">
                         <label for="login_email" class="">Correo electrónico</label>
@@ -25,51 +28,53 @@
                     </div>
                     <button class="w-100 mb-2 btn btn-ryb">Iniciar sesión</button>
                 </form>
-                <button class="w-100 mt-2 btn btn-link">Regresar</button>
+                <a class="w-100 mt-2 btn btn-link" (click)="showContent(1)">Regresar</a>
             </div>
         </div>
-        <div id="register_section">
-            <h2 class="">Registro de usuario</h2>
-            <div class="col-6 mx-auto my-4 text-left">
-                <div class="form-group w-100 mb-2">
-                    <label for="register_email" class="">Correo electrónico</label>
-                    <input id="register_email" type="text" class="form-control" placeholder="Ingrese el correo electrónico"/>
-                </div>
-                <div class="form-group w-100 mb-2">
-                    <label for="register_placeName" class="">Nombre del establecimiento</label>
-                    <input id="register_placeName" type="text" class="form-control" placeholder="Ingrese el nombre"/>
-                </div>
-                <div class="form-group w-100 mb-2">
-                    <label for="register_address" class="">Dirección del establecimiento</label>
-                    <input id="register_address" type="text" class="form-control" placeholder="Ingrese la dirección"/>
-                </div>
-                <div class="form-group w-100 mb-2">
-                    <label for="register_phone" class="">Teléfono del establecimiento</label>
-                    <input id="register_phone" type="text" class="form-control" placeholder="Ingrese el número telefónico"/>
-                </div>
-                <div class="form-group w-100 mb-2">
-                    <label for="register_alias" class="">Alias del establecimiento</label>
-                    <input id="register_alias" type="text" class="form-control" placeholder="Ingrese el alias"/>
-                </div>
-                <div class="form-group w-100 mb-2">
-                    <label for="register_googlemaps" class="">Ubicación en google maps</label>
-                    <input id="register_googlemaps" type="text" class="form-control" placeholder="https://goo.gl/maps/7iRTXLNbhzVfzenq8"/>
-                </div>
-                <hr>
-                <div class="form-group w-100 mb-2">
-                    <label for="register_pass" class="">Contraseña</label>
-                    <input id="register_pass" type="password" class="form-control" placeholder="********"/>
-                </div>
-                <div class="form-group w-100 mb-4">
-                    <label for="register_confirm_pass" class="">Confirmar contraseña</label>
-                    <input id="register_confirm_pass" type="password" class="form-control" placeholder="********"/>
-                </div>
+
+        <div id="register_section" class="hide-element">
+            <h2 class="text-center">Registro de usuario</h2>
+            <div class="form-container">
                 <form>
-                    <button class="w-100 btn btn-yellow">Registrarse</button>
+                    <div class="col-8 mx-auto my-4">
+                        <div class="form-group w-100 mb-2">
+                            <label for="register_email" class="">Correo electrónico</label>
+                            <input id="register_email" type="text" class="form-control" placeholder="Ingrese el correo electrónico"/>
+                        </div>
+                        <div class="form-group w-100 mb-2">
+                            <label for="register_placeName" class="">Nombre del establecimiento</label>
+                            <input id="register_placeName" type="text" class="form-control" placeholder="Ingrese el nombre"/>
+                        </div>
+                        <div class="form-group w-100 mb-2">
+                            <label for="register_address" class="">Dirección del establecimiento</label>
+                            <input id="register_address" type="text" class="form-control" placeholder="Ingrese la dirección"/>
+                        </div>
+                        <div class="form-group w-100 mb-2">
+                            <label for="register_phone" class="">Teléfono del establecimiento</label>
+                            <input id="register_phone" type="text" class="form-control" placeholder="Ingrese el número telefónico"/>
+                        </div>
+                        <div class="form-group w-100 mb-2">
+                            <label for="register_alias" class="">Alias del establecimiento</label>
+                            <input id="register_alias" type="text" class="form-control" placeholder="Ingrese el alias"/>
+                        </div>
+                        <div class="form-group w-100 mb-2">
+                            <label for="register_googlemaps" class="">Ubicación en google maps</label>
+                            <input id="register_googlemaps" type="text" class="form-control" placeholder="https://goo.gl/maps/7iRTXLNbhzVfzenq8"/>
+                        </div>
+                        <hr>
+                        <div class="form-group w-100 mb-2">
+                            <label for="register_pass" class="">Contraseña</label>
+                            <input id="register_pass" type="password" class="form-control" placeholder="********"/>
+                        </div>
+                        <div class="form-group w-100 mb-4">
+                            <label for="register_confirm_pass" class="">Confirmar contraseña</label>
+                            <input id="register_confirm_pass" type="password" class="form-control" placeholder="********"/>
+                        </div>
+                        <button class="w-100 btn btn-yellow">Registrarse</button>
+                    </div>
                 </form>
-                <button class="w-100 mt-2 btn btn-link">Regresar</button>
             </div>
+            <a class="w-100 mt-2 btn btn-link" (click)="showContent(1)">Regresar</a>
         </div>
     </div>
-
 </div>

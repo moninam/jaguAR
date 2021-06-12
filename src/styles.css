@@ -3,6 +3,7 @@
 :root {
     --sakura: #F49B9B;
     --lavender: #A29BF4;
+    --lavenderL50: rgba(178,173,246,0.5);
     --lila: #F4F3FE;
     --sunflower:  #FECA22;
     --sunflowerL:  #FEDD6F;/*rgba(254,221,111,1)*/
@@ -92,16 +93,19 @@ body{color: var(--charcoal)!important;}
 .backg-sand{background-color: var(--sand);}
 .shadow{box-shadow: 0 .2rem .2rem var(--shadow) !important;}
 
+/*IMAGES*/
+.back_img{height: 100%; width:100%; object-fit: cover; object-position: center; margin: 0; padding: 0;}
+
 /*LINE AND BORDERS*/
 .bb-gray{border-bottom: solid 1px var(--shadow);}
 .by-gray{border-bottom: solid 1px var(--shadow);border-top: solid 1px var(--shadow);}
 .bb-shadow-dotted{border-bottom: dotted 2px var(--shadow)}
 .bb-white-dotted{border-bottom: dotted 2px white}
 .b-radius-25{border-radius: .25rem}
-hr{border: 1px dashed var(--flash)}
 
 /*SPACING: CUSTOM PADDING AND MARGIN*/
 .w-10{width:10%}
+.w-80{width: 80%}
 
 .show-element{display: block!important; visibility: visible!important;}
 .hide-element{display: none!important; visibility: hidden!important;}

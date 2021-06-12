@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'jaguAr';
+
+  router: string = '';
+  constructor(private location: Location){ this.router = this.location.path(); }
+  shouldShow(){ return !(this.router === '/admin' || this.router === '/view'); }
 }

@@ -2,31 +2,32 @@
     <a class="navbar-brand" href="/">
         <img id="jaguar_logo" src="assets/img/jaguAR_logo_letras.png"/>
     </a>
-    <button class="navbar-toggler float-right" type="button"
+    <button class="navbar-toggler ms-auto me-3" type="button"
             (click)="isMenuCollapsed = !isMenuCollapsed">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav me-auto">
           <li class="nav-item text-center">
-            <a class="nav-link" [routerLink]="['/visor']" href="#welcome" (click)="isMenuCollapsed = true">Inicio<span class="sr-only">(current)</span></a>
+            <a class="nav-link" routerLink="inicio" (click)="isMenuCollapsed = true">Inicio</a>
           </li>
           <li class="nav-item text-center">
-            <a class="nav-link" [routerLink]="['/visor']" href="#whatIsAr" (click)="isMenuCollapsed = true">¿Qué es RA?<span class="sr-only">(current)</span></a>
+            <a class="nav-link" routerLink="visor" (click)="isMenuCollapsed = true">Visor AR</a>
           </li>
           <li class="nav-item text-center">
-            <a class="nav-link" [routerLink]="['/visor']" (click)="isMenuCollapsed = true">Visor AR</a>
-          </li>
-          <li class="nav-item text-center">
-            <a class="nav-link" href="#footer" (click)="isMenuCollapsed = true">Contáctanos</a>
-          </li>
-          <li class="nav-item text-center">
-              <a class="nav-link" [routerLink]="['/admin']" href="/admin" (click)="isMenuCollapsed = true">Panel administrador</a>
+              <a class="nav-link" routerLink="admin" (click)="isMenuCollapsed = true">Panel administrador</a>
           </li>
         </ul>
-        <ul class="navbar-nav text-center">
+        <ul class="navbar-nav text-center ms-auto me-3">
             <li>
-                <a class="nav-link">Iniciar sesión</a>
+                <a class="nav-link" routerLink="login" (click)="isMenuCollapsed = true">Iniciar sesión</a>
+            </li>
+            <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
+                <a class="nav-link" tabindex="0" id="dropdownSession" ngbDropdownToggle role="button">Username</a>
+                <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownSession">
+                    <a class="nav-link" routerLink="perfil" (click)="isMenuCollapsed = true">Mi perfil</a>
+                    <a class="nav-link" routerLink="logout" (click)="isMenuCollapsed = true">Cerrar sesión</a>
+                </div>
             </li>
         </ul>
     </div>

@@ -51,9 +51,13 @@
     --filter_height: 6.2rem;
     --content_height: calc(100vh - var(--header_height) - var(--footer_height));/*total screen height minus header's minus footer's*/
 }
-.content{overflow-x: hidden;}
 /*.content{height: var(--content_height)!important;}
 .content2{height: calc(var(--content_height) - var(--filter_height))!important;}*/
+
+/*VISIBILITY*/
+.content{overflow-x: hidden;}
+.show-element{display: block!important; visibility: visible!important;}
+.hide-element{display: none!important; visibility: hidden!important;}
 
 /*FONTS*/
 body{color: var(--charcoal)!important;}
@@ -108,9 +112,6 @@ body{color: var(--charcoal)!important;}
 /*SPACING: CUSTOM PADDING AND MARGIN*/
 .w-10{width:10%}
 .w-80{width: 80%}
-
-.show-element{display: block!important; visibility: visible!important;}
-.hide-element{display: none!important; visibility: hidden!important;}
 
 
 /*******************************************************************************************************************************/

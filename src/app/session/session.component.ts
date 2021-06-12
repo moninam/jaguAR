@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 })
 export class SessionComponent{
 
-    showContent(section:number){
+    showContent(section: number): void{
         const nav = document.getElementById('login_navigation');
         const login = document.getElementById('login_section');
         const register = document.getElementById('register_section');

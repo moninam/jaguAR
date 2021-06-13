@@ -11,9 +11,9 @@
     background-position-x: right;
     min-height: 100vh;
 }
+.welcome{min-height: calc(100vh - 3rem);}
 #whatIsAr{
     background-color: var(--darkChocolate);
-    min-height: 100vh;
 }
 #areYouReady{
     background-color: var(--syrup);
@@ -27,11 +27,12 @@ a, a:hover{
 a:hover{font-weight: bold;}
 h1,p{color: white}
 .float-right{float: right;}
-@media (max-width: 1200px) {/*bootstrap xl - big pc*/}
+@media (max-width: 1200px) {/*bootstrap xl - big pc*/
+}
 @media (max-width: 992px) {/*bootstrap lg - small pc*/}
 @media (max-width: 767px){ /*bootstrap md - tablet*/
-    #welcome{background-image: none; background-color: var(--syrup); margin: auto 3rem; min-height: 50vh;}
-    .welcome{background-color: var(--darkChocolate);}
+    #welcome{background-image: none; background-color: var(--syrup); min-height: 50vh;}
+    .welcome{background-color: var(--darkChocolate);min-height: unset}
     #jaguar_logo{width: 100%; height:auto; padding-top: 0!important}
 
 }

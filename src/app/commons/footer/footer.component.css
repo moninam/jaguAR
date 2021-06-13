@@ -1,8 +1,9 @@
 footer{
     /*position: absolute;*/
     width: 100%;
-    height: var(--footer_height);
+    min-height: var(--footer_height);
     justify-content: center;
     align-items: center;
     background-color: var(--lightChocolate);
 }
+li{word-break: break-word}

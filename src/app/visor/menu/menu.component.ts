@@ -9,9 +9,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['../visor.component.css']
 })
 export class MenuComponent {
-    closeResult: string;
     constructor(private modalService: NgbModal) {}
-    openMenuModal(content): void {
+    openMenuModal(content: any): void {
         this.modalService.open(content, {backdropClass: 'color-backdrop'});
     }
 }

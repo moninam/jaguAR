@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 /*import { Grupo } from '../../class/grupo';
 import { GrupoModelo } from '../../class/grupo-modelo';
@@ -9,12 +9,12 @@ import { SharingService } from '../../services/sharing.service';*/
 @Component({
     selector: 'app-visor-selector',
     templateUrl: './selector.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['../visor.component.css']
 })
 export class SelectorComponent implements OnInit {
-    closeResult: string;
     constructor(private modalService: NgbModal) {}
-    openMenuModal(content): void {
+    openMenuModal(content: any): void {
         this.modalService.open(content, {backdropClass: 'color-backdrop'});
     }
 

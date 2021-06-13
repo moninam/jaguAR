@@ -15,3 +15,6 @@
     background-color: var(--blue-gray);
     background-image: url('../../assets/img/admin/admin_05.jpg');
 }
+#adminContent .container-fluid{
+    min-height: 90%;
+}

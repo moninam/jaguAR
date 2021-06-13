@@ -1,4 +1,12 @@
-/*.form-container{
-    height: 25rem;
+.form-container{
+    max-height: 18rem;
     overflow-y: scroll;
-}*/
+}
+#session_back_img {
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--blue-gray);
+    background-image: url("../../assets/img/admin/admin_02.jpg");
+}

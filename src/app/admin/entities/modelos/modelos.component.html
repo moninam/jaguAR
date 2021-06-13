@@ -1,23 +1,11 @@
-<div class="container-fluid p-5">
-    <div class="row alert alert-dark text-green">
-        <div class="col-11 px-0">Sample</div>
-        <div class="col-1 px-0">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </div>
-    <div class="row alert alert-dark text-red">
-        <div class="col-11 px-0">Sample</div>
-        <div class="col-1 px-0">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    </div>
+<div class="container-fluid px-5 py-3">
+    <ngb-alert class="msg-ok" type="custom" [dismissible]="true">Sample</ngb-alert>
+    <ngb-alert class="msg-error" type="custom" [dismissible]="true">Sample</ngb-alert>
+    <ngb-alert class="" type="custom" [dismissible]="true">Sample</ngb-alert>
+
     <div class="row mb-4">
-        <h3 class="col text-white">ENTITY NAME</h3>
-        <button class="btn btn-forest col-2">Nuevo __</button>
+        <h3 class="col text-white">Modelos</h3>
+        <button class="btn btn-forest col-3">Nuevo modelo</button>
     </div>
 
     <div class="table-container">
@@ -26,17 +14,67 @@
             <tr>
                 <th>#</th>
                 <th>Nombre</th>
-                <th>Descripción</th>
                 <th>Archivo</th>
-                <th>Opciones</th>
+                <th>Animación</th>
+                <th>
+                    <span
+                        class="icon mdi mdi-resize"
+                        data-toggle="tooltip" title="Editar">
+                    </span>
+                </th>
+                <th>
+                    <span
+                            class="icon mdi mdi-cursor-move"
+                            data-toggle="tooltip" title="Editar">
+                    </span>
+                </th>
+                <th>
+                    <span
+                            class="icon mdi mdi-rotate-3d"
+                            data-toggle="tooltip" title="Editar">
+                    </span>
+                </th>
+                <th>Fecha de modificación</th>
+                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td>1</td>
                 <td>Nombre</td>
-                <td>Descripción</td>
                 <td>Archivo</td>
+                <td>Animación</td>
+                <td>
+                    <a
+                            class="icon mdi mdi-check-circle text-green"
+                            data-toggle="tooltip" title="Editar">
+                    </a>
+                    <a
+                            class="icon mdi mdi-check-circle-outline text-green"
+                            data-toggle="tooltip" title="Eliminar">
+                    </a>
+                </td>
+                <td>
+                    <a
+                            class="icon mdi mdi-check-circle text-green"
+                            data-toggle="tooltip" title="Editar">
+                    </a>
+                    <a
+                            class="icon mdi mdi-check-circle-outline text-green"
+                            data-toggle="tooltip" title="Eliminar">
+                    </a>
+                </td>
+                <td>
+                    <a
+                            class="icon mdi mdi-check-circle text-green"
+                            data-toggle="tooltip" title="Editar">
+                    </a>
+                    <a
+                            class="icon mdi mdi-check-circle-outline text-green"
+                            data-toggle="tooltip" title="Eliminar">
+                    </a>
+                </td>
+                <td>dd/mm/aa</td>
                 <td>
                     <a
                             class="icon mdi mdi-pencil text-yellow"
@@ -48,9 +86,8 @@
                     </a>
                 </td>
             </tr>
-
             <tr>
-                <td colspan="6">No se encontraron registros</td>
+                <td colspan="12">No se encontraron registros</td>
             </tr>
             </tbody>
         </table>

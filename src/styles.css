@@ -266,6 +266,39 @@ tr{width: 100%}*/
 .modal-content{background-color: var(--darks)!important;color: white;}
 .modal-header{border-bottom: unset}
 .modal-footer{border-top: unset}
-button.close:focus{border: none;}
-.close,.close:focus,.close:hover{color: white}
 .card{border-color: var(--lila)!important;}
+
+
+/*CLOSE BUTTON FOR MODALS AND ALERTS*/
+button.close{float: right}
+button.close:focus{border: none; background: transparent}
+.close,.close:focus,.close:hover{color: var(--gold); font-weight: bold}
+.close {
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/*CUSTOM ALERT*/
+.alert{top: 0; }
+.alert-custom {
+    background-color: var(--darks);
+    border-color:transparent;
+    vertical-align: middle;
+    color: white;
+}
+.msg-ok.alert-custom{color: var(--lightOlive)!important;}
+.msg-error.alert-custom{color: var(--cherry)!important;}
+.fade:not(.show) {
+    display: none;
+}

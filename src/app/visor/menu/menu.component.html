@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-lg navbar-light p-2">
+    <button class="btn circle btn-info text-white float-left mr-3" (click)="openMenuModal(content)">
+        <span class="mdi mdi-menu"></span>
+    </button>
+</nav>
+<ng-template #content let-modal>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">MENÚ</h2>
+        <button type="button" class="close col-2 mb-2" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body px-0 pt-0">
+        <div [ngbNavOutlet]="nav"></div>
+    </div>
+    <div class="modal-footer">
+        <ul ngbNav #nav="ngbNav" class="nav-pills col-12">
+            <li ngbNavItem class="col-6 text-center">
+                <a ngbNavLink>Opciones</a>
+                <ng-template ngbNavContent>
+                    <div class="text-center bb-rainbow backg-charcoal">
+                        <h5>Opciones</h5>
+                    </div>
+                    <div class="p-3 modal-content-container">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item text-center">
+                                <a class="nav-link" routerLink="inicio">Regresar a Inicio</a>
+                            </li>
+                        </ul>
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem class="col-6 text-center">
+                <a ngbNavLink>Guía Visor RA</a>
+                <ng-template ngbNavContent>
+                    <div class="text-center bb-rainbow backg-charcoal">
+                        <h5>Controles</h5>
+                    </div>
+                    <div class="p-3 modal-content-container">
+                        <div class="row py-1">
+                            <div class="col-2">
+                                <button class="btn circle btn-danger float-left">
+                                    <span class="mdi mdi-cube-outline"></span>
+                                </button>
+                            </div>
+                            <p class="col my-auto"><strong>Menú de grupos y componentes</strong></p>
+                        </div>
+                        <div class="row py-1 mx-3">
+                            <ul>
+                                <li>Debes seleccionar primero un grupo para poder después seleccionar un componente.</li>
+                                <li>El ícono <span class="mdi mdi-qrcode"></span> en los componentes indica que éste tiene un marcador asociado. Al hacerle clic, hay que escanearlo con la cámara para poder activarlo.
+                                    Si el componente no tiene el ícono, con solo hacerle clic se desplegará el componente.</li>
+                            </ul>
+                        </div>
+                        <div class="row py-1">
+                            <p class="col my-auto"><strong>Acciones disponibles</strong></p>
+                            <small>(Únicamente para dispositivos móviles)</small>
+                            <div class="row py-2 mx-auto">
+                                <div class="col">
+                                    <button class="btn circle btn-dark float-left">
+                                        <span class="mdi mdi-resize"></span>
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button class="btn circle btn-dark float-left">
+                                        <span class="mdi mdi-cursor-move"></span>
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button class="btn circle btn-dark float-left">
+                                        <span class="mdi mdi-rotate-3d"></span>
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button class="btn circle btn-dark float-left">
+                                        <span class="mdi mdi-information"></span>
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button class="btn circle btn-dark float-left">
+                                        <span class="mdi mdi-cube-outline"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row mx-3 my-1">
+                                <ul class="font-xs">
+                                    <li><span class="mdi mdi-resize me-2"></span>Cambiar el tamaño del objeto</li>
+                                    <li><span class="mdi mdi-cursor-move me-2"></span>Mover el objeto</li>
+                                    <li><span class="mdi mdi-rotate-3d me-2"></span>Rotar el objeto</li>
+                                    <li><span class="mdi mdi-information me-2"></span>Información adicional</li>
+                                    <li><span class="mdi mdi-cube-outline me-2"></span>Reproducir animación</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+

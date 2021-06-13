@@ -7,15 +7,14 @@ import { AppComponent } from './commons/app.component';
 import { HeaderComponent } from './commons/header/header.component';
 import { FooterComponent } from './commons/footer/footer.component';
 import { AdminModule } from './admin.module';
+import { VisorModule } from './visor.module';
 import { LandingComponent } from './landing/landing.component';
-import { VisorComponent } from './visor/visor.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
-    VisorComponent,
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent
@@ -24,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    AdminModule
+    AdminModule,
+    VisorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

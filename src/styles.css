@@ -37,6 +37,8 @@
     --flash: rgba(255,255,255,0.5);
     --syrup: rgba(75,56,24,0.7);
 
+    --gradientRainbow: linear-gradient(to right, #DC3545, #FAAE25, #93D22D,
+                                         #16A2B9, #5043EA, #FB258C);
     --gradientPastel: linear-gradient(to right, #A29BF4, #F49B9B, #FED85C);
     --gradientPunk: linear-gradient(to right, #5043EA, #DC3545, #F6BD02);
     --gradientJaguar: linear-gradient(to right, #FBB025, #503821, #2C1F12);
@@ -107,6 +109,10 @@ body{color: var(--charcoal)!important;}
 .by-gray{border-bottom: solid 1px var(--shadow);border-top: solid 1px var(--shadow);}
 .bb-shadow-dotted{border-bottom: dotted 2px var(--shadow)}
 .bb-white-dotted{border-bottom: dotted 2px white}
+.bb-rainbow{
+    border-bottom: 5px solid transparent!important;
+    border-image-source: var(--gradientRainbow)!important;
+    border-image-slice: 1!important;}
 .b-radius-25{border-radius: .25rem}
 
 /*SPACING: CUSTOM PADDING AND MARGIN*/
@@ -135,7 +141,6 @@ input:checked + .slider:before {-webkit-transform: translateX(26px); -ms-transfo
 .slider.round:before {border-radius: 50%;}
 input:disabled + .slider{opacity: 0.5; cursor: not-allowed}
 
-
 /*gradient 3D BUTTON*/
 .btn-3D,
 .btn-3D:hover,
@@ -157,40 +162,12 @@ input:disabled + .slider{opacity: 0.5; cursor: not-allowed}
 {box-shadow: 0 0 0 0.2rem var(--flash)!important;}
 
 /*gradient PRIMARY BUTTON*/
-.btn-ryb{
-    background-image: var(--gradientPrimary);
-    /*margin: 10px;*/
-    /*padding: 15px 45px;*/
-    text-align: center;
-    /*text-transform: uppercase;*/
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: #fff;
-    /*box-shadow: 0 0 20px #eee;*/
-    /*border-radius: 10px;*/
-    display: block;
-}
-.btn-ryb:hover{
-    background-position: right center; /* change the direction of the change here */
-    color: #fff;
-    text-decoration: none;
-}
+.btn-ryb{background-image: var(--gradientPrimary); /*margin: 10px;*/ /*padding: 15px 45px;*/text-align: center; /*text-transform: uppercase;*/transition: 0.5s;background-size: 200% auto;color: #fff; /*box-shadow: 0 0 20px #eee;*/ /*border-radius: 10px;*/display: block;}
+.btn-ryb:hover{background-position: right center; /* change the direction of the change here */color: #fff;text-decoration: none;}
 
 /*gradient FOREST BUTTON*/
-.btn-forest{
-    background-image: var(--gradientForest);
-    text-align: center;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: #fff;
-    display: block;
-}
-.btn-forest:hover{
-    background-position: right center; /* change the direction of the change here */
-    color: #fff;
-    text-decoration: none;
-}
-
+.btn-forest{background-image: var(--gradientForest);text-align: center;transition: 0.5s;background-size: 200% auto;color: #fff;display: block;}
+.btn-forest:hover{background-position: right center; /* change the direction of the change here */color: #fff;text-decoration: none;}
 
 /*JAGUAR BUTTON*/
 .btn-jaguar,
@@ -242,7 +219,6 @@ option:hover{
     color: #495057;
 }
 
-
 /*OVERRIDE - TABLES*/
 .table th, .table td{vertical-align: middle!important;}
 .table .thead-aqua th {
@@ -258,13 +234,24 @@ tr{width: 100%}*/
 
 /*OVERRIDE - MODALS AND OTHER CARD CONTAINERS*/
 .modal-content{
-    border: 5px solid!important;
-    border-image-source: var(--gradient3D)!important;
-    border-image-slice: 9!important;
+    border: 5px solid transparent!important;
+    border-image-source: var(--gradientRainbow)!important;
+    border-image-slice: 1!important;
     border-radius: 0!important;
+    background-color: var(--darks);
+    color: #fff;
+
+    /*background:
+            linear-gradient(var(--charcoal),var(--charcoal)) padding-box, /*this is your grey background/
+            var(--gradientRainbow) border-box;
+    color: #fff;
+    padding:10px;
+    border: 5px solid transparent;
+    border-radius:15px;
+    display:inline-block;
+    margin: 75px 0;*/
 }
-.modal-content{background-color: var(--darks)!important;color: white;}
-.modal-header{border-bottom: unset}
+.modal-header{border-bottom: unset; background-color: var(--charcoal);}
 .modal-footer{border-top: unset}
 .card{border-color: var(--lila)!important;}
 

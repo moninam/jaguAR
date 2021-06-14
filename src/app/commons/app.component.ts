@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void{
 
   }
-  urlChange(x): void {
+  urlChange(x: any): void {
     x === '/visor' ? this.visible = false : this.visible = true; // visibilidad del header y footer
   }
 }

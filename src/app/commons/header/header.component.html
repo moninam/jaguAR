@@ -26,7 +26,7 @@
                 <a class="nav-link" tabindex="0" id="dropdownSession" ngbDropdownToggle role="button">Username</a>
                 <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownSession">
                     <a class="btn btn-trans nav-link" routerLink="perfil" (click)="isMenuCollapsed = true">Mi perfil</a>
-                    <btn class="btn btn-trans nav-link hover-pointer" (click)="isMenuCollapsed = true; openMenuModal(content)">Cerrar sesión</btn>
+                    <a class="btn btn-trans nav-link" (click)="isMenuCollapsed = true; openMenuModal(content)">Cerrar sesión</a>
                 </div>
             </li>
         </ul>

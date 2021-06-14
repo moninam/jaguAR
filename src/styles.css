@@ -80,6 +80,7 @@ body{color: var(--charcoal)!important;}
     -webkit-text-fill-color: transparent;
     font-weight: bold;
 }
+.text-justify{text-align: justify}
 .font-xs{font-size: x-small!important;}
 .font-sm{font-size: small!important;}
 .font-lg{font-size: larger!important;}

@@ -1,11 +1,11 @@
 .jaguar-skin{
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("../../assets/img/jaguar_skin.jpg");
+    background-image: url('../../assets/img/jaguar_skin.jpg');
     background-attachment: fixed;
 }
 #welcome{
-    background-image: url("../../assets/img/landing/mountain.png");
+    background-image: url('../../assets/img/landing/mountain.png');
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
     background-position-x: right;

@@ -13,19 +13,19 @@ import { PageNotFoundComponent } from './404/pageNotFound.component';
 
 
 const routes: Routes = [
-    { path: 'inicio', component: LandingComponent },
-    { path: 'visor', component: VisorComponent},
-    { path: 'admin', component: AdminComponent,
-      children: [
+    { path: 'inicio', component: LandingComponent, data: { headfoot: true } },
+    { path: 'visor', component: VisorComponent, data: { headfoot: false } },
+    { path: 'admin', component: AdminComponent, data: { headfoot: true },
+        children: [
         {path: 'grupos', component: GruposComponent},
         {path: 'componentes', component: ComponentesComponent},
         {path: 'modelos', component: ModelosComponent},
         {path: 'marcadores', component: MarcadoresComponent}
       ]
     },
-    { path: 'login', component: SessionComponent},
+    { path: 'login', component: SessionComponent, data: { headfoot: true } },
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-    { path: '**', component: PageNotFoundComponent }
+    { path: '**', component: PageNotFoundComponent, data: { headfoot: true } }
 ];
 
 @NgModule({

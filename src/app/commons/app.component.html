@@ -1,6 +1,6 @@
 <!-- BASE STRUCTURE -->
-<app-header id="app-navbar" role="toolbar"></app-header>
+<app-header *ngIf="visible" id="app-navbar" role="toolbar"></app-header>
 <div class="content" role="main">
   <router-outlet></router-outlet>
 </div>
-<app-footer id="app-footer"></app-footer>
+<app-footer *ngIf="visible" id="app-footer"></app-footer>

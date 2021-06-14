@@ -13,9 +13,9 @@ import { PageNotFoundComponent } from './404/pageNotFound.component';
 
 
 const routes: Routes = [
-    { path: 'inicio', component: LandingComponent, data: { headfoot: true } },
-    { path: 'visor', component: VisorComponent, data: { headfoot: false } },
-    { path: 'admin', component: AdminComponent, data: { headfoot: true },
+    { path: 'inicio', component: LandingComponent },
+    { path: 'visor', component: VisorComponent },
+    { path: 'admin', component: AdminComponent,
         children: [
         {path: 'grupos', component: GruposComponent},
         {path: 'componentes', component: ComponentesComponent},
@@ -23,9 +23,9 @@ const routes: Routes = [
         {path: 'marcadores', component: MarcadoresComponent}
       ]
     },
-    { path: 'login', component: SessionComponent, data: { headfoot: true } },
+    { path: 'login', component: SessionComponent },
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-    { path: '**', component: PageNotFoundComponent, data: { headfoot: true } }
+    { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

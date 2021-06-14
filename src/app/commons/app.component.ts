@@ -1,9 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {filter, mergeMap} from 'rxjs/operators';
-import {isBoolean} from "util";
-
 
 @Component({
   selector: 'app-root',
@@ -22,6 +18,6 @@ export class AppComponent implements OnInit{
 
   }
   urlChange(x): void {
-    x === '/visor' ? this.visible = false : this.visible = true;
+    x === '/visor' ? this.visible = false : this.visible = true; // visibilidad del header y footer
   }
 }

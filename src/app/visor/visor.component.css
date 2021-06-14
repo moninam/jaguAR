@@ -21,9 +21,35 @@
     margin: 75px 0;*/
 }
 .modal-header{border-bottom: unset; background-color: var(--charcoal);}
+.modal-body{background-color: transparent!important;}
 .modal-footer{
     border-top: unset;background-color: var(--charcoal);
     border-top: 5px solid transparent!important;
     border-image-source: var(--gradientRainbow)!important;
     border-image-slice: 1!important;
 }
+.selector-img{
+    position: relative;
+    text-align: center;
+    color: white;
+    width: var(--visor-img-w);
+    height: var(--visor-img-h);
+}
+.selector-img img{object-fit: cover;width: var(--visor-img-w);height: var(--visor-img-h);}
+.selector-info, .selector-background{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.selector-background{
+    width: var(--visor-img-w);
+    height: var(--visor-img-h);
+    background-color: var(--darks);
+}
+.selector-info{}
+.selector-info p{
+    padding: .5rem; margin: 0; word-break: unset; overflow:hidden;
+    text-overflow: ellipsis; max-width: var(--visor-img-w)
+}
+.selected .selector-background, .selected img{border: 3px solid #fff}

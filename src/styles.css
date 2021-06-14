@@ -53,6 +53,8 @@
     --footer_height: 10rem;
     --filter_height: 6.2rem;
     --content_height: calc(100vh - var(--header_height) - var(--footer_height));/*total screen height minus header's minus footer's*/
+    --visor-img-w: 7.5rem;
+    --visor-img-h: 5rem;
 }
 /*.content{height: var(--content_height)!important;}
 .content2{height: calc(var(--content_height) - var(--filter_height))!important;}*/
@@ -243,7 +245,7 @@ tr{width: 100%}*/
 .modal-header{border-bottom: unset; background-color: var(--darks);}
 .modal-body{background-color: #000;}
 .modal-footer{border-top: unset;background-color: #000;}
-.modal-content-container{min-height:15rem; max-height: 15rem; overflow-y: scroll; overflow-x: hidden}
+.modal-content-container{min-height:15rem; max-height: 70vh; overflow-y: scroll; overflow-x: hidden}
 .card{border-color: var(--lila)!important;}
 
 

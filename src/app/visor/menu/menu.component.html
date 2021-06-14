@@ -7,8 +7,8 @@
     <div class="modal-header pb-2">
         <div class="col-2"></div>
         <h2 class="modal-title text-center col">MENÚ</h2>
-        <button type="button" class="close col-2 mb-2" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
         </button>
     </div>
     <div class="modal-body px-0 pt-0">
@@ -25,7 +25,10 @@
                     <div class="p-3 modal-content-container">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item text-center">
-                                <a class="nav-link" routerLink="inicio">Regresar a Inicio</a>
+                                <a class="nav-link" [routerLink]="['/inicio']"
+                                   (click)="modal.dismiss('Cross click')"
+                                >Regresar a Inicio
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -57,30 +60,34 @@
                             <p class="col my-auto"><strong>Acciones disponibles</strong></p>
                             <small>(Únicamente para dispositivos móviles)</small>
                             <div class="row py-2 mx-auto">
-                                <div class="col">
-                                    <button class="btn circle btn-dark float-left">
-                                        <span class="mdi mdi-resize"></span>
-                                    </button>
+                                <div class="row col-lg-7 col-md-7 col-sm-12 p-0 mx-0 my-1">
+                                    <div class="col text-center">
+                                        <button class="btn circle btn-dark float-left">
+                                            <span class="mdi mdi-resize"></span>
+                                        </button>
+                                    </div>
+                                    <div class="col text-center">
+                                        <button class="btn circle btn-dark float-left">
+                                            <span class="mdi mdi-cursor-move"></span>
+                                        </button>
+                                    </div>
+                                    <div class="col text-center">
+                                        <button class="btn circle btn-dark float-left">
+                                            <span class="mdi mdi-rotate-3d"></span>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <button class="btn circle btn-dark float-left">
-                                        <span class="mdi mdi-cursor-move"></span>
-                                    </button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn circle btn-dark float-left">
-                                        <span class="mdi mdi-rotate-3d"></span>
-                                    </button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn circle btn-dark float-left">
-                                        <span class="mdi mdi-information"></span>
-                                    </button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn circle btn-dark float-left">
-                                        <span class="mdi mdi-cube-outline"></span>
-                                    </button>
+                                <div class="row col-lg-5 col-md-5 col-sm-12 p-0 mx-0 my-1">
+                                    <div class="col text-center">
+                                        <button class="btn circle btn-dark float-left">
+                                            <span class="mdi mdi-information"></span>
+                                        </button>
+                                    </div>
+                                    <div class="col text-center">
+                                        <button class="btn circle btn-dark float-left">
+                                            <span class="mdi mdi-play-pause"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mx-3 my-1">
@@ -89,7 +96,7 @@
                                     <li><span class="mdi mdi-cursor-move me-2"></span>Mover el objeto</li>
                                     <li><span class="mdi mdi-rotate-3d me-2"></span>Rotar el objeto</li>
                                     <li><span class="mdi mdi-information me-2"></span>Información adicional</li>
-                                    <li><span class="mdi mdi-cube-outline me-2"></span>Reproducir animación</li>
+                                    <li><span class="mdi mdi-play-pause me-2"></span>Reproducir animación</li>
                                 </ul>
                             </div>
                         </div>

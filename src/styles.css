@@ -31,6 +31,7 @@
     --blue-gray: #8F9198;
     --ashes:#5F5F5F;
     --graybone:#D1D1D1;
+    --almost-white: #f8f9fa;
     --seashore: #caf7e9;/*#97efd5;*/
     --shadow:rgba(0,0,0,0.2);
     --darks:rgba(0,0,0,0.7);
@@ -112,7 +113,8 @@ body{color: var(--charcoal)!important;}
 .bb-rainbow{
     border-bottom: 5px solid transparent!important;
     border-image-source: var(--gradientRainbow)!important;
-    border-image-slice: 1!important;}
+    border-image-slice: 1!important;
+}
 .b-radius-25{border-radius: .25rem}
 
 /*SPACING: CUSTOM PADDING AND MARGIN*/
@@ -252,7 +254,12 @@ tr{width: 100%}*/
     margin: 75px 0;*/
 }
 .modal-header{border-bottom: unset; background-color: var(--charcoal);}
-.modal-footer{border-top: unset}
+.modal-footer{
+    border-top: unset;background-color: var(--charcoal);
+    border-top: 5px solid transparent!important;
+    border-image-source: var(--gradientRainbow)!important;
+    border-image-slice: 1!important;
+}
 .card{border-color: var(--lila)!important;}
 
 

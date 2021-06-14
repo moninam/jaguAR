@@ -1,7 +1,7 @@
 .jaguar-skin{
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("../../assets/img/jaguar_skin.png");
+    background-image: url("../../assets/img/jaguar_skin.jpg");
     background-attachment: fixed;
 }
 #welcome{
@@ -34,6 +34,7 @@ h1,p{color: white}
     #welcome{background-image: none; background-color: var(--syrup); min-height: 50vh;}
     .welcome{background-color: var(--darkChocolate);min-height: unset}
     #jaguar_logo{width: 100%; height:auto; padding-top: 0!important}
+    .mdi{font-size: inherit}
 
 }
 @media (max-width: 576px) {/*bootstrap sm - mobile*/

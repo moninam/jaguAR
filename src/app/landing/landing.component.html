@@ -9,7 +9,7 @@
                     inmersiva de realidad aumentada, utilizando modelos interactivos 3D.
                 </p>
                 <div class="mt-4">
-                    <a routerLink="visor">
+                    <a [routerLink]="['/visor']">
                         <span class="mdi mdi-camera mr-2"></span>
                         <b class="my-auto">Vive la experiencia AR</b>
                         <span class="mdi mdi-camera ml-2"></span>
@@ -41,7 +41,7 @@
                 Comienza a vivir la experiencia de la Realidad Aumentada
             </p>
             <p class="">
-                <a routerLink="visor" class="mdi mdi-xl mdi-camera"></a><br>
+                <a [routerLink]="['/visor']" class="mdi mdi-xl mdi-camera"></a><br>
                 <small><b> Haz click en la cámara para comenzar</b></small>
             </p>
         </section>

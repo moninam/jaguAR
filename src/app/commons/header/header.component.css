@@ -2,6 +2,9 @@
     top: 0;
     width: 100%;
     height: var(--header_height);
-    background-color: white;
+    background-color: var(--almost-white);
 }
 #jaguar_logo{width: 10rem; height: auto; margin: auto;}
+@media (max-width: 991px) {/*bootstrap lg - small pc*/
+.navbar-collapse{background-color: var(--sand)}
+}

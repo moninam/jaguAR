@@ -25,10 +25,30 @@
             <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
                 <a class="nav-link" tabindex="0" id="dropdownSession" ngbDropdownToggle role="button">Username</a>
                 <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownSession">
-                    <a class="nav-link" routerLink="perfil" (click)="isMenuCollapsed = true">Mi perfil</a>
-                    <a class="nav-link" routerLink="logout" (click)="isMenuCollapsed = true">Cerrar sesión</a>
+                    <a class="btn btn-trans nav-link" routerLink="perfil" (click)="isMenuCollapsed = true">Mi perfil</a>
+                    <btn class="btn btn-trans nav-link hover-pointer" (click)="isMenuCollapsed = true; openMenuModal(content)">Cerrar sesión</btn>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
+
+<!-- MODAL LOGOUT -->
+<ng-template #content let-modal>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">Cierre de sesión</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
+    </div>
+    <div class="modal-body p-3">
+        <p>¿Está seguro de que desea cerrar sesión?</p>
+    </div>
+    <div class="modal-footer">
+        <div class="row col-12">
+            <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Cerrar sesión</button></div>
+        </div>
+    </div>
+</ng-template>

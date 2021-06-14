@@ -236,30 +236,14 @@ tr{width: 100%}*/
 
 /*OVERRIDE - MODALS AND OTHER CARD CONTAINERS*/
 .modal-content{
-    border: 5px solid transparent!important;
-    border-image-source: var(--gradientRainbow)!important;
-    border-image-slice: 1!important;
-    border-radius: 0!important;
-    background-color: var(--darks);
+    border-color: transparent;
     color: #fff;
-
-    /*background:
-            linear-gradient(var(--charcoal),var(--charcoal)) padding-box, /*this is your grey background/
-            var(--gradientRainbow) border-box;
-    color: #fff;
-    padding:10px;
-    border: 5px solid transparent;
-    border-radius:15px;
-    display:inline-block;
-    margin: 75px 0;*/
+    background-color: transparent;
 }
-.modal-header{border-bottom: unset; background-color: var(--charcoal);}
-.modal-footer{
-    border-top: unset;background-color: var(--charcoal);
-    border-top: 5px solid transparent!important;
-    border-image-source: var(--gradientRainbow)!important;
-    border-image-slice: 1!important;
-}
+.modal-header{border-bottom: unset; background-color: var(--darks);}
+.modal-body{background-color: #000;}
+.modal-footer{border-top: unset;background-color: #000;}
+.modal-content-container{min-height:15rem; max-height: 15rem; overflow-y: scroll; overflow-x: hidden}
 .card{border-color: var(--lila)!important;}
 
 

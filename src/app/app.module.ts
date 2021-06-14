@@ -6,9 +6,10 @@ import { PageNotFoundComponent } from './404/pageNotFound.component';
 import { AppComponent } from './commons/app.component';
 import { HeaderComponent } from './commons/header/header.component';
 import { FooterComponent } from './commons/footer/footer.component';
+import { LandingComponent } from './landing/landing.component';
 import { AdminModule } from './admin.module';
 import { VisorModule } from './visor.module';
-import { LandingComponent } from './landing/landing.component';
+import { SessionModule } from './session.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -24,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     NgbModule,
     AdminModule,
-    VisorModule
+    VisorModule,
+    SessionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

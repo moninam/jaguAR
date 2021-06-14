@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AdminComponent } from './admin/admin.component';
-import { SessionComponent } from './session/session.component';
 import { GruposComponent } from './admin/entities/grupos/grupos.component';
 import { ComponentesComponent } from './admin/entities/componentes/componentes.component';
 import { ModelosComponent } from './admin/entities/modelos/modelos.component';
@@ -13,7 +12,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     declarations: [
         AdminComponent,
-        SessionComponent,
         GruposComponent,
         ComponentesComponent,
         ModelosComponent,

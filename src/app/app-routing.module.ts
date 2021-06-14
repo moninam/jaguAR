@@ -10,6 +10,7 @@ import { MarcadoresComponent } from './admin/entities/marcadores/marcadores.comp
 import { LandingComponent } from './landing/landing.component';
 import { VisorComponent } from './visor/visor.component';
 import { PageNotFoundComponent } from './404/pageNotFound.component';
+import { ProfileComponent } from './session/profile/profile.component';
 
 
 const routes: Routes = [
@@ -20,10 +21,11 @@ const routes: Routes = [
         {path: 'grupos', component: GruposComponent},
         {path: 'componentes', component: ComponentesComponent},
         {path: 'modelos', component: ModelosComponent},
-        {path: 'marcadores', component: MarcadoresComponent}
+        {path: 'marcadores', component: MarcadoresComponent},
       ]
     },
     { path: 'login', component: SessionComponent },
+    { path: 'perfil', component: ProfileComponent },
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
 ];

@@ -2,11 +2,14 @@
     max-height: 18rem;
     overflow-y: scroll;
 }
-#session_back_img {
+#session_back_img, #profile_back_img {
     height: 100vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-color: var(--blue-gray);
+}
+#session_back_img {
     background-image: url("../../assets/img/admin/admin_02.jpg");
 }
+#profile_back_img{background-image: url("../../assets/img/admin/admin_04.jpg")}

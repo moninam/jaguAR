@@ -1,0 +1,86 @@
+<div class="row m-0 p-0">
+    <div id="profile_back_img" class="col-lg-5 col-md-5 col-sm-12 p-0">
+        <p class="text-white font-xs p-3 backg-charcoal50">
+            Créditos de fotografía a
+            <a class="text-yellow" href="https://unsplash.com/@soberanes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+                Uriel Soberanes
+            </a> -
+            <a class="text-yellow" href="https://unsplash.com">
+                Unsplash
+            </a>
+        </p>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12 p-4 mx-auto backg-charcoal text-white">
+        <div class="mb-3">
+            <h2 class="text-center">Mi Perfil</h2>
+        </div>
+
+        <ul ngbNav #nav="ngbNav" class="nav-tabs col-12">
+            <li ngbNavItem class="col-6 text-center">
+                <a ngbNavLink>Información de perfil</a>
+                <ng-template ngbNavContent>
+                    <div class="p-3 profile-content-container">
+                        <div class="col-8 mx-auto my-4">
+                            <form>
+                            <div class="form-container mb-4">
+                                <div class="form-group w-100 mb-2">
+                                    <label for="register_email" class="">Correo electrónico</label>
+                                    <input id="register_email" type="text" class="form-control" placeholder="Ingrese el correo electrónico"/>
+                                </div>
+                                <div class="form-group w-100 mb-2">
+                                    <label for="register_placeName" class="">Nombre del establecimiento</label>
+                                    <input id="register_placeName" type="text" class="form-control" placeholder="Ingrese el nombre"/>
+                                </div>
+                                <div class="form-group w-100 mb-2">
+                                    <label for="register_address" class="">Dirección del establecimiento</label>
+                                    <input id="register_address" type="text" class="form-control" placeholder="Ingrese la dirección"/>
+                                </div>
+                                <div class="form-group w-100 mb-2">
+                                    <label for="register_phone" class="">Teléfono del establecimiento</label>
+                                    <input id="register_phone" type="text" class="form-control" placeholder="Ingrese el número telefónico"/>
+                                </div>
+                                <div class="form-group w-100 mb-2">
+                                    <label for="register_alias" class="">Alias del establecimiento</label>
+                                    <input id="register_alias" type="text" class="form-control" placeholder="Ingrese el alias"/>
+                                </div>
+                                <div class="form-group w-100 mb-2">
+                                    <label for="register_googlemaps" class="">Ubicación en google maps</label>
+                                    <input id="register_googlemaps" type="text" class="form-control" placeholder="https://goo.gl/maps/7iRTXLNbhzVfzenq8"/>
+                                </div>
+                            </div>
+                            <button class="w-100 btn btn-forest">Actualizar información</button>
+                            </form>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem class="col-6 text-center">
+                <a ngbNavLink>Cambio de contraseña</a>
+                <ng-template ngbNavContent>
+                    <div class="p-3 profile-content-container">
+                        <div class="col-8 mx-auto my-4">
+                            <form>
+                                <div class="mb-4">
+                                    <div class="form-group w-100 mb-2">
+                                        <label for="register_pass" class="">Contraseña actual</label>
+                                        <input id="register_pass" type="password" class="form-control" placeholder="********"/>
+                                    </div>
+                                    <div class="form-group w-100 mb-2">
+                                        <label for="register_new_pass" class="">Nueva contraseña</label>
+                                        <input id="register_new_pass" type="password" class="form-control" placeholder="********"/>
+                                    </div>
+                                    <div class="form-group w-100 mb-4">
+                                        <label for="register_confirm_pass" class="">Confirmar contraseña</label>
+                                        <input id="register_confirm_pass" type="password" class="form-control" placeholder="********"/>
+                                    </div>
+                                    <button class="w-100 mb-2 btn btn-forest">Cambiar contraseña</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+        <div [ngbNavOutlet]="nav"></div>
+    </div>
+</div>

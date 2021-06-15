@@ -2,7 +2,7 @@
 .nav-link,.nav-link:focus, .nav-link:hover{color: #fff}
 .nav-link:hover{font-weight: bold;}
 
-.modal-content{
+.modal-content .modal-rainbow{
     border: 5px solid transparent!important;
     border-image-source: var(--gradientRainbow)!important;
     border-image-slice: 1!important;
@@ -20,13 +20,13 @@
     display:inline-block;
     margin: 75px 0;*/
 }
-.modal-header{border-bottom: unset; background-color: var(--charcoal);}
-.modal-body{background-color: transparent!important;}
-.modal-footer{
+.modal-rainbow .modal-header{border-bottom: unset; background-color: var(--charcoal);}
+.modal-rainbow .modal-body{background-color: transparent}
+.modal-rainbow .modal-footer{
     border-top: unset;background-color: var(--charcoal);
-    border-top: 5px solid transparent!important;
-    border-image-source: var(--gradientRainbow)!important;
-    border-image-slice: 1!important;
+    border-top: 5px solid transparent;
+    border-image-source: var(--gradientRainbow);
+    border-image-slice: 1;
 }
 .selector-img{
     position: relative;

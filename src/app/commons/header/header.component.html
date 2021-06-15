@@ -19,11 +19,11 @@
           </li>
         </ul>
         <ul class="navbar-nav text-center ms-auto me-3">
-            <li>
+            <li *ngIf="!isLogged">
                 <a class="nav-link" routerLink="login" (click)="isMenuCollapsed = true">Iniciar sesión</a>
             </li>
-            <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
-                <a class="nav-link" tabindex="0" id="dropdownSession" ngbDropdownToggle role="button">Username</a>
+            <li *ngIf="isLogged" class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
+                <a class="nav-link" tabindex="0" id="dropdownSession" ngbDropdownToggle role="button">{{emailUsuario}}</a>
                 <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownSession">
                     <a class="btn btn-trans nav-link" routerLink="perfil" (click)="isMenuCollapsed = true">Mi perfil</a>
                     <a class="btn btn-trans nav-link" (click)="isMenuCollapsed = true; openMenuModal(content)">Cerrar sesión</a>
@@ -48,7 +48,7 @@
     <div class="modal-footer">
         <div class="row col-12">
             <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
-            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Cerrar sesión</button></div>
+            <div class="col-6"><button class="btn btn-yellow w-100" (click)="onLogOut()">Cerrar sesión</button></div>
         </div>
     </div>
 </ng-template>

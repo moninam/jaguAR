@@ -82,7 +82,8 @@
                     </a>
                     <a
                             class="icon mdi mdi-trash-can text-red"
-                            data-toggle="tooltip" title="Eliminar">
+                            data-toggle="tooltip" title="Eliminar"
+                            (click)="openModal(confirmDelete)">
                     </a>
                 </td>
             </tr>
@@ -93,3 +94,23 @@
         </table>
     </div>
 </div>
+
+<!-- MODAL LOGOUT -->
+<ng-template #confirmDelete let-modal>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">Eliminar</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
+    </div>
+    <div class="modal-body p-3">
+        <p>¿Está seguro de que desea eliminar este modelo?</p>
+    </div>
+    <div class="modal-footer">
+        <div class="row col-12">
+            <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Eliminar modelo</button></div>
+        </div>
+    </div>
+</ng-template>

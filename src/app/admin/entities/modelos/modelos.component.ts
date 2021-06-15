@@ -1,11 +1,15 @@
 import {Component, OnInit} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-modelos',
     templateUrl: './modelos.component.html'
 })
 export class ModelosComponent implements OnInit{
-    constructor(){}
+    constructor(private modalService: NgbModal) {}
     ngOnInit(): void {
+    }
+    openModal(content: any): void {
+        this.modalService.open(content, {backdropClass: 'color-backdrop'});
     }
 }

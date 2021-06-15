@@ -10,7 +10,7 @@ import {TokenService} from '../../service/token.service';
 })
 export class HeaderComponent implements OnInit{
     public isMenuCollapsed = true;
-    isLogged = false;
+    public isLogged = false;
 
     constructor(private modalService: NgbModal, private tokenService: TokenService) {}
     openMenuModal(content: any): void {
@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit{
     }
     ngOnInit(): void {
         this.tokenService.getToken() ? this.isLogged = true : this.isLogged = false;
-
     }
     onLogOut(): void {
         this.tokenService.logOut();

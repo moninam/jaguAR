@@ -14,7 +14,7 @@
           <li class="nav-item text-center">
             <a class="nav-link" routerLink="visor" (click)="isMenuCollapsed = true">Visor AR</a>
           </li>
-          <li class="nav-item text-center">
+          <li *ngIf="isLogged" class="nav-item text-center">
               <a class="nav-link" routerLink="admin" (click)="isMenuCollapsed = true">Panel administrador</a>
           </li>
         </ul>

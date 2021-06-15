@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgForm } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './404/pageNotFound.component';
@@ -10,7 +12,9 @@ import { LandingComponent } from './landing/landing.component';
 import { AdminModule } from './admin.module';
 import { VisorModule } from './visor.module';
 import { SessionModule } from './session.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProdInterceptorService } from './interceptors/prod-interceptor.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -26,9 +30,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     AdminModule,
     VisorModule,
-    SessionModule
+    SessionModule,
+    HttpClientModule,
+    NgForm
   ],
-  providers: [],
+  providers: [ ProdInterceptorService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

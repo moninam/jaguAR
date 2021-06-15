@@ -5,7 +5,7 @@
 
     <div class="row mb-4">
         <h3 class="col text-white">Componentes</h3>
-        <button class="btn btn-forest col-3">Nuevo componente</button>
+        <button class="btn btn-forest col-3" (click)="openModal(newEntityModal)">Nuevo componente</button>
     </div>
 
     <div class="table-container">
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<!-- MODAL LOGOUT -->
+<!-- MODAL DELETE CONFIRM -->
 <ng-template #confirmDelete let-modal>
     <div class="modal-header pb-2">
         <div class="col-2"></div>
@@ -70,6 +70,38 @@
         <div class="row col-12">
             <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
             <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Eliminar componente</button></div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- MODAL NEW ENTITY -->
+<ng-template #newEntityModal let-modal>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">Nuevo componente</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
+    </div>
+    <div class="modal-body p-3">
+        <form>
+            <div class="form-group w-100 mb-2">
+                <label for="group_name" class="">Nombre del grupo</label>
+                <input id="group_name" type="text" class="form-control" placeholder="Ingrese el nombre del grupo" required/>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Descripción del grupo</label>
+                <textarea id="group_description" class="form-control" placeholder="Ingrese una descripción" required></textarea>
+            </div>
+            <div class="form-group w-100 mb-4">
+                file uploader**
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="row col-12">
+            <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Crear grupo</button></div>
         </div>
     </div>
 </ng-template>

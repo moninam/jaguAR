@@ -5,7 +5,7 @@
 
     <div class="row mb-4">
         <h3 class="col text-white">Modelos</h3>
-        <button class="btn btn-forest col-3">Nuevo modelo</button>
+        <button class="btn btn-forest col-3" (click)="openModal(newEntityModal)">Nuevo modelo</button>
     </div>
 
     <div class="table-container">
@@ -95,7 +95,7 @@
     </div>
 </div>
 
-<!-- MODAL LOGOUT -->
+<!-- MODAL DELETE CONFIRM -->
 <ng-template #confirmDelete let-modal>
     <div class="modal-header pb-2">
         <div class="col-2"></div>
@@ -111,6 +111,54 @@
         <div class="row col-12">
             <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
             <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Eliminar modelo</button></div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- MODAL NEW ENTITY -->
+<ng-template #newEntityModal let-modal>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">Nuevo modelo</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
+    </div>
+    <div class="modal-body p-3">
+        <form>
+            <div class="form-group w-100 mb-2">
+                <label for="model_name" class="">Nombre del modelo</label>
+                <input id="model_name" type="text" class="form-control" placeholder="Ingrese el nombre del modelo" required/>
+            </div>
+            <div class="form-group w-100 mb-4">
+                file uploader**
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="model_animation" class="">Nombre de la animación</label>
+                <textarea id="model_animation" class="form-control" placeholder="Ingrese el nombre de la animación del modelo" required></textarea>
+            </div>
+            <div class="form-group row w-100 mb-4">
+                <label>Acciones disponibles</label>
+                <div class="col-4">
+                    <label for="model_action_1" class="">Cambio de tamaño</label>
+                    <input id="model_action_1" type="checkbox" class="form-control mdi mdi-resize"/>
+                </div>
+                <div class="col-4">
+                    <label for="model_action_2" class="">Cambio de tamaño</label>
+                    <input id="model_action_2" type="checkbox" class="form-control mdi mdi-resize"/>
+                </div>
+                <div class="col-4">
+                    <label for="model_action_3" class="">Cambio de tamaño</label>
+                    <input id="model_action_3" type="checkbox" class="form-control mdi mdi-resize"/>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="row col-12">
+            <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Crear grupo</button></div>
         </div>
     </div>
 </ng-template>

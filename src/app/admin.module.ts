@@ -7,6 +7,7 @@ import { GruposComponent } from './admin/entities/grupos/grupos.component';
 import { ComponentesComponent } from './admin/entities/componentes/componentes.component';
 import { ModelosComponent } from './admin/entities/modelos/modelos.component';
 import { MarcadoresComponent } from './admin/entities/marcadores/marcadores.component';
+import {MultimediaComponent} from './admin/entities/multimedia/multimedia.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -15,7 +16,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         GruposComponent,
         ComponentesComponent,
         ModelosComponent,
-        MarcadoresComponent
+        MarcadoresComponent,
+        MultimediaComponent
     ],
     imports: [
         CommonModule,

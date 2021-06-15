@@ -7,6 +7,7 @@ import { GruposComponent } from './admin/entities/grupos/grupos.component';
 import { ComponentesComponent } from './admin/entities/componentes/componentes.component';
 import { ModelosComponent } from './admin/entities/modelos/modelos.component';
 import { MarcadoresComponent } from './admin/entities/marcadores/marcadores.component';
+import {MultimediaComponent} from './admin/entities/multimedia/multimedia.component';
 import { LandingComponent } from './landing/landing.component';
 import { VisorComponent } from './visor/visor.component';
 import { PageNotFoundComponent } from './404/pageNotFound.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
         {path: 'componentes', component: ComponentesComponent},
         {path: 'modelos', component: ModelosComponent},
         {path: 'marcadores', component: MarcadoresComponent},
+        {path: 'multimedia', component: MultimediaComponent}
       ]
     },
     { path: 'login', component: SessionComponent },

@@ -1,11 +1,11 @@
 <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
     <div class="form-group w-100 mb-2">
         <label for="login_email" class="">Correo electrónico</label>
-        <input [(ngModel)]="emailUsuario" id="login_email" type="text" class="form-control" placeholder="Ingrese el correo electrónico" required/>
+        <input ngModel emailUsuario="emailUsuario" #emailUsuario = "ngModel" id="login_email" type="text" class="form-control" placeholder="Ingrese el correo electrónico" required/>
     </div>
     <div class="form-group w-100 mb-4">
         <label for="login_pass" class="">Contraseña</label>
-        <input [(ngModel)]="password" id="login_pass" type="password" class="form-control" placeholder="********" required/>
+        <input ngModel password = "password" #password="ngModel" id="login_pass" type="password" class="form-control" placeholder="********" required/>
     </div>
     <div class="form-group w-100">
         <button class="w-100 mb-2 btn btn-ryb" [disabled]="!f.valid">Iniciar sesión</button>

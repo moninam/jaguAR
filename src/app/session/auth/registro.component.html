@@ -2,23 +2,23 @@
     <div class="col-8 mx-auto my-4">
         <div class="form-group w-100 mb-2">
             <label for="register_email" class="">Correo electrónico</label>
-            <input [(ngModel)]="emailUsuario" required id="register_email" type="text" class="form-control" placeholder="Ingrese el correo electrónico"/>
+            <input ngModel="emailUsuario" #emailUsuario = "ngModel" required id="register_email" type="text" class="form-control" placeholder="Ingrese el correo electrónico"/>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_alias" class="">Correo electrónico</label>
-            <input [(ngModel)]="aliasUsuario" required id="register_alias" type="text" class="form-control" placeholder="Ingrese el correo electrónico"/>
+            <input ngModel="aliasUsuario" #aliasUsuario="ngModel" required id="register_alias" type="text" class="form-control" placeholder="Ingrese el correo electrónico"/>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_placeName" class="">Nombre del recinto</label>
-            <input [(ngModel)]="nombreRecinto" required id="register_placeName" type="text" class="form-control" placeholder="Ingrese el nombre"/>
+            <input ngModel="nombreRecinto" #nombreRecinto = "ngModel" required id="register_placeName" type="text" class="form-control" placeholder="Ingrese el nombre"/>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_address" class="">Dirección del recinto</label>
-            <input [(ngModel)]="direccionRecinto" required id="register_address" type="text" class="form-control" placeholder="Ingrese la dirección"/>
+            <input ngModel="direccionRecinto" #direccionRecinto="ngModel" required id="register_address" type="text" class="form-control" placeholder="Ingrese la dirección"/>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_phone" class="">Teléfono del recinto</label>
-            <input [(ngModel)]="telefonoRecinto" required id="register_phone" type="text" class="form-control" placeholder="Ingrese el número telefónico"/>
+            <input ngModel="telefonoRecinto" #telefonoRecinto = "ngModel" required id="register_phone" type="text" class="form-control" placeholder="Ingrese el número telefónico"/>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_latitude" class="">
@@ -29,7 +29,7 @@
                     triggers="mouseenter:mouseleave"
                 ></span>
             </label>
-            <input [(ngModel)]="latitud" required id="register_latitude" type="text" class="form-control" placeholder="Ejemplo: 21.047785753144087"/>
+            <input ngModel="latitud" required id="register_latitude" type="text" class="form-control" placeholder="Ejemplo: 21.047785753144087"/>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_longitude" class="">
@@ -40,12 +40,12 @@
                     triggers="mouseenter:mouseleave"
                 ></span>
             </label>
-            <input [(ngModel)]="longitud" required id="register_longitude" type="text" class="form-control" placeholder="Ejemplo: -89.64432970276357"/>
+            <input ngModel="longitud" required id="register_longitude" type="text" class="form-control" placeholder="Ejemplo: -89.64432970276357"/>
         </div>
         <hr>
         <div class="form-group w-100 mb-2">
             <label for="register_pass" class="">Contraseña</label>
-            <input [(ngModel)]="password" required id="register_pass" type="password" class="form-control" placeholder="********"/>
+            <input ngModel="password" #password = "ngModel" required id="register_pass" type="password" class="form-control" placeholder="********"/>
         </div>
         <div class="form-group w-100 mb-4">
             <label for="register_confirm_pass" class="">Confirmar contraseña</label>

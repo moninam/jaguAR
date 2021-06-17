@@ -18,7 +18,7 @@ export class GrupoService {
     public save(grupo: Grupo): Observable<any> {
         return this.httpClient.post<any>(this.grupoURL, grupo);
     }
-    public update(id: number, grupo: Grupo): Observable<any> {
+    public update(id: number, grupo: Grupo | null): Observable<any> {
         return this.httpClient.put<any>(this.grupoURL + `/${id}`, grupo);
     }
     public delete(id: number): Observable<any> {

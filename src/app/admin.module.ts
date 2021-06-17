@@ -9,6 +9,7 @@ import { ModelosComponent } from './admin/entities/modelos/modelos.component';
 import { MarcadoresComponent } from './admin/entities/marcadores/marcadores.component';
 import {MultimediaComponent} from './admin/entities/multimedia/multimedia.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     imports: [
         CommonModule,
         AppRoutingModule,
-        NgbModule
+        NgbModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: []
 })

@@ -19,7 +19,8 @@ export class TokenService {
     }
 
     public getToken(): string {
-        return sessionStorage.getItem(TOKEN_KEY);
+        return "";
+        //return sessionStorage.getItem(TOKEN_KEY);
     }
 
     public setUserName(userName: string): void {
@@ -28,7 +29,8 @@ export class TokenService {
     }
 
     public getUserName(): string {
-        return sessionStorage.getItem(USERNAME_KEY);
+        return "";
+        //return sessionStorage.getItem(USERNAME_KEY);
     }
 
     public setAuthorities(authorities: string[]): void {
@@ -38,11 +40,12 @@ export class TokenService {
 
     public getAuthorities(): string[] {
         this.roles = [];
+        /*
         if (sessionStorage.getItem(AUTHORITIES_KEY)) {
             JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
                 this.roles.push(authority.authority);
             });
-        }
+        }*/
         return this.roles;
     }
 

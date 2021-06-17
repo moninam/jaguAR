@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { VisorComponent } from './visor/visor.component';
 import { MenuComponent } from './visor/menu/menu.component';
 import { SelectorComponent } from './visor/selector/selector.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,9 @@ import { SelectorComponent } from './visor/selector/selector.component';
     imports: [
         CommonModule,
         AppRoutingModule,
-        NgbModule
+        NgbModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: []
 })

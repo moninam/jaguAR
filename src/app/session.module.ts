@@ -7,6 +7,7 @@ import { SessionComponent } from './session/session.component';
 import { ProfileComponent } from './session/profile/profile.component';
 import {LoginComponent} from './session/auth/login.component';
 import {RegistroComponent} from './session/auth/registro.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,9 @@ import {RegistroComponent} from './session/auth/registro.component';
     imports: [
         CommonModule,
         AppRoutingModule,
-        NgbModule
+        NgbModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: []
 })

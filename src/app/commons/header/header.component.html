@@ -23,7 +23,7 @@
                 <a class="nav-link" routerLink="login" (click)="isMenuCollapsed = true">Iniciar sesión</a>
             </li>
             <li *ngIf="isLogged" class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
-                <a class="nav-link" tabindex="0" id="dropdownSession" ngbDropdownToggle role="button">{{emailUsuario}}</a>
+                <a class="nav-link" tabindex="0" id="dropdownSession" ngbDropdownToggle role="button"></a>
                 <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownSession">
                     <a class="btn btn-trans nav-link" routerLink="perfil" (click)="isMenuCollapsed = true">Mi perfil</a>
                     <a class="btn btn-trans nav-link" (click)="isMenuCollapsed = true; openMenuModal(content)">Cerrar sesión</a>

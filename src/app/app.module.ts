@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './404/pageNotFound.component';
@@ -32,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     VisorModule,
     SessionModule,
     HttpClientModule,
-    NgForm
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ ProdInterceptorService ],
   bootstrap: [AppComponent]

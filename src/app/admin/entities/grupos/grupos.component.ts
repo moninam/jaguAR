@@ -15,7 +15,7 @@ export class GruposComponent implements OnInit{
     isAdmin = false;
 
     /*a eliminar por lo que te puse abajo del tutorial*/
-    grupo: Grupo = null;
+    grupo: Grupo | null = null;
     x = '';
     y = '';
 

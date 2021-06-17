@@ -32,7 +32,13 @@
               "node_modules/@mdi/font/css/materialdesignicons.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/lib/aframe.min.js",
+              "src/lib/aframe-ar.js",
+              "src/lib/aframe-extras.min.js",
+              "src/lib/aframe-gif-shader.min.js",
+              "src/lib/hammer.js"  
+            ]
           },
           "configurations": {
             "production": {

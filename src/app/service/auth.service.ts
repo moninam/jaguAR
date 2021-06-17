@@ -21,4 +21,20 @@ export class AuthService {
     public login(loginUsuario: LoginUsuario): Observable<JwtDTO> {
         return this.httpClient.post<JwtDTO>(this.authURL + 'login', loginUsuario);
     }
+
+    public refresh(token: string){// no pude checar qué devuelve
+        return this.httpClient.post<any>(this.authURL + 'refresh', token);
+    }
+
+    public recover(id: number){// no pude checar qué devuelve
+        return this.httpClient.get<any>(this.authURL + `recover/${id}`);
+    }
+
+    public restore(username: string, oldPassword: string, nuevaPassword: string, confirmPassword: string){// no pude checar qué devuelve
+        return this.httpClient.post<any>(this.authURL + 'restore', [username, oldPassword, nuevaPassword, confirmPassword]);
+    }
+
+    public restoreAccount(userEmail: string){// no pude checar qué devuelve
+        return this.httpClient.post<any>(this.authURL + 'restore/account', userEmail);
+    }
 }

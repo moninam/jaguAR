@@ -2,6 +2,25 @@
 .nav-link,.nav-link:focus, .nav-link:hover{color: #fff}
 .nav-link:hover{font-weight: bold;}
 
+.buttons {
+    position: absolute;
+    bottom: 0;
+    left: 1%;
+    width: 100%;
+    height: 5em;
+    display: flex;
+    z-index: 10;
+}
+.button2{
+    position: absolute;
+    top: 30%;
+    left: 1%;
+    width: 100%;
+    height: 5em;
+    display: flex;
+    z-index: 10;
+}
+
 .modal-content .modal-rainbow{
     border: 5px solid transparent!important;
     border-image-source: var(--gradientRainbow)!important;

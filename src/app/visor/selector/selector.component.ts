@@ -1,5 +1,7 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Grupo } from 'src/app/models/grupo';
+import { VisorService } from 'src/app/service/visor.service';
 /*import { Grupo } from '../../class/grupo';
 import { GrupoModelo } from '../../class/grupo-modelo';
 import { PruebaComponent } from '../prueba/prueba.component';
@@ -13,12 +15,38 @@ import { SharingService } from '../../services/sharing.service';*/
     styleUrls: ['../visor.component.css']
 })
 export class SelectorComponent implements OnInit {
-    constructor(private modalService: NgbModal) {}
+    @Input() idMuseo?:number;
+    
+    grupos:Grupo[] = [];
+    constructor(private modalService: NgbModal,private visorService: VisorService) {}
     openMenuModal(content: any): void {
         this.modalService.open(content, {backdropClass: 'color-backdrop'});
+        //alert(this.idMuseo?.toString());
+        if (this.idMuseo != null){
+            this.getGrupos(this.idMuseo!);
+        }
     }
 
     ngOnInit(): void {}
+    getGrupos(id:number){
+        this.visorService.getGruposByRecinto(id)
+        .subscribe((groups) => {
+            groups.forEach((value) => {
+                var n: Grupo = new Grupo(
+                    value.nombre,
+                    value.descripcion,
+                    value.urlImagen,
+                    value.createdDate,
+                    value.updatedDate);
+                n.GrupoId = value.idGrupo;
+
+                this.grupos.push(n);
+            })
+        },
+        (error) => {
+
+        })
+    }
     /*public isMenuCollapsed = true;
 
     @Output() onFilter: EventEmitter<any> = new EventEmitter();

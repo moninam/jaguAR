@@ -14,17 +14,19 @@ export class VisorComponent implements OnInit {
   urlModelo:string;
   longitude:number;
   latitude:number;
+  idMuseo:number;
 
   constructor(private ubicacionService: UbicacionService,private cookieService: CookieService){
     this.urlModelo = "../../assets/modelos/plato.glb";
     this.latitude = 0;
     this.longitude = 0;
+    this.idMuseo = 0;
   }
   ngOnInit(): void {
     var objeto = document.getElementById('objeto');
     objeto?.setAttribute('gltf-model',this.urlModelo);
     this.cookieService.set('Prueba','Prueba');
-    this.getLocation();   
+    this.getLocation();
   }
 
   getLocation():void{
@@ -47,6 +49,20 @@ export class VisorComponent implements OnInit {
     this.ubicacionService.getMuseo(ubicacion)
     .subscribe((museo) => {
       this.cookieService.set('idMuseo',museo.idMuseo.toString());
-    })
+      this.idMuseo = museo.idMuseo;
+    },
+    (error) => {
+      if (error.error instanceof ErrorEvent){
+        console.log("Error Event");
+      } else{
+        console.log(`error status : ${error.status} ${error.statusText}`);
+        switch(error.status){
+          case 404:
+            alert("No se encontró ningún museo cerca de su localidad");
+            break;
+        }
+      }
+    }
+    )
   }
 }

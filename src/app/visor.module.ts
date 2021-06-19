@@ -7,6 +7,7 @@ import { VisorComponent } from './visor/visor.component';
 import { MenuComponent } from './visor/menu/menu.component';
 import { SelectorComponent } from './visor/selector/selector.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
     declarations: [
@@ -19,9 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         AppRoutingModule,
         NgbModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
-    providers: [],
+    providers: [CookieService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VisorModule { }

@@ -14,6 +14,7 @@ import { VisorModule } from './visor.module';
 import { SessionModule } from './session.module';
 import { ProdInterceptorService } from './interceptors/prod-interceptor.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -33,9 +34,12 @@ import { HttpClientModule } from '@angular/common/http';
     SessionModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [ ProdInterceptorService ],
+  providers: [ 
+    ProdInterceptorService,
+    CookieService
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -32,6 +32,8 @@ export class VisorComponent implements OnInit {
   isVideo:boolean;
   isImage:boolean;
   isTest:boolean = true;
+  rotate:boolean = false;
+  resize:boolean = false;
 
   constructor(
               private ubicacionService: UbicacionService,
@@ -154,33 +156,42 @@ export class VisorComponent implements OnInit {
       );
   }
   async showComponent(componente:Componente){
-    alert(componente.IdComponente);
     /*
     if(componente.Target != null){
       this.setMarker(componente.Target.UrlMarcador);
       alert(componente.Target.UrlMarcador);
     }*/
     if (componente.Modelo != null){
+      alert("Cargando modelo");
       this.isImage = false;
       this.isVideo = false;
       this.isModel = true;
-      this.setModelo(componente.Modelo.UrlModelo);
-      alert(componente.Modelo.UrlModelo);
-      this.setMovement(componente.Modelo.HasRotation,componente.Modelo.HasResize);
+      setTimeout(() => {
+        this.setModelo(componente.Modelo!.UrlModelo);
+        this.setMovement(componente.Modelo!.HasRotation,componente.Modelo!.HasResize);
+        alert("Modelo cargado");
+      },5000);
     }
     if (componente.Multimedia != null){
       if(componente.Multimedia.TipoMultimedia == 'VIDEO'){
+        alert("Cargando video");
         this.isImage = false;
         this.isModel = false;
         this.isVideo = true;
-        this.setVideoUrl(componente.Multimedia.UrlMultimedia);
-        this.setVideo();
+        setTimeout(() => {
+          this.setVideo();
+          this.setVideoUrl(componente.Multimedia!.UrlMultimedia);
+          alert("Video cargado");
+        },5000);
       } else if(componente.Multimedia.TipoMultimedia == 'IMAGEN'){
+        alert("Cargando imagen");
         this.isModel = false;
         this.isVideo = false;
         this.isImage = true;
-        alert(componente.Multimedia.UrlMultimedia);
-        this.setImagenUrl(componente.Multimedia.UrlMultimedia);
+        setTimeout(() => {
+          this.setImagenUrl(componente.Multimedia!.UrlMultimedia);
+          alert("Imagen cargada");
+        },5000);
       }
     }
   }
@@ -210,8 +221,27 @@ export class VisorComponent implements OnInit {
     });
   }
   setMovement(rotation:boolean,resize:boolean){
+    this.rotate = false;
+    this.resize = false;
+
+    if (rotation){
+      this.rotate = true;
+    }
+    if(resize){
+      this.resize = true;
+    }
+
+    const ent = document.querySelector('a-entity');
+    var objectoT:any= {rotation: this.rotate, resize: this.resize};
+    ent!.setAttribute('foo',objectoT);
+
     this.AFRAME.registerComponent("foo",{
+      schema: {
+        rotation: {type: 'boolean'},
+        resize: {type: 'boolean'}
+      },
       init:function() {
+
         var element = document.querySelector('body');
         this.marker = document.querySelector('a-marker')
         var model = document.querySelector('a-entity');

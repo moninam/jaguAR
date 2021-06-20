@@ -2,6 +2,9 @@
 .nav-link,.nav-link:focus, .nav-link:hover{color: #fff}
 .nav-link:hover{font-weight: bold;}
 
+.clickable{
+    cursor: pointer;
+}
 .buttons {
     position: absolute;
     bottom: 0;

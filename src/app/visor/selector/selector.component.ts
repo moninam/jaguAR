@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Componente } from 'src/app/models/componente';
 import { Grupo } from 'src/app/models/grupo';
 import { VisorService } from 'src/app/service/visor.service';
 /*import { Grupo } from '../../class/grupo';
@@ -16,6 +17,9 @@ import { SharingService } from '../../services/sharing.service';*/
 })
 export class SelectorComponent implements OnInit {
     @Input() idMuseo?:number;
+    @Input() componentes:Componente[] = [];
+    @Output() componenteUpdate :EventEmitter<number> = new EventEmitter<number>();
+    @Output() componenteShow: EventEmitter<Componente> = new EventEmitter<Componente>();
     
     grupos:Grupo[] = [];
     constructor(private modalService: NgbModal,private visorService: VisorService) {}
@@ -28,9 +32,10 @@ export class SelectorComponent implements OnInit {
     }
 
     ngOnInit(): void {}
-    getGrupos(id:number){
+    async getGrupos(id:number){
         this.visorService.getGruposByRecinto(id)
         .subscribe((groups) => {
+            this.grupos = [];
             groups.forEach((value) => {
                 var n: Grupo = new Grupo(
                     value.nombre,
@@ -44,8 +49,25 @@ export class SelectorComponent implements OnInit {
             })
         },
         (error) => {
-
+            if (error.error instanceof ErrorEvent){
+                console.log("Error Event");
+              } else{
+                console.log(`error status : ${error.status} ${error.statusText}`);
+                switch(error.status){
+                  case 404:
+                    console.log("No se encontró ningún grupo registrado");
+                    break;
+                }
+              }
         })
+    }
+    getComponentes(id:number){
+        //alert(id);
+        this.componenteUpdate.emit(id);
+    }
+    showComponente(component:Componente){
+        //alert(component.IdComponente);
+        this.componenteShow.emit(component);
     }
     /*public isMenuCollapsed = true;
 

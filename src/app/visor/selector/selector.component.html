@@ -27,11 +27,11 @@
                        <!--GRUPOS-->
                         <div class="row" *ngFor="let g of grupos">
                             <div class="selector-img col-6 p-0 my-2 mx-auto text-center selected">
-                                <img [src]="g.UrlImagenGrupo" />
+                                <img [src]="g.UrlImagenGrupo"/>
                                 <input [value]="g.GrupoId" hidden>
                                 <div class="selector-background"></div>
                                 <div class="selector-info">
-                                    <p>{{g.NombreGrupo}}</p>
+                                    <p class="clickable" (click)="getComponentes(g.GrupoId!)">{{g.NombreGrupo}}</p>
                                 </div>
                             </div>
                         </div>
@@ -46,46 +46,12 @@
                     </div>
                     <div class="p-3 modal-content-container">
                         <!--COMPONENTES-->
-                        <div class="row">
+                        <div class="row" *ngFor="let c of componentes">
                             <div class="selector-img col-6 p-0 my-2 mx-auto text-center">
-                                <img src="../../../assets/img/admin/admin_01.jpg"/>
+                                <img [src]="c.UrlImagenComponente"/>
                                 <div class="selector-background"></div>
                                 <div class="selector-info">
-                                    <p><span class="mdi mdi-qrcode"></span></p>
-                                </div>
-                            </div>
-                            <div class="selector-img col-6 p-0 my-2 mx-auto text-center">
-                                <img src="../../../assets/img/admin/admin_01.jpg"/>
-                            </div>
-                            <div class="selector-img col-6 p-0 my-2 mx-auto text-center selected">
-                                <img src="../../../assets/img/admin/admin_01.jpg"/>
-                            </div>
-                            <div class="selector-img col-6 p-0 my-2 mx-auto text-center">
-                                <img src="../../../assets/img/admin/admin_01.jpg"/>
-                                <div class="selector-background"></div>
-                                <div class="selector-info">
-                                    <p><span class="mdi mdi-qrcode"></span></p>
-                                </div>
-                            </div>
-                            <div class="selector-img col-6 p-0 my-2 mx-auto text-center">
-                                <img src="../../../assets/img/admin/admin_01.jpg"/>
-                                <div class="selector-background"></div>
-                                <div class="selector-info">
-                                    <p><span class="mdi mdi-qrcode"></span></p>
-                                </div>
-                            </div>
-                            <div class="selector-img col-6 p-0 my-2 mx-auto text-center">
-                                <img src="../../../assets/img/admin/admin_01.jpg"/>
-                                <div class="selector-background"></div>
-                                <div class="selector-info">
-                                    <p><span class="mdi mdi-qrcode"></span></p>
-                                </div>
-                            </div>
-                            <div class="selector-img col-6 p-0 my-2 mx-auto text-center">
-                                <img src="../../../assets/img/admin/admin_01.jpg"/>
-                                <div class="selector-background"></div>
-                                <div class="selector-info">
-                                    <p><span class="mdi mdi-qrcode"></span></p>
+                                    <p class="clickable"(click)="showComponente(c)">{{c.NombreComponente}}</p>
                                 </div>
                             </div>
                         </div>

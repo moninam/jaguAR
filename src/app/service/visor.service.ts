@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Componente } from '../models/componente';
 import { Modelo } from '../models/modelo';
 import { Recinto } from '../models/recinto';
 import { environment } from 'src/environments/environment';
 import { Grupo } from '../interfaces/grupo';
+import { Componente } from '../interfaces/componente';
 
 @Injectable({
     providedIn: 'root'

@@ -1,13 +1,27 @@
 export class Marcador {
     idMarcador?: number;
-    nombreMarcador: string;
-    urlMarcador: string;
 
     constructor(
-        nombreMarcador: string,
-        urlMarcador: string,
-    ){
-        this.nombreMarcador = nombreMarcador;
-        this.urlMarcador = urlMarcador;
+        private nombreMarcador: string,
+        private urlMarcador: string,
+    ){}
+
+    get NombreMarcador(){
+        return this.nombreMarcador;
+    }
+    get UrlMarcador(){
+        return this.urlMarcador;
+    }
+    get IdMarcador(){
+        return this.idMarcador;
+    }
+    set NombreMarcador(value){
+        this.nombreMarcador = value;
+    }
+    set UrlMarcador(value){
+        this.urlMarcador = value;
+    }
+    set IdMarcador(value){
+        this.idMarcador = value;
     }
 }

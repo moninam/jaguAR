@@ -3,6 +3,11 @@ import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { Ubicacion } from '../interfaces/ubicacion';
 import { UbicacionService } from '../service/ubicacion.service';
+import { VisorService } from '../service/visor.service';
+import { Componente } from '../models/componente';
+import { Modelo } from '../models/modelo';
+import { Multimedia } from '../models/multimedia';
+import { Marcador } from '../models/marcador';
 
 @Component({
   selector: 'app-visor',
@@ -15,8 +20,12 @@ export class VisorComponent implements OnInit {
   longitude:number;
   latitude:number;
   idMuseo:number;
+  componentes:Componente[] = [];
 
-  constructor(private ubicacionService: UbicacionService,private cookieService: CookieService){
+  constructor(
+              private ubicacionService: UbicacionService,
+              private cookieService: CookieService,
+              private visorService: VisorService){
     this.urlModelo = "../../assets/modelos/plato.glb";
     this.latitude = 0;
     this.longitude = 0;
@@ -64,5 +73,71 @@ export class VisorComponent implements OnInit {
       }
     }
     )
+  }
+
+  async getComponente(id:number){
+    //alert("Grupo"+id);
+    this.visorService.getComponentesByGrupo(id)
+    .subscribe(
+      (componentes) => {
+        this.componentes = [];
+        componentes.forEach((value) =>{
+          var c = new Componente(
+                  value.nombre,
+                  value.urlImagen,
+                  value.descripcion,
+                  value.componentType,
+                  value.hasTarget,
+                  value.hasDescripcion
+                  );
+          if (value.modelo != null){
+            var m = new Modelo(
+                    value.modelo.nombre,
+                    value.modelo.urlModelo,
+                    value.modelo.nombreAnimacion,
+                    value.modelo.hasRotation,
+                    value.modelo.hasMovement,
+                    value.modelo.hasResize,
+                    value.modelo.texturaPath
+                    );
+            m.IdModelo = value.modelo.idModelo;
+            c.Modelo = m;
+          } else if(value.multimedia != null){
+            var mult = new Multimedia(
+              value.multimedia.nombre,
+              value.multimedia.urlUbicacion,
+              value.multimedia.multimediaType
+            );
+            mult.IdMultimedia = value.multimedia.idMultimedia;
+            c.Multimedia = mult;
+          }
+          if (value.target != null){
+            var target = new Marcador(
+              value.target.nombre,
+              value.target.urlTarget
+            );
+            target.IdMarcador = value.target.idTarget;
+            c.Target = target;
+          }
+          c.IdComponente = value.idComponente;
+          this.componentes.push(c);
+        });
+      },
+      (error) => {
+        if (error.error instanceof ErrorEvent){
+          console.log("Error Event");
+        } else{
+          console.log(`error status : ${error.status} ${error.statusText}`);
+          switch(error.status){
+            case 404:
+              console.log("No se encontró ningún componente registrado");
+              break;
+          }
+        }
+      }
+      );
+  }
+  async showComponent(componente:Componente){
+    alert(componente.IdComponente);
   }
 }

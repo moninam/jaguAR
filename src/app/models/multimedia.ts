@@ -1,16 +1,34 @@
 export class Multimedia {
-    idMultimedia?: number;
-    nombreMultimedia: string;
-    urlMultimedia: string;
-    tipoMultimedia: string;
-
+    private idMultimedia?: number;
+    
     constructor(
-        nombreMultimedia: string,
-        urlMultimedia: string,
-        tipoMultimedia: string,
-    ){
-        this.nombreMultimedia = nombreMultimedia;
-        this.urlMultimedia = urlMultimedia;
-        this.tipoMultimedia = tipoMultimedia;
+        private nombreMultimedia: string,
+        private urlMultimedia: string,
+        private tipoMultimedia: string,
+    ){}
+
+    get NombreMultimedia(){
+        return this.nombreMultimedia;
+    }
+    get UrlMultimedia(){
+        return this.urlMultimedia;
+    }
+    get TipoMultimedia(){
+        return this.tipoMultimedia;
+    }
+    get IdMultimedia(){
+        return this.idMultimedia;
+    }
+    set NombreMultimedia(value){
+        this.nombreMultimedia = value;
+    }
+    set UrlMultimedia(value){
+        this.urlMultimedia = value;
+    }
+    set TipoMultimedia(value){
+        this.tipoMultimedia = value;
+    }
+    set IdMultimedia(value){
+        this.idMultimedia = value;
     }
 }

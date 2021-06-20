@@ -1,6 +1,10 @@
 <ng-container>
-    <app-visor-selector [idMuseo]="idMuseo"></app-visor-selector>
-    <app-visor-menu></app-visor-menu>
+    <app-visor-selector 
+    [componentes]="componentes"
+    [idMuseo]="idMuseo" 
+    (componenteUpdate)="getComponente($event)"
+    (componenteShow)="showComponent($event)"></app-visor-selector>
+    <app-visor-menu ></app-visor-menu>
     <ng-container>
         <a-scene embedded style="z-index: -1" embedded arjs>
             <a-marker preset="hiro">

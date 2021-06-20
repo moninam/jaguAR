@@ -8,6 +8,7 @@ import { Componente } from '../models/componente';
 import { Modelo } from '../models/modelo';
 import { Multimedia } from '../models/multimedia';
 import { Marcador } from '../models/marcador';
+import { AnimationFrameScheduler } from 'rxjs/internal/scheduler/AnimationFrameScheduler';
 
 @Component({
   selector: 'app-visor',
@@ -16,10 +17,13 @@ import { Marcador } from '../models/marcador';
 })
 export class VisorComponent implements OnInit {
 
+  readonly AFRAME = (window as any).AFRAME;
+
   urlModelo:string;
   longitude:number;
   latitude:number;
   idMuseo:number;
+  componente?:Componente;
   componentes:Componente[] = [];
 
   constructor(
@@ -139,5 +143,14 @@ export class VisorComponent implements OnInit {
   }
   async showComponent(componente:Componente){
     alert(componente.IdComponente);
+  }
+  setMovement(){
+    this.AFRAME.registerComponent("component-manager",{
+      init:function() {
+        var element = document.querySelector('body');
+        this.marker = document.querySelector('a-marker');
+        var model = document.querySelector('a-entity');
+      }
+    });
   }
 }

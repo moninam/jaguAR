@@ -5,18 +5,42 @@
     (componenteUpdate)="getComponente($event)"
     (componenteShow)="showComponent($event)"></app-visor-selector>
     <app-visor-menu ></app-visor-menu>
-    <ng-container>
+    <ng-container *ngIf="isModel">
         <a-scene embedded style="z-index: -1" embedded arjs>
-            <a-marker preset="hiro">
+            <a-marker id="marker" preset='hiro'>
                 <a-entity
                 id="objeto"
                 position="0 0 0"
                 scale="0.5 0.5 0.5"
                 gltf-model=""
-                component-manager
+                foo
                 ></a-entity>
               </a-marker>
               <a-entity camera></a-entity>
+        </a-scene>
+    </ng-container>
+    <ng-container *ngIf="isVideo">
+        <a-scene embedded style="z-index: -1" embedded 
+        artoolkit='sourceType: webcam; detectionMode: mono; maxDetectionRate: 30; canvasWidth:240; canvasHeight:180'>
+            <a-assets>
+                <video id="vid" src="" loop="true"></video>
+            </a-assets>
+            <a-marker id="marker" preset='hiro' vidhandler>
+                <a-plane id="planeVid" position='1 2 0' scale="2 2 2" width="2" rotation="-90 0 0" 
+                material='transparent:true; opacity: 0.7; src:#vid'></a-plane>
+            </a-marker>
+            <a-entity camera></a-entity>
+        </a-scene>
+    </ng-container>
+    <ng-container *ngIf="isImage">
+        <a-scene embedded arjs>
+            <a-assets>
+                <img id="transpImage" src="">
+            </a-assets>
+            <a-marker id="marker" preset='hiro'>
+                <a-image width="1" height="1" src="#transpImage" rotation="-90 0 0" ></a-image>
+            </a-marker>
+            <a-entity camera></a-entity>
         </a-scene>
     </ng-container>
 </ng-container>

@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
@@ -35,6 +35,7 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    HammerModule
   ],
   providers: [ 
     ProdInterceptorService,

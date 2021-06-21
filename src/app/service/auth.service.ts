@@ -29,7 +29,7 @@ export class AuthService {
         return this.httpClient.post<Login>(this.authURL + 'login', loginUsuario);
     }
 
-    public refresh(token: Token){
+    public refresh(token: JwtDTO){
         return this.httpClient.post<Login>(this.authURL + 'refresh', token);
     }
 

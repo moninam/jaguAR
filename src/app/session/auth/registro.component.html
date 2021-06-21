@@ -1,24 +1,56 @@
-<form #f="ngForm" (ngSubmit)="onRegister()" novalidate>
+<div class="loading" *ngIf="isLoading">
+    <img src="../../../assets/img/spinner2.gif">
+</div>
+
+<form #f="ngForm" (ngSubmit)="onRegister(f.value)">
     <div class="col-8 mx-auto my-4">
         <div class="form-group w-100 mb-2">
             <label for="register_email" class="">Correo electrónico</label>
-            <input ngModel name="emailUsuario" #emailUsuario = "ngModel" required id="register_email" type="text" class="form-control" placeholder="Ingrese el correo electrónico"/>
+            <input ngModel name="emailUsuario" #emailUsuario = "ngModel" required email id="register_email" type="text" class="form-control" placeholder="Ingrese el correo electrónico"/>
+            <div *ngIf="emailUsuario.touched && emailUsuario.invalid" class="alert alert-danger">
+                <div *ngIf="emailUsuario.errors?.required">El campo es requerido</div>
+                <div *ngIf="emailUsuario.errors?.email">El campo debe ser de tipo email</div>
+            </div>
         </div>
         <div class="form-group w-100 mb-2">
-            <label for="register_alias" class="">Correo electrónico</label>
-            <input ngModel name="aliasUsuario" #aliasUsuario="ngModel" required id="register_alias" type="text" class="form-control" placeholder="Ingrese el correo electrónico"/>
+            <label for="register_alias" class="">Nombre de usuario</label>
+            <input ngModel name="aliasUsuario" #aliasUsuario="ngModel" required id="register_alias" type="text" class="form-control" placeholder="Ingrese la cuenta del usuario"/>
+            <div *ngIf="aliasUsuario.touched && aliasUsuario.invalid" class="alert alert-danger">
+                <div *ngIf="aliasUsuario.errors?.required">El campo es requerido</div>
+            </div>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_placeName" class="">Nombre del recinto</label>
             <input ngModel name="nombreRecinto" #nombreRecinto = "ngModel" required id="register_placeName" type="text" class="form-control" placeholder="Ingrese el nombre"/>
+            <div *ngIf="nombreRecinto.touched && nombreRecinto.invalid" class="alert alert-danger">
+                <div *ngIf="nombreRecinto.errors?.required">El campo es requerido</div>
+            </div>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_address" class="">Dirección del recinto</label>
             <input ngModel name="direccionRecinto" #direccionRecinto="ngModel" required id="register_address" type="text" class="form-control" placeholder="Ingrese la dirección"/>
+            <div *ngIf="direccionRecinto.touched && direccionRecinto.invalid" class="alert alert-danger">
+                <div *ngIf="direccionRecinto.errors?.required">El campo es requerido</div>
+            </div>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_phone" class="">Teléfono del recinto</label>
-            <input ngModel name="telefonoRecinto" #telefonoRecinto = "ngModel" required id="register_phone" type="text" class="form-control" placeholder="Ingrese el número telefónico"/>
+            <input ngModel name="telefonoRecinto" #telefonoRecinto = "ngModel"
+            required 
+            minlength="10"
+            maxlength="10"
+            pattern="^[0-9]+$"
+            id="register_phone" 
+            type="text" 
+            class="form-control" 
+            placeholder="Ingrese el número telefónico"/>
+            <div *ngIf="telefonoRecinto.touched && telefonoRecinto.invalid" class="alert alert-danger">
+                <div *ngIf="telefonoRecinto.errors?.required">El campo es requerido</div>
+                <div *ngIf="telefonoRecinto.errors?.pattern">El número solo se puede conformar por digitos</div>
+                <div *ngIf="telefonoRecinto.errors?.minlength">El número telefónico debe conformarse de  {{telefonoRecinto.errors?.minlength.requiredLength}} digitos</div>
+                <div *ngIf="telefonoRecinto.errors?.maxlength">El número telefónico debe conformarse de  {{telefonoRecinto.errors?.maxlength.requiredLength}} digitos</div>
+
+            </div>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_latitude" class="">
@@ -29,7 +61,18 @@
                     triggers="mouseenter:mouseleave"
                 ></span>
             </label>
-            <input ngModel name="latitud" #latitud="ngModel" required id="register_latitude" type="text" class="form-control" placeholder="Ejemplo: 21.047785753144087"/>
+            <input ngModel name="latitud" 
+            #latitud="ngModel"
+            required
+            pattern="^-?[0-9]\d*(\.\d+)?$"
+            id="register_latitude"
+            type="text"
+            class="form-control"
+            placeholder="Ejemplo: 21.047785753144087"/>
+            <div *ngIf="latitud.touched && latitud.invalid" class="alert alert-danger">
+                <div *ngIf="latitud.errors?.required">El campo es requerido</div>
+                <div *ngIf="latitud.errors?.pattern">El campo debe ser númerico</div>
+            </div>
         </div>
         <div class="form-group w-100 mb-2">
             <label for="register_longitude" class="">
@@ -40,16 +83,50 @@
                     triggers="mouseenter:mouseleave"
                 ></span>
             </label>
-            <input ngModel name="longitud" #longitud="ngModel" required id="register_longitude" type="text" class="form-control" placeholder="Ejemplo: -89.64432970276357"/>
+            <input ngModel name="longitud" #longitud="ngModel"
+            required
+            pattern="^-?[0-9]\d*(\.\d+)?$"
+            id="register_longitude"
+            type="text"
+            class="form-control"
+            placeholder="Ejemplo: -89.64432970276357"/>
+            <div *ngIf="longitud.touched && longitud.invalid" class="alert alert-danger">
+                <div *ngIf="longitud.errors?.required">El campo es requerido</div>
+                <div *ngIf="longitud.errors?.pattern">El campo debe ser númerico</div>
+            </div>
         </div>
         <hr>
         <div class="form-group w-100 mb-2">
             <label for="register_pass" class="">Contraseña</label>
-            <input ngModel name="password" #password = "ngModel" required id="register_pass" type="password" class="form-control" placeholder="********"/>
+            <input ngModel name="password" 
+            #password = "ngModel" 
+            required 
+            minlength="8"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            id="register_pass" 
+            type="password"
+            class="form-control"
+            placeholder="********"/>
+            <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+                <div *ngIf="password.errors?.required">El campo es requerido</div>
+                <div *ngIf="password.errors?.minlength">El campo debe tener al menos {{password.errors?.minlength.requiredLength}} caracteres</div>
+                <div *ngIf="password.errors?.pattern"> La contraseña debe contaner un número y una letra en mínuscula y mayúscula, y tener al menos 8 caracteres</div>
+            </div>
         </div>
         <div class="form-group w-100 mb-4">
             <label for="register_confirm_pass" class="">Confirmar contraseña</label>
-            <input ngModel name="confirmPass" #confirmPass="ngModel" required id="register_confirm_pass" type="password" class="form-control" placeholder="********"/>
+            <input ngModel name="confirmPass" 
+            #confirmPass="ngModel"
+            required
+            pattern="{{ password.value }}"
+            id="register_confirm_pass"
+            type="password"
+            class="form-control"
+            placeholder="********"/>
+            <div *ngIf="confirmPass.touched && confirmPass.invalid" class="alert alert-danger">
+                <div *ngIf="confirmPass.errors?.required">El campo es requerido</div>
+                <div *ngIf="confirmPass.errors?.pattern">Las contraseñas deben coincidir</div>
+            </div>
         </div>
         <button class="w-100 btn btn-yellow" [disabled]="!f.valid">Registrarse</button>
     </div>

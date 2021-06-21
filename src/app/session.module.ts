@@ -17,7 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
         SessionComponent,
         ProfileComponent,
         LoginComponent,
-        RegistroComponent
+        RegistroComponent,
     ],
     imports: [
         CommonModule,

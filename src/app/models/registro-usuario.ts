@@ -1,6 +1,6 @@
 export class RegistroUsuario {
 
-    constructor(private emailUsuario:string,
+    constructor(private email:string,
                 private alias:string,
                 private password:string,
                 private direccion:string,
@@ -11,8 +11,8 @@ export class RegistroUsuario {
                 private roles:string[]) 
     {}
 
-    get EmailUsuario(){
-        return this.emailUsuario;
+    get Email(){
+        return this.email;
     }
     get Alias(){
         return this.alias;
@@ -62,8 +62,8 @@ export class RegistroUsuario {
     set Roles(value){
         this.roles = value;
     }
-    set EmailUsuario(value){
-        this.emailUsuario = value;
+    set Email(value){
+        this.email = value;
     }
 
 }

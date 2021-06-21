@@ -8,6 +8,9 @@ import { ProfileComponent } from './session/profile/profile.component';
 import {LoginComponent} from './session/auth/login.component';
 import {RegistroComponent} from './session/auth/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
     declarations: [
@@ -21,7 +24,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         AppRoutingModule,
         NgbModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BrowserAnimationsModule, 
+        ToastrModule.forRoot(),
     ],
     providers: []
 })

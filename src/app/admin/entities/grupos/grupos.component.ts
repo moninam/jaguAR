@@ -33,12 +33,13 @@ export class GruposComponent implements OnInit{
 
     ngOnInit(): void {
         this.loadGrupos();
-        this.roles = this.tokenService.getAuthorities();
+        /*
+        this.roles = this.tokenService.get;
         this.roles.forEach(rol => {
             if (rol === 'ROLE_ADMIN') {
                 this.isAdmin = true;
             }
-        });
+        });*/
     }
     openModal(content: any): void {
         this.modalService.open(content, {backdropClass: 'color-backdrop'});

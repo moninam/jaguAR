@@ -10,6 +10,10 @@ import { MarcadoresComponent } from './admin/entities/marcadores/marcadores.comp
 import {MultimediaComponent} from './admin/entities/multimedia/multimedia.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
     declarations: [
@@ -25,7 +29,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         AppRoutingModule,
         NgbModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule, 
+        ToastrModule.forRoot(),
     ],
     providers: []
 })

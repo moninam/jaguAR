@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
+import { TokenService } from '../service/token.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,7 +8,11 @@ import {Location} from '@angular/common';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  constructor(){}
-  ngOnInit(): void {}
+  public isLogged = false;
+
+  constructor(private tokenService: TokenService){}
+  ngOnInit(): void {
+    this.tokenService.getToken() ? this.isLogged = true : this.isLogged = false;
+  }
 
 }

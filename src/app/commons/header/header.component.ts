@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { Grupo } from 'src/app/models/grupo';
+import { GrupoModelo } from 'src/app/models/grupo';
 import {TokenService} from '../../service/token.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit{
     public isLogged = false;
     public isVisor = false;
 
-    @Input()grupos:Grupo[]=[];
+    @Input()grupos:GrupoModelo[]=[];
 
     constructor(private modalService: NgbModal, private tokenService: TokenService,
                         private location:Location) {}

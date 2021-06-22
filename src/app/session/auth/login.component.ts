@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginUsuario } from '../../models/login-usuario';
 import { TokenService } from '../../service/token.service';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
         private tokenService: TokenService,
         private authService: AuthService,
         private router: Router,
-        private toastService: ToastrService
+        private toastService: ToastrService,
+        private cookieService: CookieService
     ) { }
 
     ngOnInit(): void{

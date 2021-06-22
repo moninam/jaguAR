@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ProdInterceptorService } from './interceptors/prod-interceptor.service';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,6 @@ import { ToastrModule } from 'ngx-toastr';
         BrowserAnimationsModule, 
         ToastrModule.forRoot(),
     ],
-    providers: []
+    providers: [ProdInterceptorService]
 })
 export class AdminModule { }

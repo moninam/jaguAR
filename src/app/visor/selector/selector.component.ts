@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Componente } from 'src/app/models/componente';
-import { Grupo } from 'src/app/models/grupo';
+import { GrupoModelo} from 'src/app/models/grupo';
 import { VisorService } from 'src/app/service/visor.service';
 /*import { Grupo } from '../../class/grupo';
 import { GrupoModelo } from '../../class/grupo-modelo';
@@ -21,7 +21,7 @@ export class SelectorComponent implements OnInit {
     @Output() componenteUpdate :EventEmitter<number> = new EventEmitter<number>();
     @Output() componenteShow: EventEmitter<Componente> = new EventEmitter<Componente>();
     
-    grupos:Grupo[] = [];
+    grupos:GrupoModelo[] = [];
     constructor(private modalService: NgbModal,private visorService: VisorService) {}
     openMenuModal(content: any): void {
         this.modalService.open(content, {backdropClass: 'color-backdrop'});
@@ -37,7 +37,7 @@ export class SelectorComponent implements OnInit {
         .subscribe((groups) => {
             this.grupos = [];
             groups.forEach((value) => {
-                var n: Grupo = new Grupo(
+                var n: GrupoModelo = new GrupoModelo(
                     value.nombre,
                     value.descripcion,
                     value.urlImagen,

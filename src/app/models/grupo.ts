@@ -1,4 +1,4 @@
-export class Grupo {
+export class GrupoModelo {
     private idGrupo?: number;
     private idMuseo?: number;
     

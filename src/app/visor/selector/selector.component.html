@@ -1,8 +1,11 @@
-<nav class="buttons navbar p-2">
+<!-- BOTONES DE NAVEGACION -->
+<nav class="buttons navbar p-3">
     <button class="btn circle btn-danger float-left mr-3" (click)="openMenuModal(content)">
         <span class="mdi mdi-cube-outline"></span>
     </button>
 </nav>
+
+<!-- GRUPOS Y COMPONENTES -->
 <ng-template #content let-modal>
 <div class="modal-rainbow" id="modalClase" >
     <div class="modal-header pb-2">
@@ -24,14 +27,15 @@
                         <h5>Selecciona un grupo</h5>
                     </div>
                     <div class="p-3 modal-content-container">
+                        <p *ngIf="!hasGroups" class="text-center">{{message}}</p>
                        <!--GRUPOS-->
                         <div class="row" *ngFor="let g of grupos">
-                            <div class="selector-img col-6 p-0 my-2 mx-auto text-center selected">
+                            <div class="selector-img col-6 p-0 my-2 mx-auto text-center">
                                 <img [src]="g.UrlImagenGrupo"/>
-                                <input [value]="g.GrupoId" hidden>
+                                <input [value]="g.GrupoId" hidden/>
                                 <div class="selector-background"></div>
                                 <div class="selector-info">
-                                    <p class="clickable" (click)="getComponentes(g.GrupoId!)">{{g.NombreGrupo}}</p>
+                                    <p class="clickable" (click)="getComponentes(g.GrupoId!, $event)">{{g.NombreGrupo}}</p>
                                 </div>
                             </div>
                         </div>
@@ -39,19 +43,20 @@
                 </ng-template>
             </li>
             <li ngbNavItem class="col-6 text-center">
-                <a ngbNavLink>Componentes</a>
+                <a ngbNavLink *ngIf="hasComponentes">Componentes</a>
                 <ng-template ngbNavContent>
                     <div class="text-center bb-rainbow backg-charcoal">
                         <h5>Selecciona un componente</h5>
                     </div>
                     <div class="p-3 modal-content-container">
+                        <p *ngIf="!hasComponentes" class="text-center">{{message}}</p>
                         <!--COMPONENTES-->
                         <div class="row" *ngFor="let c of componentes">
                             <div class="selector-img col-6 p-0 my-2 mx-auto text-center">
                                 <img [src]="c.UrlImagenComponente"/>
                                 <div class="selector-background"></div>
                                 <div class="selector-info">
-                                    <p class="clickable"(click)="showComponente(c)">{{c.NombreComponente}}</p>
+                                    <p class="clickable" (click)="showComponente(c)">{{c.NombreComponente}}</p>
                                 </div>
                             </div>
                         </div>
@@ -62,46 +67,5 @@
     </div>
 </div>
 </ng-template>
-
-
-
-<!--nav class="navbar navbar-expand-lg navbar-light">
-    <button class="btn circle btn-jaguar float-left mr-3" type="button"
-            (click)="isMenuCollapsed = !isMenuCollapsed">
-        <!--span class="mdi mdi-hexagon-multiple"></span->
-        <span class="mdi mdi-label-multiple"></span>
-    </button>
-    <div [ngbCollapse]="isMenuCollapsed" class="row collapse ml-1">
-        <button class="col btn btn-trans" id="back"><span class="mdi mdi-xl mdi-chevron-left"></span> </button>
-        <button class="col btn btn-trans" id="forward"> <span class="mdi mdi-xl mdi-chevron-right"></span></button>
-        <div class="col container slider-ct">
-            <div class="row slide-wr">
-                <div class="col-4 col-lg-2 slide" *ngFor = "let grupo of listaGrupos">
-                    <img (click)="clickFilter(grupo.idGrupo, $event)" src="../../../assets/imagenes/{{grupo.imagen}}" class="img-fluid grupoImagen" alt="...">
-                    <br (click) = "detectAction(grupo.idGrupo)"><small>{{grupo.nombreGrupo}}</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav-->
-<!--nav class="navbar navbar-expand-lg navbar-light">
-    <button class="btn circle btn-jaguar float-left mr-3" type="button"
-            (click)="isMenuCollapsed = !isMenuCollapsed">
-        <span class="mdi mdi-rotate-3d"></span>
-    </button>
-    <div [ngbCollapse]="isMenuCollapsed" class="row collapse ml-1">
-        <button class="col btn btn-trans" id="back"><span class="mdi mdi-xl mdi-chevron-left"></span> </button>
-        <button class="col btn btn-trans" id="forward"> <span class="mdi mdi-xl mdi-chevron-right"></span></button>
-        <div class="col container slider-ct">
-            <div class="row slide-wr">
-                <div class="col-4 col-lg-2 slide" *ngFor = "let modelo of modelos">
-                    <img (click)="changeModel(modelo.modelo)" src="../../../assets/imagenes/{{modelo.modelo.icono}}" class="img-fluid" alt="...">
-                    <br><small>{{modelo.modelo.descripcion}}</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav-->
-
 
 

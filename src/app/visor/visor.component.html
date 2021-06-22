@@ -1,11 +1,24 @@
 <ng-container>
-    <app-visor-selector 
-    [componentes]="componentes"
-    [idMuseo]="idMuseo" 
-    (componenteUpdate)="getComponente($event)"
-    (componenteShow)="showComponent($event)"></app-visor-selector>
-    <app-visor-menu ></app-visor-menu>
-    <ng-container *ngIf="isModel">
+    <div id="visor-navigation">
+        <app-visor-selector
+                [componentes]="componentes"
+                [idMuseo]="idMuseo"
+                (componenteUpdate)="getComponente($event)"
+                (componenteShow)="showComponent($event)"></app-visor-selector>
+        <app-visor-menu></app-visor-menu>
+        <nav class="buttons navbar p-3">
+            <button type="button" class="btn circle btn-dark float-left mr-3" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
+                    aria-controls="collapseExample">
+                <span class="mdi mdi-information"></span>
+            </button>
+        </nav>
+        <nav class="buttons navbar p-3">
+            <button class="btn circle btn-dark float-left mr-3">
+                <span class="mdi mdi-play-pause"></span>
+            </button>
+        </nav>
+    </div>
+    <ng-container class="component-display" *ngIf="isModel">
         <a-scene embedded style="z-index: -1" embedded arjs>
             <a-marker id="marker" preset='hiro'>
                 <a-entity
@@ -19,8 +32,8 @@
               <a-entity camera></a-entity>
         </a-scene>
     </ng-container>
-    <ng-container *ngIf="isVideo">
-        <a-scene embedded style="z-index: -1" embedded 
+    <ng-container class="component-display" *ngIf="isVideo">
+        <a-scene embedded style="z-index: -1" embedded
         artoolkit='sourceType: webcam; detectionMode: mono; maxDetectionRate: 30; canvasWidth:240; canvasHeight:180'>
             <a-assets>
                 <video id="vid" src="" autoplay="true" loop="true"></video>
@@ -32,7 +45,7 @@
             <a-entity camera></a-entity>
         </a-scene>
     </ng-container>
-    <ng-container *ngIf="isImage">
+    <ng-container class="component-display" *ngIf="isImage">
         <a-scene embedded arjs>
             <a-assets>
                 <img id="transpImage" src="">
@@ -43,5 +56,39 @@
             <a-entity camera></a-entity>
         </a-scene>
     </ng-container>
+    <footer id="visor-footer">
+        <ngb-alert *ngIf="errorMsg" #selfClosingAlert class="msg-error p-2 col-10 mx-auto" type="custom" [dismissible]="true">{{errorMsg}}</ngb-alert>
+        <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+            <div class="visor-footer-before row py-2 px-3">
+                <div class="row col my-auto">
+                    <p class="font-sm m-0">
+                        Acciones disponibles:
+                        <span class="mdi mdi-resize px-1"></span>
+                        <span class="mdi mdi-cursor-move px-1"></span>
+                        <span class="mdi mdi-rotate-3d px-1"></span>
+                        <span class="mdi mdi-information px-1"></span>
+                        <span class="mdi mdi-play-pause px-1"></span>
+                    </p>
+                </div>
+                <button class="btn btn-trans col-1 text-center text-white"
+                        (click)="collapse.toggle()">
+                    <span class="mdi mdi-lg mdi-close-thick"></span>
+                </button>
+                <p>Coloca el siguiente marcador frente a la cámara para comenzar.</p>
+            </div>
+            <div class="visor-footer-after">
+                <div>
+                    <p> Acciones disponibles:
+                        <span class="mdi mdi-resize px-1"></span>
+                        <span class="mdi mdi-cursor-move px-1"></span>
+                        <span class="mdi mdi-rotate-3d px-1"></span>
+                    </p>
+                </div>
+                <div id="component-info">
+                    <p *ngIf="componentDescription">{{componentDescription}}</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </ng-container>
 <router-outlet></router-outlet>

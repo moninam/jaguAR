@@ -16,33 +16,35 @@ import { AnimationFrameScheduler } from 'rxjs/internal/scheduler/AnimationFrameS
   styleUrls: ['./visor.component.css']
 })
 export class VisorComponent implements OnInit {
-
   readonly AFRAME = (window as any).AFRAME;
 
-  urlModelo:string;
-  urlTarget:string;
-  urlVideo:string;
-  urlImagen:string;
-  longitude:number;
-  latitude:number;
-  idMuseo:number;
-  componente?:Componente;
-  componentes:Componente[] = [];
-  isModel:boolean;
-  isVideo:boolean;
-  isImage:boolean;
-  isTest:boolean = true;
-  rotate:boolean = false;
-  resize:boolean = false;
+  urlModelo: string;
+  urlTarget: string;
+  urlVideo: string;
+  urlImagen: string;
+  longitude: number;
+  latitude: number;
+  idMuseo: number;
+  componente?: Componente;
+  componentes: Componente[] = [];
+  isModel: boolean;
+  isVideo: boolean;
+  isImage: boolean;
+  isTest: boolean = true;
+  rotate: boolean = false;
+  resize: boolean = false;
+  errorMsg: string = '';
+  public isCollapsed = true;
+  public componentDescription = '';
 
-  constructor(
+    constructor(
               private ubicacionService: UbicacionService,
               private cookieService: CookieService,
               private visorService: VisorService){
-    this.urlModelo = "../../assets/modelos/plato.glb";
-    this.urlTarget = "../../assets/usr/marcadores/hiro.patt";
-    this.urlVideo = "../../assets/usr/videos/prueba.mp4";
-    this.urlImagen="../../assets/usr/imagenes/example.png";
+    this.urlModelo = '../../assets/modelos/plato.glb';
+    this.urlTarget = '../../assets/usr/marcadores/hiro.patt';
+    this.urlVideo = '../../assets/usr/videos/prueba.mp4';
+    this.urlImagen = '../../assets/usr/imagenes/example.png';
     this.latitude = 0;
     this.longitude = 0;
     this.idMuseo = 0;
@@ -50,56 +52,59 @@ export class VisorComponent implements OnInit {
     this.isVideo = false;
     this.isImage = false;
   }
-  ngAfterViewInit(){
-  }
+  ngAfterViewInit(){}
   ngOnInit(): void {
     this.getLocation();
   }
 
   async getLocation(){
-    if(!navigator.geolocation){
-      console.log("No es soportado por el navegador");
+    if (!navigator.geolocation){
+      console.log('No es soportado por el navegador');
+      alert('La geolocalización no es soportada por este navegador o dispositivo');
     } else {
-      navigator.geolocation.getCurrentPosition((position) =>{
+      navigator.geolocation.getCurrentPosition((position) => {
         console.log(
         `lat: ${position.coords.latitude}, long: ${position.coords.longitude}`
         );
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
-        this.getMuseo(this.latitude,this.longitude);  
+        // alert(this.latitude + ' ' +  this.longitude);
+        this.getMuseo(this.latitude, this.longitude);
       });
     }
   }
 
-  async getMuseo(latitude:number, longitud:number){
-    let ubicacion = new Ubicacion(latitude,longitud);
+  async getMuseo(latitude: number, longitud: number){
+    let ubicacion = new Ubicacion(latitude, longitud);
     this.ubicacionService.getMuseo(ubicacion)
     .subscribe((museo) => {
-      this.cookieService.set('idMuseo',museo.idMuseo.toString());
+      this.cookieService.set('idMuseo', museo.idMuseo.toString());
       this.idMuseo = museo.idMuseo;
+      alert(this.idMuseo + ' ' + museo.idMuseo);
     },
     (error) => {
       if (error.error instanceof ErrorEvent){
-        console.log("Error Event");
+        console.log('Error Event');
       } else{
         console.log(`error status : ${error.status} ${error.statusText}`);
         switch(error.status){
           case 404:
-            alert("No se encontró ningún museo cerca de su localidad");
+            // alert('No se encontró ningún museo cerca de su localidad');
+            this.errorMsg = 'No se encontró ningún museo cerca de su localidad';
             break;
         }
       }
     }
-    )
+    );
   }
 
-  async getComponente(id:number){
-    //alert("Grupo"+id);
+  async getComponente(id: number){
+    // alert("Grupo"+id);
     this.visorService.getComponentesByGrupo(id)
     .subscribe(
       (componentes) => {
         this.componentes = [];
-        componentes.forEach((value) =>{
+        componentes.forEach((value) => {
           var c = new Componente(
                   value.nombre,
                   value.urlImagen,
@@ -120,7 +125,7 @@ export class VisorComponent implements OnInit {
                     );
             m.IdModelo = value.modelo.idModelo;
             c.Modelo = m;
-          } else if(value.multimedia != null){
+          } else if (value.multimedia != null){
             var mult = new Multimedia(
               value.multimedia.nombre,
               value.multimedia.urlUbicacion,
@@ -143,68 +148,69 @@ export class VisorComponent implements OnInit {
       },
       (error) => {
         if (error.error instanceof ErrorEvent){
-          console.log("Error Event");
+          console.log('Error Event');
         } else{
           console.log(`error status : ${error.status} ${error.statusText}`);
           switch(error.status){
             case 404:
-              console.log("No se encontró ningún componente registrado");
+              console.log('No se encontró ningún componente registrado');
               break;
           }
         }
       }
       );
   }
-  async showComponent(componente:Componente){
+  async showComponent(componente: Componente){
     /*
     if(componente.Target != null){
       this.setMarker(componente.Target.UrlMarcador);
       alert(componente.Target.UrlMarcador);
     }*/
     if (componente.Modelo != null){
-      alert("Cargando modelo");
+      alert('Cargando modelo');
       this.isImage = false;
       this.isVideo = false;
       this.isModel = true;
       setTimeout(() => {
         this.setModelo(componente.Modelo!.UrlModelo);
-        this.setMovement(componente.Modelo!.HasRotation,componente.Modelo!.HasResize);
-        alert("Modelo cargado");
-      },5000);
+        this.setMovement(componente.Modelo!.HasRotation, componente.Modelo!.HasResize);
+        alert('Modelo cargado');
+      }, 5000);
     }
     if (componente.Multimedia != null){
-      if(componente.Multimedia.TipoMultimedia == 'VIDEO'){
-        alert("Cargando video");
+      if (componente.Multimedia.TipoMultimedia == 'VIDEO'){
+        alert('Cargando video');
         this.isImage = false;
         this.isModel = false;
         this.isVideo = true;
         setTimeout(() => {
           this.setVideo();
           this.setVideoUrl(componente.Multimedia!.UrlMultimedia);
-          alert("Video cargado");
-        },5000);
+          alert('Video cargado');
+        }, 5000);
       } else if(componente.Multimedia.TipoMultimedia == 'IMAGEN'){
-        alert("Cargando imagen");
+        alert('Cargando imagen');
         this.isModel = false;
         this.isVideo = false;
         this.isImage = true;
         setTimeout(() => {
           this.setImagenUrl(componente.Multimedia!.UrlMultimedia);
-          alert("Imagen cargada");
-        },5000);
+          alert('Imagen cargada');
+        }, 5000);
       }
+      this.componentDescription = componente.DescripcionComponente;
     }
   }
   setVideo(){
     this.AFRAME.registerComponent('vidhandler', {
       init: function () {
         this.toggle = false;
-        this.vid = document.querySelector("#vid")
-        this.vid.pause()
+        this.vid = document.querySelector('#vid');
+        this.vid.pause();
     },
     update:function(){
       this.toggle = false;
-      this.vid = document.querySelector("#vid");
+      this.vid = document.querySelector('#vid');
       this.vid.play();
     },
     tick:function(){
@@ -235,7 +241,7 @@ export class VisorComponent implements OnInit {
     var objectoT:any= {rotation: this.rotate, resize: this.resize};
     ent!.setAttribute('foo',objectoT);
 
-    this.AFRAME.registerComponent("foo",{
+    this.AFRAME.registerComponent('foo', {
       schema: {
         rotation: {type: 'boolean'},
         resize: {type: 'boolean'}
@@ -251,7 +257,7 @@ export class VisorComponent implements OnInit {
   
         if(rotation){
           hammertime.on('pan', (ev) => {
-            let rotation:any = model!.getAttribute("rotation")
+            let rotation:any = model!.getAttribute('rotation');
             switch(ev.direction) {
               case 2:
                 rotation.y = rotation.y + 4

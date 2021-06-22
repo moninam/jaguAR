@@ -16,59 +16,72 @@ import { SharingService } from '../../services/sharing.service';*/
     styleUrls: ['../visor.component.css']
 })
 export class SelectorComponent implements OnInit {
-    @Input() idMuseo?:number;
-    @Input() componentes:Componente[] = [];
-    @Output() componenteUpdate :EventEmitter<number> = new EventEmitter<number>();
+    @Input() idMuseo?: number;
+    @Input() componentes: Componente[] = [];
+    @Output() componenteUpdate: EventEmitter<number> = new EventEmitter<number>();
     @Output() componenteShow: EventEmitter<Componente> = new EventEmitter<Componente>();
-    
-    grupos:Grupo[] = [];
-    constructor(private modalService: NgbModal,private visorService: VisorService) {}
+
+    public hasGroups = false;
+    public hasComponentes = false;
+    public message = '';
+
+    grupos: Grupo[] = [];
+    constructor(private modalService: NgbModal, private visorService: VisorService) {}
     openMenuModal(content: any): void {
         this.modalService.open(content, {backdropClass: 'color-backdrop'});
-        //alert(this.idMuseo?.toString());
+         // alert(this.idMuseo?.toString());
         if (this.idMuseo != null){
             this.getGrupos(this.idMuseo!);
         }
     }
 
     ngOnInit(): void {}
-    async getGrupos(id:number){
+    async getGrupos(id: number){
         this.visorService.getGruposByRecinto(id)
         .subscribe((groups) => {
             this.grupos = [];
             groups.forEach((value) => {
-                var n: Grupo = new Grupo(
+                const n: Grupo = new Grupo(
                     value.nombre,
                     value.descripcion,
                     value.urlImagen,
                     value.createdDate,
                     value.updatedDate);
                 n.GrupoId = value.idGrupo;
-
                 this.grupos.push(n);
-            })
+            });
+            this.hasGroups = true;
         },
         (error) => {
             if (error.error instanceof ErrorEvent){
-                console.log("Error Event");
+                console.log('Error Event');
               } else{
                 console.log(`error status : ${error.status} ${error.statusText}`);
                 switch(error.status){
                   case 404:
-                    console.log("No se encontró ningún grupo registrado");
+                    console.log('No se encontró ningún grupo registrado');
+                    this.hasGroups = false;
+                    this.hasComponentes = false;
+                    this.message = 'No se encontró ningún grupo registrado';
                     break;
                 }
               }
-        })
+        });
     }
-    getComponentes(id:number){
-        //alert(id);
+    getComponentes(id: number, event: any): void{
+        // alert(id);
+        // marca la clase seleccionada
+        const images = document.getElementsByClassName('selector-img');
+        for (let i = 0; i < images.length; i++) {
+            images[i].classList.remove('selected');
+        }
+        event.target.classList.toggle('selected');
+        // carga sus componentes
         this.componenteUpdate.emit(id);
+        this.hasComponentes = true;
     }
-    showComponente(component:Componente){
-        //alert(component.IdComponente);
+    showComponente(component: Componente): void{
+        // alert(component.IdComponente);
         this.componenteShow.emit(component);
     }
-   
-
 }

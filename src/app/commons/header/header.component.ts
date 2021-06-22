@@ -26,7 +26,5 @@ export class HeaderComponent implements OnInit{
         this.tokenService.logOut();
         window.location.reload();
     }
-    getGrupo(){
-        
-    }
+    getGrupo(){}
 }

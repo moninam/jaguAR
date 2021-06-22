@@ -13,7 +13,6 @@
         <table class="table table-light table-hover text-center">
             <thead class="thead-aqua">
             <tr>
-                <th>#</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Imagen</th>
@@ -22,12 +21,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Nombre</td>
-                <td>Descripción</td>
-                <td>Archivo</td>
-                <td>dd/mm/aa</td>
+            <tr *ngFor="let item of grupos">
+                <td>{{item.Nombre}}</td>
+                <td>{{item.Descripcion}}</td>
+                <td>{{item.UrlImagen}}</td>
+                <td>{{item.UpdatedDate}}</td>
                 <td>
                     <a
                         class="icon mdi mdi-pencil text-yellow"
@@ -45,7 +43,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr *ngIf="grupos.length === 0">
                 <td colspan="12">No se encontraron registros</td>
             </tr>
             </tbody>

@@ -27,11 +27,11 @@
                        <!--GRUPOS-->
                         <div class="row" *ngFor="let g of grupos">
                             <div class="selector-img col-6 p-0 my-2 mx-auto text-center selected">
-                                <img [src]="g.UrlImagenGrupo"/>
-                                <input [value]="g.GrupoId" hidden>
+                                <img [src]="g.UrlImagen"/>
+                                <input [value]="g.IdGrupo" hidden>
                                 <div class="selector-background"></div>
                                 <div class="selector-info">
-                                    <p class="clickable" (click)="getComponentes(g.GrupoId!)">{{g.NombreGrupo}}</p>
+                                    <p class="clickable" (click)="getComponentes(g.IdGrupo!)">{{g.Nombre}}</p>
                                 </div>
                             </div>
                         </div>

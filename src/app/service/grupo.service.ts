@@ -16,7 +16,7 @@ export class GrupoService {
     constructor(private httpClient: HttpClient) { }
 
     public getAllByRecinto(id: number){
-        return this.httpClient.get<Grupo[]>(this.grupoURL + `s/${id}`);
+        return this.httpClient.get<Grupo[]>(`${this.grupoURL}/grupos/${id}`);
     }
     public save(grupo: GrupoModelo): Observable<any> {
         return this.httpClient.post<any>(this.grupoURL, grupo);

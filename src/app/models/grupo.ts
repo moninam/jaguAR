@@ -4,51 +4,51 @@ export class GrupoModelo {
     
 
     constructor(
-        private nombreGrupo: string,
-        private descripcionGrupo: string,
-        private urlImagenGrupo: string,
-        private fechaCreacionGrupo: string,
-        private fechaActualizacionGrupo: string
+        private nombre: string,
+        private descripcion: string,
+        private urlImagen: string,
+        private createdDate: string,
+        private updatedDate: string
     ){}
 
-    get NombreGrupo(){
-        return this.nombreGrupo;
+    get Nombre(){
+        return this.nombre;
     }
-    get DescripcionGrupo(){
-        return this.descripcionGrupo;
+    get Descripcion(){
+        return this.descripcion;
     }
-    get UrlImagenGrupo(){
-        return this.urlImagenGrupo;
+    get UrlImagen(){
+        return this.urlImagen;
     }
-    get FechaCreacionGrupo(){
-        return this.fechaCreacionGrupo;
+    get CreatedDate(){
+        return this.createdDate;
     }
-    get FechaActualizacionGrupo(){
-        return this.fechaActualizacionGrupo;
+    get UpdatedDate(){
+        return this.updatedDate;
     }
-    get GrupoId(){
+    get IdGrupo(){
         return this.idGrupo;
     }
     get MuseoId(){
         return this.idMuseo;
     }
 
-    set NombreGrupo(value){
-        this.nombreGrupo = value;
+    set Nombre(value){
+        this.nombre = value;
     }
-    set DescripcionGrupo(value){
-        this.descripcionGrupo = value;
+    set Descripcion(value){
+        this.descripcion = value;
     }
-    set UrlImagenGrupo(value){
-        this.urlImagenGrupo = value;
+    set UrlImagen(value){
+        this.urlImagen = value;
     }
-    set FechaCreacionGrupo(value){
-        this.fechaCreacionGrupo = value;
+    set CreatedDate(value){
+        this.createdDate = value;
     }
-    set FechaActualizacionGrupo(value){
-        this.fechaActualizacionGrupo = value;
+    set UpdatedDate(value){
+        this.updatedDate = value;
     }
-    set GrupoId(value){
+    set IdGrupo(value){
         this.idGrupo = value;
     }
     set MuseoId(value){

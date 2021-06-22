@@ -11,6 +11,7 @@ import { Token } from '../models/token';
 import { Mensaje } from '../interfaces/mensaje';
 import { Restore } from '../models/restore';
 import { EmailRequest } from '../models/email-request';
+import { MuseoResponse } from '../admin/dto/museo-response';
 
 @Injectable({
     providedIn: 'root'

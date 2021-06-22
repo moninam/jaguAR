@@ -43,7 +43,7 @@ export class SelectorComponent implements OnInit {
                     value.urlImagen,
                     value.createdDate,
                     value.updatedDate);
-                n.GrupoId = value.idGrupo;
+                n.IdGrupo = value.idGrupo;
 
                 this.grupos.push(n);
             })

@@ -16,7 +16,6 @@ import { ToastrModule } from 'ngx-toastr';
 @NgModule({
     declarations: [
         SessionComponent,
-        ProfileComponent,
         LoginComponent,
         RegistroComponent,
     ],

@@ -14,7 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
-import { ProdInterceptorService } from './interceptors/prod-interceptor.service';
+import { interceptorProvider, ProdInterceptorService } from './interceptors/prod-interceptor.service';
+import { ProfileComponent } from './session/profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { ProdInterceptorService } from './interceptors/prod-interceptor.service'
         ComponentesComponent,
         ModelosComponent,
         MarcadoresComponent,
-        MultimediaComponent
+        MultimediaComponent,
+        ProfileComponent,
     ],
     imports: [
         CommonModule,
@@ -35,6 +37,6 @@ import { ProdInterceptorService } from './interceptors/prod-interceptor.service'
         BrowserAnimationsModule, 
         ToastrModule.forRoot(),
     ],
-    providers: [ProdInterceptorService]
+    providers: [interceptorProvider]
 })
 export class AdminModule { }

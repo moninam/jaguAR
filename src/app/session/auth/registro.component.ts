@@ -74,6 +74,7 @@ export class RegistroComponent implements OnInit {
             },2000);
         },
         (error) => {
+            this.isLoading = false;
             console.log(error);
             this.errMsj = error.error.message;
             console.log(this.errMsj);

@@ -4,7 +4,13 @@
 
 export const environment = {
   production: false,
-  urlApi: "https://192.168.1.131:8080/api/v1"
+  urlApi: "https://192.168.1.131:8080/api/v1",
+  grupoFolder : "/root/jaguAR/src/assets/usr/grupos/",
+  grupoExternoFolder : "../../../assets/usr/grupos/",
+  componentesFolder : "/root/jaguAR/src/assets/usr/componentes/",
+  imagenesFolder : "/root/jaguAR/src/assets/usr/imagenes/",
+  videosFolder : "/root/jaguAR/src/assets/usr/videos/",
+  modelosFolder: "/root/jaguAR/src/assets/usr/modelos/"
 };
 
 /*

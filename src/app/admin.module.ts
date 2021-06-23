@@ -16,6 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { interceptorProvider, ProdInterceptorService } from './interceptors/prod-interceptor.service';
 import { ProfileComponent } from './session/profile/profile.component';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
     declarations: [
@@ -36,6 +38,8 @@ import { ProfileComponent } from './session/profile/profile.component';
         HttpClientModule,
         BrowserAnimationsModule, 
         ToastrModule.forRoot(),
+        MatIconModule,
+        MatSliderModule
     ],
     providers: [interceptorProvider]
 })

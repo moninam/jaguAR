@@ -4,6 +4,7 @@ import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { RegistroUsuario } from '../../models/registro-usuario';
 import {Recinto} from '../../models/recinto';
+import { ToastrService } from 'ngx-toastr';
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -24,11 +25,13 @@ export class RegistroComponent implements OnInit {
     longitud: number = 0;
     errMsj: string = '';
     isLogged = false;
+    isLoading = false;
 
     constructor(
         private tokenService: TokenService,
         private authService: AuthService,
         private router: Router,
+        private toastService: ToastrService
         // private toastr: ToastrService
     ) {}
 
@@ -38,27 +41,48 @@ export class RegistroComponent implements OnInit {
         }
     }
 
-    onRegister(): void {
-        const nuevoUsuario = new RegistroUsuario(
-            this.emailUsuario, this.aliasUsuario, this.password,
-            this.nombreRecinto, this.direccionRecinto, this.telefonoRecinto, this.latitud, this.longitud
-        );
-        this.authService.nuevo(nuevoUsuario).subscribe(
-            data => {
-                /*this.toastr.success('Cuenta Creada', 'OK', {
-                    timeOut: 3000, positionClass: 'toast-top-center'
-                });*/
+    onRegister(register:any): void {
+        this.isLoading = true;
+        console.log(register);
+        let roles = ["admin"];
+        let email = register.emailUsuario;
+        let alias = register.aliasUsuario;
+        let password = register.password;
+        let direccion = register.direccionRecinto;
+        let telefono = register.telefonoRecinto;
+        let latitud = register.latitud;
+        let longitud = register.longitud;
+        let nombre = register.nombreRecinto;
 
-                this.router.navigate(['/login']);
-            },
-            err => {
-                this.errMsj = err.error.mensaje;
-                /*this.toastr.error(this.errMsj, 'Fail', {
+        let registro = new RegistroUsuario(email,
+                        alias,
+                        password,
+                        direccion,
+                        telefono,
+                        latitud,
+                        longitud,
+                        nombre,
+                        roles);
+        this.authService.nuevo(registro)
+        .subscribe((data) => {
+            this.isLoading = false;
+            this.toastService.success('Su cuenta se ha registrado con éxito, recibirá un email a '+ data.email+' en la brevedad','OK', {
+                timeOut:3000,positionClass : 'toast-top-center'
+            });
+            setTimeout(() => {
+                window.location.reload();
+            },2000);
+        },
+        (error) => {
+            this.isLoading = false;
+            console.log(error);
+            this.errMsj = error.error.message;
+            console.log(this.errMsj);
+            this.toastService.error(this.errMsj, 'Fail', {
                     timeOut: 3000,  positionClass: 'toast-top-center',
-                });*/
-                // console.log(err.error.message);
-            }
-        );
+            });
+        }
+        )
     }
 
 }

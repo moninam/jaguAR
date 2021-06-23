@@ -1,4 +1,4 @@
-<nav class="button2 navbar p-2">
+<nav class="buttons navbar p-3">
     <button class="btn circle btn-info text-white float-left mr-3" (click)="openMenuModal(content)">
         <span class="mdi mdi-menu"></span>
     </button>
@@ -30,6 +30,10 @@
                                    (click)="modal.dismiss('Cross click')"
                                 >Regresar a Inicio
                                 </a>
+                                <a class="nav-link"
+                                   (click)="modal.dismiss('Cross click'); refreshPage()"
+                                >Recargar visor
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -55,12 +59,16 @@
                                 <li>Debes seleccionar primero un grupo para poder después seleccionar un componente.</li>
                                 <li>El ícono <span class="mdi mdi-qrcode"></span> en los componentes indica que éste tiene un marcador asociado. Al hacerle clic, hay que escanearlo con la cámara para poder activarlo.
                                     Si el componente no tiene el ícono, con solo hacerle clic se desplegará el componente.</li>
+                                <li>Una vez cargado el componente, aparecerá el ícono <span class="mdi mdi-information me-2"></span>
+                                    Éste puede contener información adicional sobre el contenido que se despliega.
+                                    Si es un modelo, también muestra una imagen del marcador asociado.
+                                </li>
                             </ul>
                         </div>
                         <div class="row py-1">
                             <p class="col my-auto"><strong>Acciones disponibles</strong></p>
                             <small>(Únicamente para dispositivos móviles)</small>
-                            <div class="row py-2 mx-auto">
+                            <!--div class="row py-2 mx-auto">
                                 <div class="row col-lg-7 col-md-7 col-sm-12 p-0 mx-0 my-1">
                                     <div class="col text-center">
                                         <button class="btn circle btn-dark float-left">
@@ -90,14 +98,14 @@
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </div-->
                             <div class="row mx-3 my-1">
                                 <ul class="font-xs">
                                     <li><span class="mdi mdi-resize me-2"></span>Cambiar el tamaño del objeto</li>
                                     <li><span class="mdi mdi-cursor-move me-2"></span>Mover el objeto</li>
                                     <li><span class="mdi mdi-rotate-3d me-2"></span>Rotar el objeto</li>
-                                    <li><span class="mdi mdi-information me-2"></span>Información adicional</li>
-                                    <li><span class="mdi mdi-play-pause me-2"></span>Reproducir animación</li>
+                                    <!--li><span class="mdi mdi-information me-2"></span>Información adicional</li-->
+                                    <!--li><span class="mdi mdi-play-pause me-2"></span>Reproducir animación</li-->
                                 </ul>
                             </div>
                         </div>

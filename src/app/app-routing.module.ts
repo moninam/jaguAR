@@ -12,6 +12,7 @@ import { LandingComponent } from './landing/landing.component';
 import { VisorComponent } from './visor/visor.component';
 import { PageNotFoundComponent } from './404/pageNotFound.component';
 import { ProfileComponent } from './session/profile/profile.component';
+import { ProdGuardService } from './guards/prod-guards.service';
 
 
 const routes: Routes = [
@@ -19,15 +20,15 @@ const routes: Routes = [
     { path: 'visor', component: VisorComponent },
     { path: 'admin', component: AdminComponent,
         children: [
-        {path: 'grupos', component: GruposComponent},
-        {path: 'componentes', component: ComponentesComponent},
-        {path: 'modelos', component: ModelosComponent},
-        {path: 'marcadores', component: MarcadoresComponent},
-        {path: 'multimedia', component: MultimediaComponent}
+        {path: 'grupos', component: GruposComponent,canActivate: [ProdGuardService], data: { expectedRol: ['admin'] }},
+        {path: 'componentes', component: ComponentesComponent,canActivate: [ProdGuardService], data: { expectedRol: ['admin'] }},
+        {path: 'modelos', component: ModelosComponent,canActivate: [ProdGuardService], data: { expectedRol: ['admin'] }},
+        {path: 'marcadores', component: MarcadoresComponent,canActivate: [ProdGuardService], data: { expectedRol: ['admin'] }},
+        {path: 'multimedia', component: MultimediaComponent,canActivate: [ProdGuardService], data: { expectedRol: ['admin'] }}
       ]
     },
     { path: 'login', component: SessionComponent },
-    { path: 'perfil', component: ProfileComponent },
+    { path: 'perfil', component: ProfileComponent,canActivate: [ProdGuardService], data: { expectedRol: ['admin'] }},
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
 ];

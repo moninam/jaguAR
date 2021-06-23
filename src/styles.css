@@ -65,7 +65,7 @@
 .hide-element{display: none!important; visibility: hidden!important;}
 
 /*FONTS*/
-body{color: var(--charcoal)!important;}
+body{color: var(--charcoal)!important;background-color: var(--lila);}
 /*colors*/
 .text-pink{color: var(--sakura);}
 .text-purple{color: var(--lavender);}
@@ -81,6 +81,8 @@ body{color: var(--charcoal)!important;}
     font-weight: bold;
 }
 .text-justify{text-align: justify}
+.text-right{text-align: right}
+.text-left{text-align: left}
 .font-xs{font-size: x-small!important;}
 .font-sm{font-size: small!important;}
 .font-lg{font-size: larger!important;}
@@ -99,7 +101,8 @@ body{color: var(--charcoal)!important;}
 /*BACKGROUNDS*/
 .backg-white{background-color: white;}
 .backg-white50{background-color: rgba(255,255,255,255.3)}
-.backg-charcoal50{background-color: rgba(0,0,0,0.3)}
+.backg-charcoal50{background-color: rgba(0,0,0,0.3  )}
+.backg-charcoal80{background-color: rgba(0,0,0,0.8)}
 .backg-charcoal{background-color: var(--charcoal);}
 .backg-graybone{background-color: var(--graybone);}
 .backg-sand{background-color: var(--sand);}
@@ -113,6 +116,7 @@ body{color: var(--charcoal)!important;}
 .by-gray{border-bottom: solid 1px var(--shadow);border-top: solid 1px var(--shadow);}
 .bb-shadow-dotted{border-bottom: dotted 2px var(--shadow)}
 .bb-white-dotted{border-bottom: dotted 2px white}
+.bt-flash-dotted{border-top: dotted 2px var(--flash)}
 .bb-rainbow{
     border-bottom: 5px solid transparent!important;
     border-image-source: var(--gradientRainbow)!important;
@@ -224,6 +228,15 @@ option:hover{
     color: #495057;
 }
 
+/*OVERRIDE - INPUTS*/
+.form-select,.form-select:focus{background-color: var(--lightCharcoal)!important;border-color: transparent!important;}
+.form-select{color: var(--graybone);}
+.form-select:focus {color: #fff;box-shadow: 0 0 0 0.2rem var(--shadow)!important;}
+option:hover{
+    background-color: var(--lightAqua);
+    color: #495057;
+}
+
 /*OVERRIDE - TABLES*/
 .table th, .table td{vertical-align: middle!important;}
 .table .thead-aqua th {
@@ -246,7 +259,7 @@ tr{width: 100%}*/
 .modal-header{border-bottom: unset; background-color: var(--darks);}
 .modal-body{background-color: #000;}
 .modal-footer{border-top: unset;background-color: #000;}
-.modal-content-container{min-height:15rem; max-height: 70vh; overflow-y: scroll; overflow-x: hidden}
+.modal-content-container{min-height:15rem; max-height: 50vh; overflow-y: scroll; overflow-x: hidden}
 .card{border-color: var(--lila)!important;}
 
 
@@ -277,9 +290,22 @@ button.close:focus{border: none; background: transparent}
     border-color:transparent;
     vertical-align: middle;
     color: white;
+    height: auto;
+    word-break: break-word;
 }
 .msg-ok.alert-custom{color: var(--lightOlive)!important;}
 .msg-error.alert-custom{color: var(--cherry)!important;}
 .fade:not(.show) {
     display: none;
+}
+.loading{
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    position: absolute;
+    top: 0;left: 0; /*por el visor al activarse la cámara*/
+}
+.loading img{
+    width: 50vh;
+    height: auto;
 }

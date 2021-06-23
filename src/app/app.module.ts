@@ -16,6 +16,10 @@ import { ProdInterceptorService } from './interceptors/prod-interceptor.service'
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +39,9 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    HammerModule
+    HammerModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot(),
   ],
   providers: [ 
     ProdInterceptorService,

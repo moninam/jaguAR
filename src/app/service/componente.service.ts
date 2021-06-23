@@ -1,31 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Componente } from '../models/componente';
-import { Grupo } from '../models/grupo';
+
+import { ComponenteAdmin } from '../models/componente-admin';
+import { environment } from 'src/environments/environment';
+import { Componente } from '../interfaces/componente';
+import { ComponenteRequest } from '../models/componente-request';
+import { Grupo } from '../interfaces/grupo';
+import { ComponenteUpdate } from '../models/componente-update';
+import { Mensaje } from '../interfaces/mensaje';
+import { MensajeDelete } from '../interfaces/mensaje-delete';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class ComponenteService {
 
-    componenteURL = 'http://localhost:8080/api/v1/componente';
+    componenteURL = environment.urlApi;
 
     constructor(private httpClient: HttpClient) { }
 
-    public getAllByRecinto(id: number): Observable<Componente[]> {
-        return this.httpClient.get<Componente[]>(this.componenteURL + `s/${id}`);
+    public getAllByRecinto(id: number){
+        return this.httpClient.get<Componente[]>(`${this.componenteURL}/componentes/${id}`);
     }
-    public save(componente: Componente): Observable<any> {
-        return this.httpClient.post<any>(this.componenteURL, componente);
+    public save(componente: ComponenteRequest) {
+        return this.httpClient.post<Componente>(`${this.componenteURL}/componente`, componente);
     }
-    public update(id: number, componente: Componente): Observable<any> {
-        return this.httpClient.put<any>(this.componenteURL + `/${id}`, componente);
+    public update(id: number, componente: ComponenteUpdate){
+        return this.httpClient.put<Componente>(`${this.componenteURL}/componente/${id}`, componente);
     }
-    public delete(id: number): Observable<any> {
-        return this.httpClient.delete<any>(this.componenteURL + `/${id}`);
+    public delete(id: number,idMuseo:number){
+        return this.httpClient.delete<MensajeDelete>(`${this.componenteURL}/componente/${id}?id=${idMuseo}`);
     }
-    public getGruposByComponente(id: number): Observable<Grupo[]> {
-        return this.httpClient.get<Grupo[]>(this.componenteURL + `componente/${id}/grupo`);
+    public getGruposByComponente(id: number){
+        return this.httpClient.get<Grupo>(`${this.componenteURL}/componente/${id}/grupo`);
     }
 }

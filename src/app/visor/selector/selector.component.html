@@ -1,5 +1,5 @@
 <!-- BOTONES DE NAVEGACION -->
-<nav class="buttons navbar p-3">
+<nav class="buttons navbar p-3" *ngIf="idMuseo && idMuseo != 0">
     <button class="btn circle btn-danger float-left mr-3" (click)="openMenuModal(content)">
         <span class="mdi mdi-cube-outline"></span>
     </button>

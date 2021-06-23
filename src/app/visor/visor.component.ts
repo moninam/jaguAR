@@ -28,8 +28,8 @@ export class VisorComponent implements OnInit {
   isModel: boolean;
   isVideo: boolean;
   isImage: boolean;
+  isLoading: boolean;
   isTest: boolean = true;
-  errorMsg: string = '';
   // COLLAPSE AL DESPLEGAR COMPONENTE
     isCollapsed = true;
     componentDescription = '';
@@ -37,6 +37,7 @@ export class VisorComponent implements OnInit {
     resize: boolean = false;
   // ATRIBUTOS ENVIADOS A SELECTOR
     idMuseo: number;
+    nombreMuseo: string;
     hasComponentes: boolean;
     componentes: Componente[] = [];
 
@@ -51,10 +52,12 @@ export class VisorComponent implements OnInit {
     this.latitude = 0;
     this.longitude = 0;
     this.idMuseo = 0;
+    this.nombreMuseo = '';
     this.isModel = false;
     this.isVideo = false;
     this.isImage = false;
     this.hasComponentes = false;
+    this.isLoading = false;
   }
   ngAfterViewInit(){}
   ngOnInit(): void {
@@ -84,6 +87,7 @@ export class VisorComponent implements OnInit {
     .subscribe((museo) => {
       this.cookieService.set('idMuseo', museo.idMuseo.toString());
       this.idMuseo = museo.idMuseo;
+      this.nombreMuseo = museo.nameMuseo;
       // alert(this.idMuseo + ' ' + museo.idMuseo);
     },
     (error) => {
@@ -94,7 +98,7 @@ export class VisorComponent implements OnInit {
         switch(error.status){
           case 404:
             // alert('No se encontró ningún museo cerca de su localidad');
-            this.errorMsg = 'No se encontró ningún museo cerca de su localidad';
+            console.log('No se encontró ningún museo cerca de su localidad');
             break;
         }
       }
@@ -175,13 +179,17 @@ export class VisorComponent implements OnInit {
     if (componente.Modelo != null){
       // alert('Cargando modelo');
       console.log('Cargando modelo');
+      this.isLoading = true;
       this.isImage = false;
       this.isVideo = false;
       this.isModel = true;
       setTimeout(() => {
         this.setModelo(componente.Modelo!.UrlModelo);
         this.setMovement(componente.Modelo!.HasRotation, componente.Modelo!.HasResize);
-        alert('Modelo cargado');
+        // alert('Modelo cargado');
+        console.log('modelo cargado');
+        this.isLoading = false;
+        this.isCollapsed = false;
         this.componentDescription = componente.DescripcionComponente;
       }, 5000);
     }
@@ -189,24 +197,32 @@ export class VisorComponent implements OnInit {
       if (componente.Multimedia.TipoMultimedia == 'VIDEO'){
         // alert('Cargando video');
         console.log('Cargando video');
+        this.isLoading = true;
         this.isImage = false;
         this.isModel = false;
         this.isVideo = true;
         setTimeout(() => {
           this.setVideo();
           this.setVideoUrl(componente.Multimedia!.UrlMultimedia);
-          alert('Video cargado');
+          // alert('Video cargado');
+          console.log('video cargado');
+          this.isLoading = false;
+          this.isCollapsed = false;
           this.componentDescription = componente.DescripcionComponente;
         }, 5000);
-      } else if(componente.Multimedia.TipoMultimedia == 'IMAGEN'){
+      } else if (componente.Multimedia.TipoMultimedia == 'IMAGEN'){
         // alert('Cargando imagen');
         console.log('Cargando imagen');
+        this.isLoading = true;
         this.isModel = false;
         this.isVideo = false;
         this.isImage = true;
         setTimeout(() => {
           this.setImagenUrl(componente.Multimedia!.UrlMultimedia);
-          alert('Imagen cargada');
+          // alert('Imagen cargada');
+          console.log('imagen cargada');
+          this.isLoading = false;
+          this.isCollapsed = false;
           this.componentDescription = componente.DescripcionComponente;
         }, 5000);
       }

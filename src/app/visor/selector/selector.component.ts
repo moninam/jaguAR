@@ -18,7 +18,7 @@ import { SharingService } from '../../services/sharing.service';*/
 export class SelectorComponent implements OnInit {
     @Input() idMuseo?: number;
     @Input() componentes: Componente[] = [];
-    @Input() hasComponentes: boolean;
+    @Input() hasComponentes: boolean = false;
     @Output() componenteUpdate: EventEmitter<number> = new EventEmitter<number>();
     @Output() componenteShow: EventEmitter<Componente> = new EventEmitter<Componente>();
 
@@ -76,7 +76,8 @@ export class SelectorComponent implements OnInit {
             // if (images[i].id === 'grupo-'+id ){}
             images[i].classList.remove('selected');
         }
-        document.getElementById('grupo-'+id ).classList.add('selected');
+        const grupoImg = document.getElementById('grupo-'+ id );
+        if (grupoImg != null){grupoImg.classList.add('selected'); }
         // carga sus componentes
         this.componenteUpdate.emit(id);
     }
@@ -85,7 +86,8 @@ export class SelectorComponent implements OnInit {
         // marca la clase seleccionada
         const images = document.getElementsByClassName('componente-img');
         for (let i = 0; i < images.length; i++) {images[i].classList.remove('selected');}
-        document.getElementById('componente-' + component.IdComponente).classList.add('selected');
+        const grupoImg = document.getElementById('componente-' + component.IdComponente );
+        if (grupoImg != null){grupoImg.classList.add('selected'); }
         this.componenteShow.emit(component);
     }
 }

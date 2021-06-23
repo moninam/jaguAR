@@ -1,4 +1,12 @@
 /*Botones de navegación del visor*/
+body{
+    overflow: hidden;
+}
+#visor-background{
+    background-image: url("../../assets/img/landing/mountain.png");
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+}
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link{background-color: #000 !important; text-decoration: underline}
 .nav-link,.nav-link:focus, .nav-link:hover{color: #fff}
 .nav-link:hover{font-weight: bold;}

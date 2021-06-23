@@ -1,4 +1,7 @@
 <ng-container>
+    <div *ngIf="isLoading" class="loading backg-charcoal80 text-center">
+        <img src="../../assets/gif/loading_splash.gif"/>
+    </div>
     <div id="visor-navigation">
         <app-visor-menu></app-visor-menu>
         <app-visor-selector
@@ -58,8 +61,8 @@
         </a-scene>
     </ng-container>
     <footer id="visor-footer">
-        <ngb-alert *ngIf="errorMsg" #selfClosingAlert class="msg-error p-2 col-11 mx-auto" type="custom" [dismissible]="true">{{errorMsg}}</ngb-alert>
-        <ngb-alert *ngIf="idMuseo" #selfClosingAlert class="msg-ok p-2 col-11 mx-auto" type="custom" [dismissible]="true">Museo detectado, bienvenido</ngb-alert>
+        <ngb-alert *ngIf="!idMuseo || idMuseo == 0" #selfClosingAlert class="msg-error p-2 col-11 mx-auto" type="custom" [dismissible]="true">No se encontró ningún museo cerca de su localidad. Sus coordenadas son {{latitude}}, {{longitude}}</ngb-alert>
+        <ngb-alert *ngIf="idMuseo && idMuseo != 0" #selfClosingAlert class="msg-ok p-2 col-11 mx-auto" type="custom" [dismissible]="true">Museo detectado, bienvenido a {{nombreMuseo}}</ngb-alert>
         <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
             <div class="visor-footer-info row p-0">
                 <div class="row col my-auto p-3">

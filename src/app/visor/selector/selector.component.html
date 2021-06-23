@@ -27,7 +27,7 @@
                         <h5>Selecciona un grupo</h5>
                     </div>
                     <div class="p-3 modal-content-container">
-                        <p *ngIf="!hasGroups" class="text-center">{{message}}</p>
+                        <p *ngIf="!hasGroups" class="text-center">No se encontró ningún grupo registrado</p>
                        <!--GRUPOS-->
                         <div class="row">
                             <div *ngFor="let g of grupos"

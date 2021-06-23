@@ -152,8 +152,8 @@ export class VisorComponent implements OnInit {
           }
           c.IdComponente = value.idComponente;
           this.componentes.push(c);
-          this.hasComponentes = true;
         });
+        this.componentes.length > 0 ? this.hasComponentes = true : this.hasComponentes = false;
       },
       (error) => {
         if (error.error instanceof ErrorEvent){

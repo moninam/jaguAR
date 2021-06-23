@@ -51,8 +51,8 @@ export class SelectorComponent implements OnInit {
                 n.GrupoId = value.idGrupo;
                 this.grupos.push(n);
             });
-            this.hasGroups = true;
-        },
+            this.grupos.length > 0 ? this.hasGroups = true : this.hasGroups = false;
+            },
         (error) => {
             if (error.error instanceof ErrorEvent){
                 console.log('Error Event');
@@ -62,7 +62,6 @@ export class SelectorComponent implements OnInit {
                   case 404:
                     console.log('No se encontró ningún grupo registrado');
                     this.hasGroups = false;
-                    this.message = 'No se encontró ningún grupo registrado';
                     break;
                 }
               }

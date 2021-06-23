@@ -14,7 +14,9 @@ export const environment = {
   videosFolder : "/root/jaguAR/src/assets/usr/videos/",
   videosExternoFolder : "../../assets/usr/videos/",
   modelosFolder: "/root/jaguAR/src/assets/usr/modelos/",
-  modelosExternoFolder : "../../assets/usr/modelos/"
+  modelosExternoFolder : "../../assets/usr/modelos/",
+  marcadoresFolder : "/root/jaguAR/src/assets/usr/marcadores/",
+  marcadoresExternosFolder : "../../assets/usr/marcadores/"
 };
 
 /*

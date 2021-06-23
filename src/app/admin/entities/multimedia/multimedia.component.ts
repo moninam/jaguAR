@@ -191,7 +191,7 @@ export class MultimediaComponent implements OnInit{
             this.isLoading = false;
             this.errMsj = error.error.message;
             console.log(this.errMsj);
-            this.toastService.error("Ocurrió un error al actualizar el modelo", 'Fail', {
+            this.toastService.error("Ocurrió un error al actualizar el archivo", 'Fail', {
                 timeOut: 3000,  positionClass: 'toast-top-center',
             });
         });

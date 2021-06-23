@@ -93,7 +93,6 @@ export class ComponentesComponent implements OnInit{
         },2000);
         if (component.ComponentType === 'MODELO'){
             if (component.Modelo != null){
-                alert(component.Modelo.IdModelo);
                 this.editForm.get('archivo')?.setValue(component.Modelo.IdModelo?.toString());
             }
         } else if (component.ComponentType === 'VIDEO' || component.ComponentType === 'IMAGEN'){
@@ -102,7 +101,6 @@ export class ComponentesComponent implements OnInit{
             }
         }
         if (component.Target != null) {
-            alert("con marcador");
             this.editForm.get('marcador')?.setValue(component.Target.IdTarget!.toString());
         }
         this.editForm.get('idComponente')?.setValue(component.IdComponente);
@@ -295,7 +293,6 @@ export class ComponentesComponent implements OnInit{
         }
     }
     fillSelect(value:any){
-        alert(value);
         if (value == 'MODELO'){
             this.elementos = [];
             this.modelos.forEach(element => {

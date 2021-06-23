@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Modelo } from '../models/modelo';
+import { Modelo } from '../interfaces/modelo';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class ModeloService {
 
-   modeloURL = 'http://localhost:8080/api/v1/modelo';
+   modeloURL = environment.urlApi;
 
     constructor(private httpClient: HttpClient) { }
 
-    public getAllByRecinto(id: number): Observable<Modelo[]> {
-        return this.httpClient.get<Modelo[]>(this.modeloURL + `s/${id}`);
+    public getAllByRecinto(id: number) {
+        return this.httpClient.get<Modelo[]>(`${this.modeloURL}/modelos/${id}`);
     }
     public save(modelo: Modelo): Observable<any> {
         return this.httpClient.post<any>(this.modeloURL, modelo);

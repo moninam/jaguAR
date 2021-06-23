@@ -87,13 +87,16 @@ export class GruposComponent implements OnInit{
                 this.toastService.success(response.message,'OK', {
                     timeOut:3000,positionClass : 'toast-top-center'
                 });
+                this.deleteGrupo = 0;
                 setTimeout(() => {
                     window.location.reload();
                 },2000);
+                
             },(error) => {
                 this.isLoading = false;
                 this.errMsj = error.error.message;
                 console.log(this.errMsj);
+                this.deleteGrupo = 0;
                 this.toastService.error(this.errMsj, 'Fail', {
                         timeOut: 3000,  positionClass: 'toast-top-center',
                 });
@@ -186,7 +189,6 @@ export class GruposComponent implements OnInit{
           .subscribe((museo) => {
             this.tokenService.setIdMuseo(+museo.idMuseo);
             this.loadGrupos(+(this.tokenService.getIdMuseo()!));
-            alert(this.tokenService.getIdMuseo());
           },(error) => {
             this.errMsj = error.error.message;
                 console.log(this.errMsj);

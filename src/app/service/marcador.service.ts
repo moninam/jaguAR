@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Target } from '../interfaces/target';
 import { Marcador } from '../models/marcador';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class MarcadorService {
 
-    marcadorURL = 'http://localhost:8080/api/v1/target';
+    marcadorURL = environment.urlApi;
 
     constructor(private httpClient: HttpClient) { }
 
-    public getAllByRecinto(id: number): Observable<Marcador[]> {
-        return this.httpClient.get<Marcador[]>(this.marcadorURL + `s/${id}`);
+    public getAllByRecinto(id: number){
+        return this.httpClient.get<Target[]>(`${this.marcadorURL}/targets/${id}`);
     }
     public save(marcador: Marcador): Observable<any> {
         return this.httpClient.post<any>(this.marcadorURL, marcador);

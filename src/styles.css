@@ -224,6 +224,15 @@ option:hover{
     color: #495057;
 }
 
+/*OVERRIDE - INPUTS*/
+.form-select,.form-select:focus{background-color: var(--lightCharcoal)!important;border-color: transparent!important;}
+.form-select{color: var(--graybone);}
+.form-select:focus {color: #fff;box-shadow: 0 0 0 0.2rem var(--shadow)!important;}
+option:hover{
+    background-color: var(--lightAqua);
+    color: #495057;
+}
+
 /*OVERRIDE - TABLES*/
 .table th, .table td{vertical-align: middle!important;}
 .table .thead-aqua th {

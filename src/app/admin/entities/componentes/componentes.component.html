@@ -1,20 +1,16 @@
+<div class="loading" *ngIf="isLoading">
+    <img src="../../../assets/img/spinner2.gif">
+</div>
 <div class="container-fluid px-5 py-3">
-    <ngb-alert class="msg-ok" type="custom" [dismissible]="true">Sample</ngb-alert>
-    <ngb-alert class="msg-error" type="custom" [dismissible]="true">Sample</ngb-alert>
-    <ngb-alert class="" type="custom" [dismissible]="true">Sample</ngb-alert>
-
     <div class="row mb-4">
         <h3 class="col text-white">Componentes</h3>
         <button class="btn btn-forest col-3" (click)="openModal(newEntityModal)">Nuevo componente</button>
     </div>
-
     <div class="table-container">
         <table class="table table-light table-hover text-center">
             <thead class="thead-aqua">
             <tr>
-                <th>#</th>
                 <th>Nombre</th>
-                <th>Grupo</th>
                 <th>Descripción</th>
                 <th>Imagen</th>
                 <th>Marcador</th>
@@ -24,29 +20,28 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Nombre</td>
-                <td>Grupo</td>
-                <td>Descripción</td>
-                <td>Imagen</td>
-                <td>Marcador</td>
-                <td>Tipo</td>
-                <td>Archivo</td>
+            <tr *ngFor="let item of componentes">
+                <td>{{item.Nombre}}</td>
+                <td>{{item.Descripcion}}</td>
+                <td>{{item.UrlImagen}}</td>
+                <td>{{item.Target?.IdTarget || "N/A"}}</td>
+                <td>{{item.ComponentType}}</td>
+                <td>{{item.Modelo?.IdModelo || item.Multimedia?.IdMultimedia}}</td>
                 <td>
                     <a
                             class="icon mdi mdi-pencil text-yellow"
-                            data-toggle="tooltip" title="Editar">
+                            data-toggle="tooltip" title="Editar"
+                            (click)="editModal(EditEntityModal,item)">
                     </a>
                     <a
                             class="icon mdi mdi-trash-can text-red"
                             data-toggle="tooltip" title="Eliminar"
-                            (click)="openModal(confirmDelete)">
+                            (click)="deleteModal(confirmDelete,item.IdComponente!)">
                     </a>
                 </td>
             </tr>
 
-            <tr>
+            <tr *ngIf="componentes.length === 0">
                 <td colspan="12">No se encontraron registros</td>
             </tr>
             </tbody>
@@ -56,6 +51,9 @@
 
 <!-- MODAL DELETE CONFIRM -->
 <ng-template #confirmDelete let-modal>
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../assets/img/spinner2.gif">
+    </div>
     <div class="modal-header pb-2">
         <div class="col-2"></div>
         <h2 class="modal-title text-center col">Eliminar</h2>
@@ -69,13 +67,16 @@
     <div class="modal-footer">
         <div class="row col-12">
             <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
-            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Eliminar componente</button></div>
+            <div class="col-6"><button class="btn btn-yellow w-100" (click)="onDelete()">Eliminar componente</button></div>
         </div>
     </div>
 </ng-template>
 
 <!-- MODAL NEW ENTITY -->
 <ng-template #newEntityModal let-modal>
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../assets/img/spinner2.gif">
+    </div>
     <div class="modal-header pb-2">
         <div class="col-2"></div>
         <h2 class="modal-title text-center col">Nuevo componente</h2>
@@ -83,25 +84,147 @@
             <span aria-hidden="true" class="mdi mdi-close-thick"></span>
         </button>
     </div>
-    <div class="modal-body p-3">
-        <form>
+    <form #f="ngForm" (ngSubmit)="onRegister(f.value)">
+        <div class="modal-body p-3">
             <div class="form-group w-100 mb-2">
-                <label for="group_name" class="">Nombre del grupo</label>
-                <input id="group_name" type="text" class="form-control" placeholder="Ingrese el nombre del grupo" required/>
+                <label for="group_name" class="">Nombre del componente</label>
+                <input ngModel name="nombreComponente" #nombreComponente="ngModel" type="text" class="form-control" placeholder="Ingrese el nombre del grupo" required/>
+                <div *ngIf="nombreComponente.touched && nombreComponente.invalid" class="alert alert-danger">
+                    <div *ngIf="nombreComponente.errors?.required">El campo es requerido</div>
+                </div>
             </div>
             <div class="form-group w-100 mb-4">
-                <label for="group_description" class="">Descripción del grupo</label>
-                <textarea id="group_description" class="form-control" placeholder="Ingrese una descripción" required></textarea>
+                <label for="group_description" class="">Descripción del componente</label>
+                <textarea ngModel name="descripcionComponente" #descripcionComponente="ngModel" class="form-control" placeholder="Ingrese una descripción" required></textarea>
+                <div *ngIf="descripcionComponente.touched && descripcionComponente.invalid" class="alert alert-danger">
+                    <div *ngIf="descripcionComponente.errors?.required">El campo es requerido</div>
+                </div>
             </div>
             <div class="form-group w-100 mb-4">
-                file uploader**
+                <label for="group_description" class="">Grupo</label>
+                <select ngModel name="grupo" #grupo="ngModel" class="form-select" aria-label="Default select example">
+                    <option value="-1" selected>Sin Grupo</option>
+                    <option *ngFor="let g of grupos"[value]="g.IdGrupo">{{g.Nombre}}</option>
+                </select>
             </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <div class="row col-12">
-            <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
-            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Crear grupo</button></div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Marcador</label>
+                <select ngModel name="marcador" #marcador="ngModel" class="form-select" aria-label="Default select example">
+                    <option value="-1" selected>Sin Marcador</option>
+                    <option *ngFor="let m of targets"[value]="m.IdTarget">{{m.Nombre}}</option>
+                </select>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Tipo Archivo</label>
+                <select ngModel name="componentTipe" #componentTipe="ngModel" required class="form-select" aria-label="Default select example" (change)="fillSelect(componentTipe.value)">
+                    <option value="" selected>Seleccione el tipo de archivo</option>
+                    <option *ngFor="let i of componentType"[value]="i.value">{{i.name}}</option>
+                </select>
+                <div *ngIf="componentTipe.touched && componentTipe.invalid" class="alert alert-danger">
+                    <div *ngIf="componentTipe.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Archivo</label>
+                <select ngModel name="archivo" #archivo="ngModel" required class="form-select" aria-label="Default select example">
+                    <option value="" selected>Seleccione el Archivo</option>
+                    <option *ngFor="let sc of elementos"[value]="sc.Value">{{sc.Name}}</option>
+                </select>
+                <div *ngIf="archivo.touched && archivo.invalid" class="alert alert-danger">
+                    <div *ngIf="archivo.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <input type="file" required class="file-input"
+                accept=".jpg,.jpeg,.png"
+                (change)="onFileSelected($event)" #fileUpload>
+
+                <div class="file-upload">
+
+                    {{fileName || "Ningún archivo seleccionado."}}
+
+                    <button type="button" mat-mini-fab color="primary" class="upload-btn"
+                    (click)="fileUpload.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </div>
+            </div>
         </div>
+        <div class="modal-footer">
+            <div class="row col-12">
+                <div class="col-6"><button class="btn btn-secondary w-100" type="button" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+                <div class="col-6"><button class="btn btn-yellow w-100" [disabled]="!f.valid || !fileGrupo">Crear componente</button></div>
+            </div>
+        </div>
+    </form>
+</ng-template>
+<!-- MODAL NEW ENTITY -->
+<ng-template #EditEntityModal let-modal>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">Editar componente</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
     </div>
+    <form [formGroup]="editForm" (ngSubmit)="onEdit()">
+        <div class="modal-body p-3">
+            <div class="form-group w-100 mb-2">
+                <label for="group_name" class="">Nombre del componente</label>
+                <input formControlName="nombre" type="text" class="form-control" placeholder="Ingrese el nombre del grupo"/>
+                <div *ngIf="this.nombre!.touched && this.nombre!.invalid" class="alert alert-danger">
+                    <div *ngIf="this.nombre!.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Descripción del componente</label>
+                <textarea formControlName="descripcion" class="form-control" placeholder="Ingrese una descripción"></textarea>
+                <div *ngIf="this.descripcion!.touched && this.descripcion!.invalid" class="alert alert-danger">
+                    <div *ngIf="this.descripcion!.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Grupo</label>
+                <select formControlName="grupo" class="form-select" aria-label="Default select example">
+                    <option value="-1" selected>Sin grupo</option>
+                    <option *ngFor="let g of grupos"[value]="g.IdGrupo">{{g.Nombre}}</option>
+                </select>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Marcador</label>
+                <select formControlName="marcador" class="form-select" aria-label="Default select example">
+                    <option value="-1" selected>Sin marcador</option>
+                    <option *ngFor="let m of targets"[value]="m.IdTarget">{{m.Nombre}}</option>
+                </select>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Tipo Archivo</label>
+                <select formControlName="componentTipe" class="form-select" aria-label="Default select example" (change)="fillSelect(this.componentTipe)">
+                    <option value="" selected>Seleccione el tipo de archivo</option>
+                    <option *ngFor="let i of componentType"[value]="i.value">{{i.name}}</option>
+                </select>
+                <div *ngIf="this.componentTipe!.touched && this.componentTipe!.invalid" class="alert alert-danger">
+                    <div *ngIf="this.componentTipe!.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Archivo</label>
+                <select formControlName="archivo" class="form-select" aria-label="Default select example">
+                    <option value="" selected>Seleccione el Archivo</option>
+                    <option *ngFor="let sc of elementos"[value]="sc.Value">{{sc.Name}}</option>
+                </select>
+                <div *ngIf="this.archivo!.touched && this.archivo!.invalid" class="alert alert-danger">
+                    <div *ngIf="this.archivo!.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <input formControlName="idComponente" type="text" class="form-control" hidden>
+            <input formControlName="urlImagen" type="text" class="form-control" hidden>
+        </div>
+        <div class="modal-footer">
+            <div class="row col-12">
+                <div class="col-6"><button type="button" class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+                <div class="col-6"><button class="btn btn-yellow w-100" [disabled]="!isValid()">Guardar Componente</button></div>
+            </div>
+        </div>
+    </form>
 </ng-template>

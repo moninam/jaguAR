@@ -76,7 +76,7 @@ body{
 .selector-info{}
 .selector-info p{
     padding: .5rem; margin: 0; word-break: unset; overflow:hidden;
-    text-overflow: ellipsis; max-width: var(--visor-img-w)
+    text-overflow: ellipsis; max-width: var(--visor-img-w); max-height: var(--visor-img-h);
 }
 .selected .selector-background, .selected img{border: 3px solid #fff}
 

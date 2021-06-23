@@ -1,8 +1,11 @@
-<nav class="buttons navbar p-2">
+<!-- BOTONES DE NAVEGACION -->
+<nav class="buttons navbar p-3" *ngIf="idMuseo && idMuseo != 0">
     <button class="btn circle btn-danger float-left mr-3" (click)="openMenuModal(content)">
         <span class="mdi mdi-cube-outline"></span>
     </button>
 </nav>
+
+<!-- GRUPOS Y COMPONENTES -->
 <ng-template #content let-modal>
 <div class="modal-rainbow" id="modalClase" >
     <div class="modal-header pb-2">
@@ -24,14 +27,19 @@
                         <h5>Selecciona un grupo</h5>
                     </div>
                     <div class="p-3 modal-content-container">
+                        <p *ngIf="!hasGroups" class="text-center">No se encontró ningún grupo registrado</p>
                        <!--GRUPOS-->
-                        <div class="row" *ngFor="let g of grupos">
-                            <div class="selector-img col-6 p-0 my-2 mx-auto text-center selected">
+                        <div class="row">
+                            <div *ngFor="let g of grupos"
+                                 class="selector-img grupo-img col-6 p-0 my-2 mx-auto text-center clickable"
+                                 (click)="getComponentes(g.IdGrupo!)"
+                                 [id]="'grupo-' + g.IdGrupo"
+                            >
                                 <img [src]="g.UrlImagen"/>
-                                <input [value]="g.IdGrupo" hidden>
+                                <input [value]="g.IdGrupo" hidden/>
                                 <div class="selector-background"></div>
                                 <div class="selector-info">
-                                    <p class="clickable" (click)="getComponentes(g.IdGrupo!)">{{g.Nombre}}</p>
+                                    <p>{{g.Nombre}}</p>
                                 </div>
                             </div>
                         </div>
@@ -45,14 +53,22 @@
                         <h5>Selecciona un componente</h5>
                     </div>
                     <div class="p-3 modal-content-container">
+                        <p *ngIf="!hasComponentes" class="text-center">No se encontró ningún componente registrado</p>
                         <!--COMPONENTES-->
-                        <div class="row" *ngFor="let c of componentes">
-                            <div class="selector-img col-6 p-0 my-2 mx-auto text-center">
+                        <div class="row" *ngIf="hasComponentes">
+                            <div *ngFor="let c of componentes"
+                                class="selector-img componente-img col-6 p-0 my-2 mx-auto text-center clickable"
+                                 (click)="modal.dismiss('Cross click'); showComponente(c)"
+                                 [id]="'componente-' + c.IdComponente"
+                            >
                                 <img [src]="c.UrlImagenComponente"/>
                                 <div class="selector-background"></div>
                                 <div class="selector-info">
-                                    <p class="clickable"(click)="showComponente(c)">{{c.NombreComponente}}</p>
+                                    <p class="clickable" >
+                                        <span class="mdi mdi-qrcode"></span>
+                                    </p>
                                 </div>
+                                <p>{{c.NombreComponente}}</p>
                             </div>
                         </div>
                     </div>
@@ -62,46 +78,5 @@
     </div>
 </div>
 </ng-template>
-
-
-
-<!--nav class="navbar navbar-expand-lg navbar-light">
-    <button class="btn circle btn-jaguar float-left mr-3" type="button"
-            (click)="isMenuCollapsed = !isMenuCollapsed">
-        <!--span class="mdi mdi-hexagon-multiple"></span->
-        <span class="mdi mdi-label-multiple"></span>
-    </button>
-    <div [ngbCollapse]="isMenuCollapsed" class="row collapse ml-1">
-        <button class="col btn btn-trans" id="back"><span class="mdi mdi-xl mdi-chevron-left"></span> </button>
-        <button class="col btn btn-trans" id="forward"> <span class="mdi mdi-xl mdi-chevron-right"></span></button>
-        <div class="col container slider-ct">
-            <div class="row slide-wr">
-                <div class="col-4 col-lg-2 slide" *ngFor = "let grupo of listaGrupos">
-                    <img (click)="clickFilter(grupo.idGrupo, $event)" src="../../../assets/imagenes/{{grupo.imagen}}" class="img-fluid grupoImagen" alt="...">
-                    <br (click) = "detectAction(grupo.idGrupo)"><small>{{grupo.nombreGrupo}}</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav-->
-<!--nav class="navbar navbar-expand-lg navbar-light">
-    <button class="btn circle btn-jaguar float-left mr-3" type="button"
-            (click)="isMenuCollapsed = !isMenuCollapsed">
-        <span class="mdi mdi-rotate-3d"></span>
-    </button>
-    <div [ngbCollapse]="isMenuCollapsed" class="row collapse ml-1">
-        <button class="col btn btn-trans" id="back"><span class="mdi mdi-xl mdi-chevron-left"></span> </button>
-        <button class="col btn btn-trans" id="forward"> <span class="mdi mdi-xl mdi-chevron-right"></span></button>
-        <div class="col container slider-ct">
-            <div class="row slide-wr">
-                <div class="col-4 col-lg-2 slide" *ngFor = "let modelo of modelos">
-                    <img (click)="changeModel(modelo.modelo)" src="../../../assets/imagenes/{{modelo.modelo.icono}}" class="img-fluid" alt="...">
-                    <br><small>{{modelo.modelo.descripcion}}</small>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav-->
-
 
 

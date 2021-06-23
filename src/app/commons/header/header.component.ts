@@ -32,4 +32,5 @@ export class HeaderComponent implements OnInit{
     isRouteVisor(){
         return !(this.location.path() === '' || (this.location.path() == '/inicio'));
     }
+    getGrupo(){}
 }

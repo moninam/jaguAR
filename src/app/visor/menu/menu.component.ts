@@ -13,4 +13,7 @@ export class MenuComponent {
     openMenuModal(content: any): void {
         this.modalService.open(content, {backdropClass: 'color-backdrop'});
     }
+    refreshPage(): void{
+        window.location.reload();
+    }
 }

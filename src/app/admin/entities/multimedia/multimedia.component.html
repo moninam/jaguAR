@@ -1,3 +1,6 @@
+<div class="loading" *ngIf="isLoading">
+    <img src="../../../assets/img/spinner2.gif">
+</div>
 <div class="container-fluid px-5 py-3">
     <div class="row mb-4">
         <h3 class="col text-white">Archivos multimedia</h3>
@@ -67,6 +70,9 @@
 
 <!-- MODAL NEW ENTITY -->
 <ng-template #newEntityModal let-modal>
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../assets/img/spinner2.gif">
+    </div>
     <div class="modal-header pb-2">
         <div class="col-2"></div>
         <h2 class="modal-title text-center col">Nuevo archivo multimedia</h2>
@@ -119,6 +125,9 @@
 </ng-template>
 <!-- MODAL NEW ENTITY -->
 <ng-template #EditEntityModal let-modal>
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../assets/img/spinner2.gif">
+    </div>
     <div class="modal-header pb-2">
         <div class="col-2"></div>
         <h2 class="modal-title text-center col">Editar archivo multimedia</h2>
@@ -135,16 +144,7 @@
                     <div *ngIf="this.nombre!.errors?.required">El campo es requerido</div>
                 </div>
             </div>
-            <div class="form-group w-100 mb-4">
-                <label for="group_description" class="">Tipo Archivo</label>
-                <select formControlName="tipo" class="form-select" aria-label="Default select example">
-                    <option value="" selected>Seleccione el tipo de archivo</option>
-                    <option *ngFor="let i of componentType"[value]="i.value">{{i.name}}</option>
-                </select>
-                <div *ngIf="this.tipo!.touched && this.tipo!.invalid" class="alert alert-danger">
-                    <div *ngIf="this.tipo!.errors?.required">El campo es requerido</div>
-                </div>
-            </div>
+            <input formControlName="tipo" type="text" class="form-control" hidden>
             <input formControlName="idMultimedia" type="text" class="form-control" hidden>
             <input formControlName="urlImagen" type="text" class="form-control" hidden>
         </div>

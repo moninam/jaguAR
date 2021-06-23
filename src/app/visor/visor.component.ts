@@ -24,18 +24,21 @@ export class VisorComponent implements OnInit {
   urlImagen: string;
   longitude: number;
   latitude: number;
-  idMuseo: number;
   componente?: Componente;
-  componentes: Componente[] = [];
   isModel: boolean;
   isVideo: boolean;
   isImage: boolean;
   isTest: boolean = true;
-  rotate: boolean = false;
-  resize: boolean = false;
   errorMsg: string = '';
-  public isCollapsed = true;
-  public componentDescription = '';
+  // COLLAPSE AL DESPLEGAR COMPONENTE
+    isCollapsed = true;
+    componentDescription = '';
+    rotate: boolean = false;
+    resize: boolean = false;
+  // ATRIBUTOS ENVIADOS A SELECTOR
+    idMuseo: number;
+    hasComponentes: boolean;
+    componentes: Componente[] = [];
 
     constructor(
               private ubicacionService: UbicacionService,
@@ -51,6 +54,7 @@ export class VisorComponent implements OnInit {
     this.isModel = false;
     this.isVideo = false;
     this.isImage = false;
+    this.hasComponentes = false;
   }
   ngAfterViewInit(){}
   ngOnInit(): void {
@@ -80,7 +84,7 @@ export class VisorComponent implements OnInit {
     .subscribe((museo) => {
       this.cookieService.set('idMuseo', museo.idMuseo.toString());
       this.idMuseo = museo.idMuseo;
-      alert(this.idMuseo + ' ' + museo.idMuseo);
+      // alert(this.idMuseo + ' ' + museo.idMuseo);
     },
     (error) => {
       if (error.error instanceof ErrorEvent){
@@ -144,6 +148,7 @@ export class VisorComponent implements OnInit {
           }
           c.IdComponente = value.idComponente;
           this.componentes.push(c);
+          this.hasComponentes = true;
         });
       },
       (error) => {
@@ -151,9 +156,10 @@ export class VisorComponent implements OnInit {
           console.log('Error Event');
         } else{
           console.log(`error status : ${error.status} ${error.statusText}`);
-          switch(error.status){
+          switch (error.status){
             case 404:
               console.log('No se encontró ningún componente registrado');
+              this.hasComponentes = false;
               break;
           }
         }
@@ -167,7 +173,8 @@ export class VisorComponent implements OnInit {
       alert(componente.Target.UrlMarcador);
     }*/
     if (componente.Modelo != null){
-      alert('Cargando modelo');
+      // alert('Cargando modelo');
+      console.log('Cargando modelo');
       this.isImage = false;
       this.isVideo = false;
       this.isModel = true;
@@ -175,11 +182,13 @@ export class VisorComponent implements OnInit {
         this.setModelo(componente.Modelo!.UrlModelo);
         this.setMovement(componente.Modelo!.HasRotation, componente.Modelo!.HasResize);
         alert('Modelo cargado');
+        this.componentDescription = componente.DescripcionComponente;
       }, 5000);
     }
     if (componente.Multimedia != null){
       if (componente.Multimedia.TipoMultimedia == 'VIDEO'){
-        alert('Cargando video');
+        // alert('Cargando video');
+        console.log('Cargando video');
         this.isImage = false;
         this.isModel = false;
         this.isVideo = true;
@@ -187,18 +196,20 @@ export class VisorComponent implements OnInit {
           this.setVideo();
           this.setVideoUrl(componente.Multimedia!.UrlMultimedia);
           alert('Video cargado');
+          this.componentDescription = componente.DescripcionComponente;
         }, 5000);
       } else if(componente.Multimedia.TipoMultimedia == 'IMAGEN'){
-        alert('Cargando imagen');
+        // alert('Cargando imagen');
+        console.log('Cargando imagen');
         this.isModel = false;
         this.isVideo = false;
         this.isImage = true;
         setTimeout(() => {
           this.setImagenUrl(componente.Multimedia!.UrlMultimedia);
           alert('Imagen cargada');
+          this.componentDescription = componente.DescripcionComponente;
         }, 5000);
       }
-      this.componentDescription = componente.DescripcionComponente;
     }
   }
   setVideo(){

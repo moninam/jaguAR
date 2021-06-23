@@ -65,7 +65,7 @@
 .hide-element{display: none!important; visibility: hidden!important;}
 
 /*FONTS*/
-body{color: var(--charcoal)!important;}
+body{color: var(--charcoal)!important;overflow: hidden}
 /*colors*/
 .text-pink{color: var(--sakura);}
 .text-purple{color: var(--lavender);}
@@ -115,6 +115,7 @@ body{color: var(--charcoal)!important;}
 .by-gray{border-bottom: solid 1px var(--shadow);border-top: solid 1px var(--shadow);}
 .bb-shadow-dotted{border-bottom: dotted 2px var(--shadow)}
 .bb-white-dotted{border-bottom: dotted 2px white}
+.bt-flash-dotted{border-top: dotted 2px var(--flash)}
 .bb-rainbow{
     border-bottom: 5px solid transparent!important;
     border-image-source: var(--gradientRainbow)!important;
@@ -279,6 +280,8 @@ button.close:focus{border: none; background: transparent}
     border-color:transparent;
     vertical-align: middle;
     color: white;
+    height: auto;
+    word-break: break-word;
 }
 .msg-ok.alert-custom{color: var(--lightOlive)!important;}
 .msg-error.alert-custom{color: var(--cherry)!important;}

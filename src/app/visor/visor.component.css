@@ -80,18 +80,25 @@
 }
 
 /*FOOTER - informacion adicional de componentes*/
+#visor-footer .row{--bs-gutter-x: 0!important;}
 #visor-footer{
     position: absolute;
     bottom: 0;
+    left: 0;
     width: 100vw;
     max-height: 12rem;
     overflow-y: scroll;
+    overflow-x: hidden;
     z-index: 20
 }
-.visor-footer-before, .visor-footer-after{background-color: var(--darks);color: #fff;}
+.visor-footer-info{background-color: var(--darks);color: #fff;}
 #visor-footer .card{border: unset!important;}
 #visor-footer .card-body{
     background-color: var(--darks);
     border-radius: 0;
     color: #fff;
+}
+.marker-img{
+    width: 15vw;
+    height: auto;
 }

@@ -18,15 +18,16 @@ import { SharingService } from '../../services/sharing.service';*/
 export class SelectorComponent implements OnInit {
     @Input() idMuseo?: number;
     @Input() componentes: Componente[] = [];
+    @Input() hasComponentes: boolean;
     @Output() componenteUpdate: EventEmitter<number> = new EventEmitter<number>();
     @Output() componenteShow: EventEmitter<Componente> = new EventEmitter<Componente>();
 
     public hasGroups = false;
-    public hasComponentes = false;
     public message = '';
 
     grupos: Grupo[] = [];
     constructor(private modalService: NgbModal, private visorService: VisorService) {}
+
     openMenuModal(content: any): void {
         this.modalService.open(content, {backdropClass: 'color-backdrop'});
          // alert(this.idMuseo?.toString());
@@ -61,27 +62,30 @@ export class SelectorComponent implements OnInit {
                   case 404:
                     console.log('No se encontró ningún grupo registrado');
                     this.hasGroups = false;
-                    this.hasComponentes = false;
                     this.message = 'No se encontró ningún grupo registrado';
                     break;
                 }
               }
         });
     }
-    getComponentes(id: number, event: any): void{
+    getComponentes(id: number): void{
         // alert(id);
         // marca la clase seleccionada
-        const images = document.getElementsByClassName('selector-img');
+        const images = document.getElementsByClassName('grupo-img');
         for (let i = 0; i < images.length; i++) {
+            // if (images[i].id === 'grupo-'+id ){}
             images[i].classList.remove('selected');
         }
-        event.target.classList.toggle('selected');
+        document.getElementById('grupo-'+id ).classList.add('selected');
         // carga sus componentes
         this.componenteUpdate.emit(id);
-        this.hasComponentes = true;
     }
     showComponente(component: Componente): void{
         // alert(component.IdComponente);
+        // marca la clase seleccionada
+        const images = document.getElementsByClassName('componente-img');
+        for (let i = 0; i < images.length; i++) {images[i].classList.remove('selected');}
+        document.getElementById('componente-' + component.IdComponente).classList.add('selected');
         this.componenteShow.emit(component);
     }
 }

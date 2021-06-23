@@ -1,8 +1,7 @@
+<div class="loading" *ngIf="isLoading">
+    <img src="../../../assets/img/spinner2.gif">
+</div>
 <div class="container-fluid px-5 py-3">
-    <ngb-alert class="msg-ok" type="custom" [dismissible]="true">Sample</ngb-alert>
-    <ngb-alert class="msg-error" type="custom" [dismissible]="true">Sample</ngb-alert>
-    <ngb-alert class="" type="custom" [dismissible]="true">Sample</ngb-alert>
-
     <div class="row mb-4">
         <h3 class="col text-white">Modelos</h3>
         <button class="btn btn-forest col-3" (click)="openModal(newEntityModal)">Nuevo modelo</button>
@@ -12,7 +11,6 @@
         <table class="table table-light table-hover text-center">
             <thead class="thead-aqua">
             <tr>
-                <th>#</th>
                 <th>Nombre</th>
                 <th>Archivo</th>
                 <th>Animación</th>
@@ -28,67 +26,49 @@
                             data-toggle="tooltip" title="Editar">
                     </span>
                 </th>
-                <th>
-                    <span
-                            class="icon mdi mdi-rotate-3d"
-                            data-toggle="tooltip" title="Editar">
-                    </span>
-                </th>
-                <th>Fecha de modificación</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Nombre</td>
-                <td>Archivo</td>
-                <td>Animación</td>
+            <tr *ngFor="let model of modelos">
+                <td>{{model.Nombre}}</td>
+                <td>{{model.UrlModelo}}</td>
+                <td>{{model.NombreAnimacion}}</td>
                 <td>
-                    <a
+                    <a *ngIf="model.HasResize"
                             class="icon mdi mdi-check-circle text-green"
                             data-toggle="tooltip" title="Editar">
                     </a>
-                    <a
+                    <a *ngIf="!model.HasResize"
                             class="icon mdi mdi-check-circle-outline text-green"
                             data-toggle="tooltip" title="Eliminar">
                     </a>
                 </td>
                 <td>
-                    <a
+                    <a *ngIf="model.HasRotation"
                             class="icon mdi mdi-check-circle text-green"
                             data-toggle="tooltip" title="Editar">
                     </a>
-                    <a
+                    <a *ngIf="!model.HasRotation"
                             class="icon mdi mdi-check-circle-outline text-green"
                             data-toggle="tooltip" title="Eliminar">
                     </a>
                 </td>
-                <td>
-                    <a
-                            class="icon mdi mdi-check-circle text-green"
-                            data-toggle="tooltip" title="Editar">
-                    </a>
-                    <a
-                            class="icon mdi mdi-check-circle-outline text-green"
-                            data-toggle="tooltip" title="Eliminar">
-                    </a>
-                </td>
-                <td>dd/mm/aa</td>
                 <td>
                     <a
                             class="icon mdi mdi-pencil text-yellow"
-                            data-toggle="tooltip" title="Editar">
+                            data-toggle="tooltip" title="Editar"
+                            (click)="editModal(EditEntityModal,model)">
                     </a>
                     <a
                             class="icon mdi mdi-trash-can text-red"
                             data-toggle="tooltip" title="Eliminar"
-                            (click)="openModal(confirmDelete)">
+                            (click)="deleteModal(confirmDelete,model.IdModelo!)">
                     </a>
                 </td>
             </tr>
             <tr>
-                <td colspan="12">No se encontraron registros</td>
+                <td *ngIf="modelos.length == 0" colspan="12">No se encontraron registros</td>
             </tr>
             </tbody>
         </table>
@@ -97,6 +77,9 @@
 
 <!-- MODAL DELETE CONFIRM -->
 <ng-template #confirmDelete let-modal>
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../assets/img/spinner2.gif">
+    </div>
     <div class="modal-header pb-2">
         <div class="col-2"></div>
         <h2 class="modal-title text-center col">Eliminar</h2>
@@ -110,13 +93,16 @@
     <div class="modal-footer">
         <div class="row col-12">
             <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
-            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Eliminar modelo</button></div>
+            <div class="col-6"><button class="btn btn-yellow w-100" (click)="onDelete()">Eliminar modelo</button></div>
         </div>
     </div>
 </ng-template>
 
 <!-- MODAL NEW ENTITY -->
 <ng-template #newEntityModal let-modal>
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../assets/img/spinner2.gif">
+    </div>
     <div class="modal-header pb-2">
         <div class="col-2"></div>
         <h2 class="modal-title text-center col">Nuevo modelo</h2>
@@ -124,41 +110,115 @@
             <span aria-hidden="true" class="mdi mdi-close-thick"></span>
         </button>
     </div>
-    <div class="modal-body p-3">
-        <form>
-            <div class="form-group w-100 mb-2">
-                <label for="model_name" class="">Nombre del modelo</label>
-                <input id="model_name" type="text" class="form-control" placeholder="Ingrese el nombre del modelo" required/>
-            </div>
-            <div class="form-group w-100 mb-4">
-                file uploader**
-            </div>
-            <div class="form-group w-100 mb-4">
-                <label for="model_animation" class="">Nombre de la animación</label>
-                <textarea id="model_animation" class="form-control" placeholder="Ingrese el nombre de la animación del modelo" required></textarea>
-            </div>
-            <div class="form-group row w-100 mb-4">
-                <label>Acciones disponibles</label>
-                <div class="col-4">
-                    <label for="model_action_1" class="">Cambio de tamaño</label>
-                    <input id="model_action_1" type="checkbox" class="form-control mdi mdi-resize"/>
+    <form #f="ngForm" (ngSubmit)="onRegister(f.value)">
+        <div class="modal-body p-3">
+                <div class="form-group w-100 mb-2">
+                    <label for="model_name" class="">Nombre del modelo</label>
+                    <input ngModel name="nombre" #nombre="ngModel" id="model_name" type="text" class="form-control" placeholder="Ingrese el nombre del modelo" required/>
+                    <div *ngIf="nombre.touched && nombre.invalid" class="alert alert-danger">
+                        <div *ngIf="nombre.errors?.required">El campo es requerido</div>
+                    </div>
                 </div>
-                <div class="col-4">
-                    <label for="model_action_2" class="">Cambio de tamaño</label>
-                    <input id="model_action_2" type="checkbox" class="form-control mdi mdi-resize"/>
+                <div class="form-group w-100 mb-2">
+                    <label for="model_name" class="">Nombre de la animación</label>
+                    <input ngModel name="animacion" #animacion="ngModel" id="model_name" type="text" class="form-control" placeholder="Ingrese el nombre del modelo" required/>
+                    <div *ngIf="animacion.touched && animacion.invalid" class="alert alert-danger">
+                        <div *ngIf="animacion.errors?.required">El campo es requerido</div>
+                    </div>
                 </div>
-                <div class="col-4">
-                    <label for="model_action_3" class="">Cambio de tamaño</label>
-                    <input id="model_action_3" type="checkbox" class="form-control mdi mdi-resize"/>
+                <div class="form-group w-100 mb-4">
+                    <input type="file" required class="file-input"
+                    accept=".glb,.gltf,.obj"
+                    (change)="onFileSelected($event)" #fileUpload>
+    
+                    <div class="file-upload">
+    
+                        {{fileName || "Ningún archivo seleccionado."}}
+    
+                        <button type="button" mat-mini-fab color="primary" class="upload-btn"
+                        (click)="fileUpload.click()">
+                            <mat-icon>attach_file</mat-icon>
+                        </button>
+                    </div>
                 </div>
-
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <div class="row col-12">
-            <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
-            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Crear grupo</button></div>
+                <div class="form-group w-100 mb-4">
+                    <input ngModel name="resize" #resize="ngModel" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Cambio de tamaño
+                    </label>
+                    <div *ngIf="resize.touched && resize.invalid" class="alert alert-danger">
+                        <div *ngIf="resize.errors?.required">El campo es requerido</div>
+                    </div>
+                </div>
+                <div class="form-group w-100 mb-4">
+                    <input ngModel name="rotation" #rotation="ngModel" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Rotación
+                    </label>
+                    <div *ngIf="rotation.touched && rotation.invalid" class="alert alert-danger">
+                        <div *ngIf="rotation.errors?.required">El campo es requerido</div>
+                    </div>
+                </div>
         </div>
+        <div class="modal-footer">
+            <div class="row col-12">
+                <div class="col-6"><button type="button" class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+                <div class="col-6"><button class="btn btn-yellow w-100" [disabled]="!f.valid || !fileModelo">Crear Modelo</button></div>
+            </div>
+        </div>
+    </form>
+</ng-template>
+<!-- MODAL EDIT ENTITY -->
+<ng-template #EditEntityModal let-modal>
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../assets/img/spinner2.gif">
     </div>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">Editar modelo</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
+    </div>
+    <form [formGroup]="editForm" (ngSubmit)="onEdit()">
+        <div class="modal-body p-3">
+                <div class="form-group w-100 mb-2">
+                    <label for="model_name" class="">Nombre del modelo</label>
+                    <input formControlName="nombre" type="text" class="form-control" placeholder="Ingrese el nombre del modelo"/>
+                </div>
+                <div class="form-group w-100 mb-2">
+                    <label for="model_name" class="">Nombre de la animación</label>
+                    <input formControlName="animacion" type="text" class="form-control" placeholder="Ingrese el nombre del modelo"/>
+                    <div *ngIf="this.animacion!.touched && this.animacion!.invalid" class="alert alert-danger">
+                        <div *ngIf="this.animacion!.errors?.required">El campo es requerido</div>
+                    </div>
+                </div>
+                <div class="form-group w-100 mb-4">
+                    <input formControlName="resize" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Cambio de tamaño
+                    </label>
+                    <div *ngIf="this.resize!.touched && this.resize!.invalid" class="alert alert-danger">
+                        <div *ngIf="this.resize!.errors?.required">El campo es requerido</div>
+                    </div>
+                </div>
+                <div class="form-group w-100 mb-4">
+                    <input formControlName="rotation" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Rotación
+                    </label>
+                    <div *ngIf="this.rotation!.touched && this.rotation!.invalid" class="alert alert-danger">
+                        <div *ngIf="this.rotation!.errors?.required">El campo es requerido</div>
+                    </div>
+                </div>
+                <input formControlName="idModelo" type="text" class="form-control" hidden>
+                <input formControlName="urlImagen" type="text" class="form-control" hidden>
+        </div>
+        <div class="modal-footer">
+            <div class="row col-12">
+                <div class="col-6"><button type="button" class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+                <div class="col-6"><button class="btn btn-yellow w-100" [disabled]="!isValid()">Guardar modelo</button></div>
+            </div>
+        </div>
+    </form>
 </ng-template>

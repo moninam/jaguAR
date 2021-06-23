@@ -1,8 +1,4 @@
 <div class="container-fluid px-5 py-3">
-    <ngb-alert class="msg-ok" type="custom" [dismissible]="true">Sample</ngb-alert>
-    <ngb-alert class="msg-error" type="custom" [dismissible]="true">Sample</ngb-alert>
-    <ngb-alert class="" type="custom" [dismissible]="true">Sample</ngb-alert>
-
     <div class="row mb-4">
         <h3 class="col text-white">Archivos multimedia</h3>
         <button class="btn btn-forest col-3" (click)="openModal(newEntityModal)">Nuevo archivo</button>
@@ -12,7 +8,6 @@
         <table class="table table-light table-hover text-center">
             <thead class="thead-aqua">
             <tr>
-                <th>#</th>
                 <th>Nombre</th>
                 <th>Archivo</th>
                 <th>Tipo</th>
@@ -20,30 +15,30 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Nombre</td>
-                <td>Archivo</td>
-                <td>Tipo</td>
+            <tr *ngFor="let mult of multimedias">
+                <td>{{mult.Nombre}}</td>
+                <td>{{mult.UrlUbicacion}}</td>
+                <td>{{mult.MultimediaType}}</td>
                 <td>
                     <a
                             class="icon mdi mdi-pencil text-yellow"
                             data-toggle="tooltip"
                             ngbPopover="Editar"
                             triggers="mouseenter:mouseleave"
+                            (click)="editModal(EditEntityModal,mult)"
                     >
                     </a>
                     <a
                             class="icon mdi mdi-trash-can text-red"
                             data-toggle="tooltip" title="Eliminar"
-                            (click)="openModal(confirmDelete)">
+                            (click)="deleteModal(confirmDelete,mult.IdMultimedia!)">
                     </a>
                     
                 </td>
             </tr>
 
             <tr>
-                <td colspan="12">No se encontraron registros</td>
+                <td *ngIf="multimedias.length == 0" colspan="12">No se encontraron registros</td>
             </tr>
             </tbody>
         </table>
@@ -65,7 +60,7 @@
     <div class="modal-footer">
         <div class="row col-12">
             <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
-            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Eliminar archivo</button></div>
+            <div class="col-6"><button class="btn btn-yellow w-100" (click)="onDelete()">Eliminar archivo</button></div>
         </div>
     </div>
 </ng-template>
@@ -79,25 +74,85 @@
             <span aria-hidden="true" class="mdi mdi-close-thick"></span>
         </button>
     </div>
-    <div class="modal-body p-3">
-        <form>
+    <form #f="ngForm" (ngSubmit)="onRegister(f.value)">
+        <div class="modal-body p-3">
             <div class="form-group w-100 mb-2">
                 <label for="multimedia_name" class="">Nombre del archivo</label>
-                <input id="multimedia_name" type="text" class="form-control" placeholder="Ingrese el nombre del archivo" required/>
+                <input ngModel name="nombre" #nombre="ngModel" id="multimedia_name" type="text" class="form-control" placeholder="Ingrese el nombre del archivo" required/>
+                <div *ngIf="nombre.touched && nombre.invalid" class="alert alert-danger">
+                    <div *ngIf="nombre.errors?.required">El campo es requerido</div>
+                </div>
             </div>
             <div class="form-group w-100 mb-4">
-                <label for="" class="">Tipo de archivo</label>
-                <input id="" type="password" class="form-control" placeholder="" required/>
+                <label for="group_description" class="">Tipo Archivo</label>
+                <select ngModel name="componentTipe" #componentTipe="ngModel" required class="form-select" aria-label="Default select example" >
+                    <option value="" selected>Seleccione el tipo de archivo</option>
+                    <option *ngFor="let i of componentType"[value]="i.value">{{i.name}}</option>
+                </select>
+                <div *ngIf="componentTipe.touched && componentTipe.invalid" class="alert alert-danger">
+                    <div *ngIf="componentTipe.errors?.required">El campo es requerido</div>
+                </div>
             </div>
             <div class="form-group w-100 mb-4">
-                file uploader**
+                <input type="file" required class="file-input"
+                accept=".jpg,.jpeg,.png,.mp4"
+                (change)="onFileSelected($event)" #fileUpload>
+
+                <div class="file-upload">
+
+                    {{fileName || "Ningún archivo seleccionado."}}
+
+                    <button type="button" mat-mini-fab color="primary" class="upload-btn"
+                    (click)="fileUpload.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </div>
             </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <div class="row col-12">
-            <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
-            <div class="col-6"><button class="btn btn-yellow w-100" routerLink="logout">Crear archivo</button></div>
         </div>
+        <div class="modal-footer">
+            <div class="row col-12">
+                <div class="col-6"><button type="button" class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+                <div class="col-6"><button class="btn btn-yellow w-100" [disabled]="!f.valid || !fileMultimedia">Crear archivo</button></div>
+            </div>
+        </div>
+    </form>
+</ng-template>
+<!-- MODAL NEW ENTITY -->
+<ng-template #EditEntityModal let-modal>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">Editar archivo multimedia</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
     </div>
+    <form form [formGroup]="editForm" (ngSubmit)="onEdit()">
+        <div class="modal-body p-3">
+            <div class="form-group w-100 mb-2">
+                <label for="multimedia_name" class="">Nombre del archivo</label>
+                <input formControlName="nombre" id="multimedia_name" type="text" class="form-control" placeholder="Ingrese el nombre del archivo" required/>
+                <div *ngIf="this.nombre!.touched && this.nombre!.invalid" class="alert alert-danger">
+                    <div *ngIf="this.nombre!.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Tipo Archivo</label>
+                <select formControlName="tipo" class="form-select" aria-label="Default select example">
+                    <option value="" selected>Seleccione el tipo de archivo</option>
+                    <option *ngFor="let i of componentType"[value]="i.value">{{i.name}}</option>
+                </select>
+                <div *ngIf="this.tipo!.touched && this.tipo!.invalid" class="alert alert-danger">
+                    <div *ngIf="this.tipo!.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <input formControlName="idMultimedia" type="text" class="form-control" hidden>
+            <input formControlName="urlImagen" type="text" class="form-control" hidden>
+        </div>
+        <div class="modal-footer">
+            <div class="row col-12">
+                <div class="col-6"><button type="button" class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+                <div class="col-6"><button class="btn btn-yellow w-100" [disabled]="!isValid()">Guardar archivo</button></div>
+            </div>
+        </div>
+    </form>
 </ng-template>

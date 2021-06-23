@@ -19,7 +19,7 @@
           </li>
         </ul>
         <ul class="navbar-nav text-center ms-auto me-3">
-            <li *ngIf="!isLogged">
+            <li *ngIf="!isLogged && isRouteVisor()">
                 <a class="nav-link" routerLink="login" (click)="isMenuCollapsed = true">Iniciar sesión</a>
             </li>
             <li *ngIf="isLogged" class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">

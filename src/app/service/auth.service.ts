@@ -4,37 +4,45 @@ import { RegistroUsuario } from '../models/registro-usuario';
 import { Observable } from 'rxjs';
 import { LoginUsuario } from '../models/login-usuario';
 import { JwtDTO } from '../models/jwt-dto';
+import { environment } from 'src/environments/environment';
+import { Register } from '../admin/dto/register';
+import { Login } from '../admin/dto/login';
+import { Token } from '../models/token';
+import { Mensaje } from '../interfaces/mensaje';
+import { Restore } from '../models/restore';
+import { EmailRequest } from '../models/email-request';
+import { MuseoResponse } from '../admin/dto/museo-response';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    authURL = 'http://localhost:8080/api/v1/auth/';
+    authURL = `${environment.urlApi}/auth/`;
 
     constructor(private httpClient: HttpClient) { }
 
-    public nuevo(nuevoUsuario: RegistroUsuario): Observable<any> {
-        return this.httpClient.post<any>(this.authURL + 'register', nuevoUsuario);
+    public nuevo(nuevoUsuario: RegistroUsuario){
+        return this.httpClient.post<Register>(this.authURL + 'register', nuevoUsuario);
     }
 
-    public login(loginUsuario: LoginUsuario): Observable<JwtDTO> {
-        return this.httpClient.post<JwtDTO>(this.authURL + 'login', loginUsuario);
+    public login(loginUsuario: LoginUsuario) {
+        return this.httpClient.post<Login>(this.authURL + 'login', loginUsuario);
     }
 
-    public refresh(token: string){// no pude checar qué devuelve
-        return this.httpClient.post<any>(this.authURL + 'refresh', token);
+    public refresh(token: JwtDTO){
+        return this.httpClient.post<Login>(this.authURL + 'refresh', token);
     }
 
-    public recover(id: number){// no pude checar qué devuelve
-        return this.httpClient.get<any>(this.authURL + `recover/${id}`);
+    public recover(id: number){
+        return this.httpClient.get<Mensaje>(this.authURL + `recover/${id}`);
     }
 
-    public restore(username: string, oldPassword: string, nuevaPassword: string, confirmPassword: string){// no pude checar qué devuelve
-        return this.httpClient.post<any>(this.authURL + 'restore', [username, oldPassword, nuevaPassword, confirmPassword]);
+    public restore(restore:Restore){
+        return this.httpClient.post<Mensaje>(this.authURL + 'restore', restore);
     }
 
-    public restoreAccount(userEmail: string){// no pude checar qué devuelve
-        return this.httpClient.post<any>(this.authURL + 'restore/account', userEmail);
+    public restoreAccount(userEmail: EmailRequest){
+        return this.httpClient.post<Mensaje>(this.authURL + 'restore/account', userEmail);
     }
 }

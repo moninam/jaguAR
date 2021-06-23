@@ -3,6 +3,8 @@ import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { LoginUsuario } from '../../models/login-usuario';
 import { TokenService } from '../../service/token.service';
+import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -24,40 +26,41 @@ export class LoginComponent implements OnInit {
         private tokenService: TokenService,
         private authService: AuthService,
         private router: Router,
-        // private toastr: ToastrService
+        private toastService: ToastrService,
+        private cookieService: CookieService
     ) { }
 
     ngOnInit(): void{
         if (this.tokenService.getToken()) {
             this.isLogged = true;
             this.isLoginFail = false;
-            this.roles = this.tokenService.getAuthorities();
         }
     }
 
-    onLogin(): void {
-        const loginUsuario = new LoginUsuario(this.emailUsuario, this.password);
-        this.authService.login(loginUsuario).subscribe(
-            data => {
-                this.isLogged = true;
-
-                this.tokenService.setToken(data.token);
-                this.tokenService.setUserName(data.emailUsuario);
-                this.tokenService.setAuthorities(data.authorities);
-                this.roles = data.authorities;
-                /*this.toastr.success('Bienvenido ' + data.emailUsuario, 'OK', {
-                    timeOut: 3000, positionClass: 'toast-top-center'
-                });*/
-                this.router.navigate(['/admin']);
-            },
-            err => {
-                this.isLogged = false;
-                this.errMsj = err.error.message;
-                /*this.toastr.error(this.errMsj, 'Fail', {
+    onLogin(login:any): void {
+        console.log(login.emailUsuario);
+        var loginUsuario = new LoginUsuario(login.emailUsuario,login.password);
+        this.authService.login(loginUsuario).
+        subscribe((data) => {
+            this.isLogged = true;
+            this.tokenService.setToken(data.token);
+            this.toastService.success('Bienvenido ' + this.tokenService.getUserName(),'OK', {
+                timeOut:3000,positionClass : 'toast-top-center'
+            });
+            setTimeout(() => {
+                window.location.href = '/admin';
+            },2000);
+            //this.router.navigate(['/admin']);
+        },
+        (error) => {
+            this.isLogged = false;
+                this.errMsj = error.error.message;
+                console.log(this.errMsj);
+                this.toastService.error(this.errMsj, 'Fail', {
                     timeOut: 3000,  positionClass: 'toast-top-center',
-                });*/
+                });
                 // console.log(err.error.message);
-            }
+        }
         );
     }
 

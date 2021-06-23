@@ -10,6 +10,14 @@ import { MarcadoresComponent } from './admin/entities/marcadores/marcadores.comp
 import {MultimediaComponent} from './admin/entities/multimedia/multimedia.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+import { interceptorProvider, ProdInterceptorService } from './interceptors/prod-interceptor.service';
+import { ProfileComponent } from './session/profile/profile.component';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
     declarations: [
@@ -18,15 +26,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         ComponentesComponent,
         ModelosComponent,
         MarcadoresComponent,
-        MultimediaComponent
+        MultimediaComponent,
+        ProfileComponent,
     ],
     imports: [
         CommonModule,
         AppRoutingModule,
         NgbModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule, 
+        ToastrModule.forRoot(),
+        MatIconModule,
+        MatSliderModule
     ],
-    providers: []
+    providers: [interceptorProvider]
 })
 export class AdminModule { }

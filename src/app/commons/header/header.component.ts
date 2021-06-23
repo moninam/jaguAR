@@ -1,6 +1,7 @@
+import { Location } from '@angular/common';
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { Grupo } from 'src/app/models/grupo';
+import { GrupoModelo } from 'src/app/models/grupo';
 import {TokenService} from '../../service/token.service';
 
 @Component({
@@ -12,10 +13,12 @@ import {TokenService} from '../../service/token.service';
 export class HeaderComponent implements OnInit{
     public isMenuCollapsed = true;
     public isLogged = false;
+    public isVisor = false;
 
-    @Input()grupos:Grupo[]=[];
+    @Input()grupos:GrupoModelo[]=[];
 
-    constructor(private modalService: NgbModal, private tokenService: TokenService) {}
+    constructor(private modalService: NgbModal, private tokenService: TokenService,
+                        private location:Location) {}
     openMenuModal(content: any): void {
         this.modalService.open(content, {backdropClass: 'color-backdrop'});
     }
@@ -25,6 +28,9 @@ export class HeaderComponent implements OnInit{
     onLogOut(): void {
         this.tokenService.logOut();
         window.location.reload();
+    }
+    isRouteVisor(){
+        return !(this.location.path() === '' || (this.location.path() == '/inicio'));
     }
     getGrupo(){}
 }

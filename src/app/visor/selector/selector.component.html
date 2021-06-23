@@ -32,14 +32,14 @@
                         <div class="row">
                             <div *ngFor="let g of grupos"
                                  class="selector-img grupo-img col-6 p-0 my-2 mx-auto text-center clickable"
-                                 (click)="getComponentes(g.GrupoId!)"
-                                 [id]="'grupo-' + g.GrupoId"
+                                 (click)="getComponentes(g.IdGrupo!)"
+                                 [id]="'grupo-' + g.IdGrupo"
                             >
-                                <img [src]="g.UrlImagenGrupo"/>
-                                <input [value]="g.GrupoId" hidden/>
+                                <img [src]="g.UrlImagen"/>
+                                <input [value]="g.IdGrupo" hidden/>
                                 <div class="selector-background"></div>
                                 <div class="selector-info">
-                                    <p>{{g.NombreGrupo}}</p>
+                                    <p>{{g.Nombre}}</p>
                                 </div>
                             </div>
                         </div>

@@ -19,14 +19,22 @@
           </li>
         </ul>
         <ul class="navbar-nav text-center ms-auto me-3">
-            <li *ngIf="!isLogged && isRouteVisor()">
+            <!--li *ngIf="!isLogged">
                 <a class="nav-link" routerLink="login" (click)="isMenuCollapsed = true">Iniciar sesión</a>
-            </li>
+            </li-->
             <li *ngIf="isLogged" class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
-                <a class="nav-link" tabindex="0" id="dropdownSession" ngbDropdownToggle role="button"></a>
+                <a class="nav-link" tabindex="0" id="dropdownSession" ngbDropdownToggle role="button">
+                    {{userName}}
+                </a>
                 <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownSession">
-                    <a class="btn btn-trans nav-link" routerLink="perfil" (click)="isMenuCollapsed = true">Mi perfil</a>
-                    <a class="btn btn-trans nav-link" (click)="isMenuCollapsed = true; openMenuModal(content)">Cerrar sesión</a>
+                    <a class="btn btn-trans nav-link" routerLink="perfil" (click)="isMenuCollapsed = true">
+                        <span class="mdi mdi-account"></span>
+                        Mi perfil
+                    </a>
+                    <a class="btn btn-trans nav-link" (click)="isMenuCollapsed = true; openMenuModal(content)">
+                        <span class="mdi mdi-logout"></span>
+                        Cerrar sesión
+                    </a>
                 </div>
             </li>
         </ul>

@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit{
     public isMenuCollapsed = true;
     public isLogged = false;
     public isVisor = false;
+    public userName = '';
 
     @Input()grupos:GrupoModelo[]=[];
 
@@ -24,13 +25,11 @@ export class HeaderComponent implements OnInit{
     }
     ngOnInit(): void {
         this.tokenService.getToken() ? this.isLogged = true : this.isLogged = false;
+        this.userName = this.tokenService.getUserName();
     }
     onLogOut(): void {
         this.tokenService.logOut();
         window.location.reload();
-    }
-    isRouteVisor(){
-        return !(this.location.path() === '' || (this.location.path() == '/inicio'));
     }
     getGrupo(){}
 }

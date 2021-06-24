@@ -310,7 +310,7 @@ button.close:focus{border: none; background: transparent}
     z-index: 100;
     position: absolute;
     top: 0;left: 0; /*por el visor al activarse la cámara*/
-    /*background-color: rgba(0,0,0,0.8);*/
+    background-color: rgba(0,0,0,0.8);
     text-align: center;
 }
 .loading img{

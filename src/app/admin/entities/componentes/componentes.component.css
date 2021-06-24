@@ -1,3 +1,4 @@
 .file-input {
     display: none;
 }
+.loading{height: calc(100% + var(--header_height) + var(--footer_height));}

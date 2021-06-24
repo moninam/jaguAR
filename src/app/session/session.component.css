@@ -13,3 +13,4 @@
     background-image: url("../../assets/img/admin/admin_02.jpg");
 }
 #profile_back_img{background-image: url("../../assets/img/admin/admin_04.jpg")}
+.loading{height: calc(100% + var(--header_height) + var(--footer_height));}

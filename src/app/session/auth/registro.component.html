@@ -1,8 +1,8 @@
 <div class="loading" *ngIf="isLoading">
-    <img src="../../../assets/img/spinner2.gif">
+    <img src="../../../assets/gif/loading_splash.gif">
 </div>
 
-<form #f="ngForm" (ngSubmit)="onRegister(f.value)">
+<form class="form-container" #f="ngForm" (ngSubmit)="onRegister(f.value)">
     <div class="col-8 mx-auto my-4">
         <div class="form-group w-100 mb-2">
             <label for="register_email" class="">Correo electrónico</label>

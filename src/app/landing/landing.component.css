@@ -1,7 +1,7 @@
 .jaguar-skin{
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url('../../assets/img/jaguar_skin.jpg');
+    background-image: url('../../assets/img/jaguar_skin.svg');
     background-attachment: fixed;
 }
 #welcome{

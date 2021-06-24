@@ -64,8 +64,10 @@
 .show-element{display: block!important; visibility: visible!important;}
 .hide-element{display: none!important; visibility: hidden!important;}
 
+.cursor-pointer:hover{cursor: pointer;}
+
 /*FONTS*/
-body{color: var(--charcoal)!important;background-color: var(--lila);}
+body{color: var(--charcoal)!important;background-color: var(--lila); overflow-y: scroll; overflow-x: hidden}
 /*colors*/
 .text-pink{color: var(--sakura);}
 .text-purple{color: var(--lavender);}
@@ -284,6 +286,10 @@ button.close:focus{border: none; background: transparent}
 }
 
 /*CUSTOM ALERT*/
+.alert-danger{
+    background-color: var(--darks); color: var(--cherry); border-color: var(--darks);
+    padding: .2rem .5rem; margin-bottom: .5rem; margin-top: 0.2rem;
+}
 .alert{top: 0; }
 .alert-custom {
     background-color: var(--darks);
@@ -304,6 +310,8 @@ button.close:focus{border: none; background: transparent}
     z-index: 100;
     position: absolute;
     top: 0;left: 0; /*por el visor al activarse la cámara*/
+    background-color: rgba(0,0,0,0.8);
+    text-align: center;
 }
 .loading img{
     width: 50vh;

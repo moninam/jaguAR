@@ -24,8 +24,8 @@ export class AdminComponent implements OnInit {
       this.cuentaService.getMuseo(this.tokenService.getUserName())
       .subscribe((museo) => {
         this.tokenService.setIdMuseo(+museo.idMuseo);
-        alert(this.tokenService.getIdMuseo());
-      },(error) => {
+        // alert(this.tokenService.getIdMuseo());
+      }, (error) => {
         this.errMsj = error.error.message;
             console.log(this.errMsj);
             this.toastService.error(this.errMsj, 'Fail', {
@@ -35,7 +35,7 @@ export class AdminComponent implements OnInit {
             setTimeout(() => {
               window.location.href = '/admin';
             },2000);*/
-      })
+      });
     }
   }
 

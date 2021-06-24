@@ -18,3 +18,4 @@
 #adminContent .container-fluid{
     min-height: 90%;
 }
+#admin_alt_sidebar{background-image: url("../../assets/img/jaguar_skin.svg"); background-repeat: no-repeat; background-size: cover}

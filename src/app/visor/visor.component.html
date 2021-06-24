@@ -1,5 +1,5 @@
 <ng-container>
-    <div *ngIf="isLoading" class="loading backg-charcoal80 text-center">
+    <div *ngIf="isLoading" class="loading text-center">
         <img src="../../assets/gif/loading_splash.gif"/>
     </div>
     <div id="visor-navigation">
@@ -10,7 +10,7 @@
                 [hasComponentes]="hasComponentes"
                 (componenteUpdate)="getComponente($event)"
                 (componenteShow)="showComponent($event)"></app-visor-selector>
-        <nav *ngIf="isModel || isVideo || isImage" class="buttons navbar p-3"> <!---->
+        <nav *ngIf="isModel || isVideo || isImage" class="buttons navbar p-3">
             <button type="button" class="btn circle btn-dark float-left mr-3" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed"
                     aria-controls="collapseExample">
                 <span class="mdi mdi-information"></span>

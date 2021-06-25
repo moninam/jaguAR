@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlApi: "https://192.168.1.67:8080/api/v1",
+  urlApi: "",
   grupoFolder : "/root/jaguAR/src/assets/usr/grupos/",
   grupoExternoFolder : "../../../assets/usr/grupos/",
   componentesFolder : "/root/jaguAR/src/assets/usr/componentes/",

@@ -26,8 +26,8 @@
                     <div class="p-3 modal-content-container">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item text-center">
-                                <a class="nav-link" [routerLink]="['/inicio']"
-                                   (click)="modal.dismiss('Cross click')"
+                                <a class="nav-link cursor-pointer"
+                                   (click)="modal.dismiss('Cross click'); loadHomePage()"
                                 >Regresar a Inicio
                                 </a>
                                 <a class="nav-link cursor-pointer"

@@ -16,4 +16,7 @@ export class MenuComponent {
     refreshPage(): void{
         window.location.reload();
     }
+    loadHomePage(): void{
+        window.location.replace('/inicio');
+    }
 }

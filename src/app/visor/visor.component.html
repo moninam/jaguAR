@@ -39,12 +39,12 @@
     <ng-container class="component-display" *ngIf="isVideo">
         <a-scene embedded style="z-index: -1" embedded vr-mode-ui="enabled: false"
         artoolkit='sourceType: webcam; detectionMode: mono; maxDetectionRate: 30; canvasWidth:240; canvasHeight:180'>
-            <a-assets>
-                <video id="vid" src="" autoplay="true" loop="true"></video>
+            <a-assets id="assetId">
+                <video id="vid" src="../../assets/usr/videos/hanal_pixan.mp4" loop="true"></video>
             </a-assets>
-            <a-marker preset="hiro" vidhandler>
-                <a-plane id="planeVid" position='1 2 0' scale="2 2 2" width="2" rotation="-90 0 0" 
-                material='transparent:true; opacity: 0.7; src:#vid'></a-plane>
+            <a-marker id="markervideo" preset="hiro">
+                <a-video id="planeVid" src="#vid" width="2" height="2"rotation="-90 0 0"
+                material='transparent:true; opacity: 0.8;' vidhandler></a-video>
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
@@ -52,10 +52,10 @@
     <ng-container class="component-display" *ngIf="isImage">
         <a-scene embedded arjs vr-mode-ui="enabled: false">
             <a-assets>
-                <img id="transpImage" src="">
+                <img src="">
             </a-assets>
             <a-marker preset='hiro'>
-                <a-image width="1" height="1" src="#transpImage" rotation="-90 0 0" ></a-image>
+                <a-image id="transpImage" width="1" height="1" src="" rotation="-90 0 0" ></a-image>
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>

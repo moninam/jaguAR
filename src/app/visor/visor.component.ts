@@ -30,6 +30,7 @@ export class VisorComponent implements OnInit {
   isImage: boolean;
   isLoading: boolean;
   isTest: boolean = true;
+  secondTime:boolean = false;
   // COLLAPSE AL DESPLEGAR COMPONENTE
     isCollapsed = true;
     componentDescription = '';
@@ -62,6 +63,7 @@ export class VisorComponent implements OnInit {
   ngAfterViewInit(){}
   ngOnInit(): void {
     this.getLocation();
+    this.setVideo();
   }
 
   async getLocation(){
@@ -201,9 +203,12 @@ export class VisorComponent implements OnInit {
         this.isImage = false;
         this.isModel = false;
         this.isVideo = true;
+        /*
         setTimeout(() => {
-          this.setVideo();
           this.setVideoUrl(componente.Multimedia!.UrlMultimedia);
+        },8000);*/
+        setTimeout(() => {
+          //this.setVideo();
           // alert('Video cargado');
           console.log('video cargado');
           this.isLoading = false;
@@ -232,25 +237,23 @@ export class VisorComponent implements OnInit {
     this.AFRAME.registerComponent('vidhandler', {
       init: function () {
         this.toggle = false;
-        this.vid = document.querySelector('#vid');
+        this.vid = document.querySelector("#vid"); //reference to the video
         this.vid.pause();
-    },
-    update:function(){
-      this.toggle = false;
-      this.vid = document.querySelector('#vid');
-      this.vid.play();
-    },
-    tick:function(){
-       if(this.el.object3D.visible == true){
+      },
+      tick:function(){
+        this.marker = document.querySelector("a-marker");
+       if(this.marker.object3D.visible == true){
          if(!this.toggle){
            this.toggle = true;
+           this.vid = document.querySelector("#vid");
            this.vid.play();
-        }
-      }else{
-        this.toggle = false;
-        this.vid.pause();
+         }
+       }else{
+         this.toggle = false;
+         this.vid = document.querySelector("#vid");
+         this.vid.pause();
+       }
       }
-     }
     });
   }
   setMovement(rotation:boolean,resize:boolean){
@@ -268,95 +271,57 @@ export class VisorComponent implements OnInit {
     var objectoT:any= {rotation: this.rotate, resize: this.resize};
     ent!.setAttribute('foo',objectoT);
 
-    this.AFRAME.registerComponent('foo', {
-      schema: {
-        rotation: {type: 'boolean'},
-        resize: {type: 'boolean'}
-      },
-      init:function() {
-
-        var element = document.querySelector('body');
-        this.marker = document.querySelector('a-marker')
-        var model = document.querySelector('a-entity');
-        var hammertime = new Hammer(element!);
-        var pinch = new Hammer.Pinch(); // Pinch is not by default in the recognisers
-        hammertime.add(pinch); // add it to the Manager instance
+    try{
+      this.AFRAME.registerComponent('foo', {
+        schema: {
+          rotation: {type: 'boolean'},
+          resize: {type: 'boolean'}
+        },
+        init:function() {
   
-        if(rotation){
-          hammertime.on('pan', (ev) => {
-            let rotation:any = model!.getAttribute('rotation');
-            switch(ev.direction) {
-              case 2:
-                rotation.y = rotation.y + 4
-                break;
-              case 4:
-                rotation.y = rotation.y - 4
-                break;
-              case 8:
-                rotation.x = rotation.x + 4
-                break;
-              case 16:
-                rotation.x = rotation.x - 4
-                break;
-              default:
-                break;
-            }
-            model!.setAttribute("rotation", rotation)
-          });
+          var element = document.querySelector('body');
+          this.marker = document.querySelector('a-marker')
+          var model = document.querySelector('a-entity');
+          var hammertime = new Hammer(element!);
+          var pinch = new Hammer.Pinch(); // Pinch is not by default in the recognisers
+          hammertime.add(pinch); // add it to the Manager instance
+    
+          if(rotation){
+            hammertime.on('pan', (ev) => {
+              let rotation:any = model!.getAttribute('rotation');
+              switch(ev.direction) {
+                case 2:
+                  rotation.y = rotation.y + 4
+                  break;
+                case 4:
+                  rotation.y = rotation.y - 4
+                  break;
+                case 8:
+                  rotation.x = rotation.x + 4
+                  break;
+                case 16:
+                  rotation.x = rotation.x - 4
+                  break;
+                default:
+                  break;
+              }
+              model!.setAttribute("rotation", rotation)
+            });
+          }
+          if (resize){
+            hammertime.on("pinch", (ev) => {
+              let scale:any = {x:ev.scale, y:ev.scale, z:ev.scale}
+              model!.setAttribute("scale", scale);
+            });
+          }
+         
         }
-        if (resize){
-          hammertime.on("pinch", (ev) => {
-            let scale:any = {x:ev.scale, y:ev.scale, z:ev.scale}
-            model!.setAttribute("scale", scale);
-          });
-        }
-       
+      });
+    }catch(e: unknown){
+      console.log("Si pasa");
+      this.isLoading = false;
     }
-  });
-  /*
-    this.AFRAME.registerComponent("foo",{
-      schema : { speed : {default:1}},
-      init : function(){
-        this.ifMouseDown = false;
-        this.x_cord = 0;
-        this.y_cord = 0;
-        document.addEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
-        document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
-        document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
-        window.addEventListener("wheel", (e) => {
-        let scaleFactor = e.deltaY > 0 ? 0.9 : 1.1
-        let scale = this.el.getAttribute("scale").clone()
-        scale.multiplyScalar(scaleFactor)
-        this.el.setAttribute("scale", scale)
-      })
-      },
-      OnDocumentMouseDown : function(event:any){
-        this.ifMouseDown = true;
-        this.x_cord = event.clientX;
-        this.y_cord = event.clientY;
-      },
-      OnDocumentMouseUp : function(){
-        this.ifMouseDown = false;
-      },
-      OnDocumentMouseMove : function(event:any)
-      {
-        if(this.ifMouseDown)
-        {
-          var temp_x = event.clientX-this.x_cord;
-          var temp_y = event.clientY-this.y_cord;
-          if(Math.abs(temp_y)<Math.abs(temp_x))
-          {
-            this.el.object3D.rotateY(temp_x*this.data.speed/1000);
-          }
-          else
-          {
-            this.el.object3D.rotateX(temp_y*this.data.speed/1000);
-          }
-          this.x_cord = event.clientX;
-          this.y_cord = event.clientY;
-        }
-      }
-    });*/
+
   }
   setMarker(marcador:string){
     var marker = document.getElementById('marker');
@@ -367,10 +332,17 @@ export class VisorComponent implements OnInit {
     objeto?.setAttribute('gltf-model',urlModelo);
   }
   setVideoUrl(urlVideo:string){
-    var objVid = document.getElementById('vid')
-    objVid!.setAttribute('src',urlVideo);
+    // Create a new asset
+    var assets = document.getElementById('assetId')!;
+    assets.removeChild(assets.childNodes[0]);
+    var new_asset = document.createElement('video');
+    new_asset.setAttribute('id', 'vid'); // Create a unique id for asset
+    new_asset.setAttribute('src', urlVideo);
+
+    // Append the new video to the a-assets, where a-assets id="assets-id"
+    assets.appendChild(new_asset);
     var obj = document.getElementById('planeVid');
-    obj!.setAttribute('material','transparent:true; opacity: 0.8; src:#vid');
+    obj!.setAttribute('src','#vid');
   }
   setImagenUrl(urlImagen:string){
     var obj = document.getElementById('transpImage');

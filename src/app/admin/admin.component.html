@@ -1,1 +1,50 @@
-<p>admin works!</p>
+<div class="row p-0 m-0">
+    <div class="col-lg-3 col-md-3 col-sm-12 px-0">
+        <div class="container-fluid h-100 backg-charcoal px-0" *ngIf="isLogged">
+            <div class="col bb-gray">
+                <div class="p-3">
+                    <a id="admin-grupos" routerLink="grupos" class="font-lg btn-link w-100">Grupos</a>
+                </div>
+            </div>
+            <div class="col bb-gray">
+                <div class="p-3">
+                    <a id="admin-componentes" routerLink="componentes" class="font-lg btn-link w-100">Componentes</a>
+                </div>
+                <div class="px-3">
+                    <div class="ps-4">
+                        <a id="admin-modelos" routerLink="modelos" class="font-lg btn-link w-100">
+                            <span class="mdi mdi-arrow-bottom-right-thick"></span>
+                            Modelos
+                        </a>
+                    </div>
+                    <div class="ps-4">
+                        <a id="admin-multimedia" routerLink="multimedia" class="font-lg btn-link w-100">
+                            <span class="mdi mdi-arrow-bottom-right-thick"></span>
+                            Multimedia
+                        </a>
+                    </div>
+                    <div class="ps-4 pb-3">
+                        <a id="admin-marcadores" routerLink="marcadores" class="font-lg btn-link w-100">
+                            <span class="mdi mdi-arrow-bottom-right-thick"></span>
+                            Marcadores
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="admin_alt_sidebar" class="container-fluid h-100 px-0" *ngIf="!isLogged"></div>
+    </div>
+    <div id="adminContent" class="col-lg-9 col-md-9 col-sm-12 px-0">
+        <p class="text-white font-xs p-3 backg-charcoal50">
+            Créditos de fotografía a
+            <a class="text-yellow" href="https://unsplash.com/@esu?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+                Adaivorukamuthan
+            </a> -
+            <a class="text-yellow" href="https://unsplash.com">
+                Unsplash
+            </a>
+        </p>
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

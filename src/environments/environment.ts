@@ -3,7 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  urlApi: "https://50.21.190.243:4043/api/v1",
+  grupoFolder : "/root/jaguar/jaguAR/src/assets/usr/grupos/",
+  grupoExternoFolder : "../../../assets/usr/grupos/",
+  componentesFolder : "/root/jaguar/jaguAR/src/assets/usr/componentes/",
+  componenteExternoFolder : "../../../assets/usr/componentes/",
+  imagenesFolder : "/root/jaguar/jaguAR/src/assets/usr/imagenes/",
+  imagenesExternoFolder : "../../assets/usr/imagenes/",
+  videosFolder : "/root/jaguar/jaguAR/src/assets/usr/videos/",
+  videosExternoFolder : "../../assets/usr/videos/",
+  modelosFolder: "/root/jaguar/jaguAR/src/assets/usr/modelos/",
+  modelosExternoFolder : "../../assets/usr/modelos/",
+  marcadoresFolder : "/root/jaguar/jaguAR/src/assets/usr/marcadores/",
+  marcadoresExternosFolder : "../../assets/usr/marcadores/"
 };
 
 /*

@@ -1,7 +1,12 @@
 .navbar{
     top: 0;
     width: 100%;
-    min-height: 5em;
-    background-color: white;
+    height: var(--header_height);
+}
+.navbar-light{
+    background-color: var(--almost-white);
 }
 #jaguar_logo{width: 10rem; height: auto; margin: auto;}
+@media (max-width: 991px) {/*bootstrap lg - small pc*/
+.navbar-collapse{background-color: var(--sand)}
+}

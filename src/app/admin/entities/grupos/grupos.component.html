@@ -1,0 +1,173 @@
+<div class="loading" *ngIf="isLoading">
+    <img src="../../../../assets/gif/loading_splash.gif">
+</div>
+<div class="container-fluid px-5 py-3">
+    <!--
+    <ngb-alert class="msg-ok" type="custom" [dismissible]="true">Sample</ngb-alert>
+    <ngb-alert class="msg-error" type="custom" [dismissible]="true">Sample</ngb-alert>
+    <ngb-alert class="" type="custom" [dismissible]="true">Sample</ngb-alert>-->
+
+    <div class="row mb-4">
+        <h3 class="col text-white">Grupos</h3>
+        <button class="btn btn-forest col-3" (click)="openModal(newEntityModal)">Nuevo grupo</button>
+    </div>
+
+    <div class="table-container">
+        <table class="table table-light table-hover text-center">
+            <thead class="thead-aqua">
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Imagen</th>
+                <th>Fecha de modificación</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of grupos">
+                <td>{{item.Nombre}}</td>
+                <td>{{item.Descripcion}}</td>
+                <td>{{item.UrlImagen}}</td>
+                <td>{{item.UpdatedDate}}</td>
+                <td>
+                    <a
+                        class="icon mdi mdi-pencil text-yellow"
+                        data-toggle="tooltip"
+                        ngbPopover="Editar"
+                        triggers="mouseenter:mouseleave"
+                        (click)="editModal(editEntityModal,item)"
+                    >
+                    </a>
+                    <a
+                        class="icon mdi mdi-trash-can text-red"
+                        data-toggle="tooltip" title="Eliminar"
+                        (click)="deleteModal(confirmDelete,item.IdGrupo!)"
+                        >
+                    </a>
+                    
+                </td>
+            </tr>
+
+            <tr *ngIf="grupos.length === 0">
+                <td colspan="12">No se encontraron registros</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL DELETE CONFIRM -->
+<ng-template #confirmDelete let-modal>
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../../assets/gif/loading_splash.gif">
+    </div>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">Eliminar</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
+    </div>
+    <div class="modal-body p-3">
+        <p>¿Está seguro de que desea eliminar este grupo?</p>
+    </div>
+    <div class="modal-footer">
+        <div class="row col-12">
+            <div class="col-6"><button class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+            <div class="col-6"><button class="btn btn-yellow w-100" (click)="onDelete()">Eliminar grupo</button></div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- MODAL NEW ENTITY -->
+<ng-template #newEntityModal let-modal>
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../../assets/gif/loading_splash.gif">
+    </div>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">Nuevo grupo</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
+    </div>
+    <form #f="ngForm" (ngSubmit)="onRegister(f.value)">
+        <div class="modal-body p-3">
+            <div class="form-group w-100 mb-2">
+                <label for="group_name" class="">Nombre del grupo</label>
+                <input ngModel name="nombreGrupo" #nombreGrupo="ngModel" required id="group_name" type="text" class="form-control" placeholder="Ingrese el nombre del grupo"/>
+                <div *ngIf="nombreGrupo.touched && nombreGrupo.invalid" class="alert alert-danger">
+                    <div *ngIf="nombreGrupo.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Descripción del grupo</label>
+                <textarea ngModel name = "descripcionGrupo" #descripcionGrupo="ngModel" required id="group_description" class="form-control" placeholder="Ingrese una descripción" required></textarea>
+                <div *ngIf="descripcionGrupo.touched && descripcionGrupo.invalid" class="alert alert-danger">
+                    <div *ngIf="descripcionGrupo.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <input type="file" required class="file-input"
+                accept=".jpg,.jpeg,.png"
+                (change)="onFileSelected($event)" #fileUpload>
+
+                <div class="file-upload">
+
+                    {{fileName || "Ningún archivo seleccionado."}}
+
+                    <button type="button" mat-mini-fab color="primary" class="upload-btn"
+                    (click)="fileUpload.click()">
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row col-12">
+                <div class="col-6"><button type="button" class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+                <div class="col-6"><button class="btn btn-yellow w-100" [disabled]="!f.valid || !fileGrupo">Crear grupo</button></div>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<!-- MODAL NEW ENTITY -->
+<ng-template #editEntityModal let-modal>
+    <div class="loading" *ngIf="isLoading">
+        <img src="../../../../assets/gif/loading_splash.gif">
+    </div>
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">Editar grupo</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
+    </div>
+    <form [formGroup]="editForm"  (ngSubmit)="onEdit()">
+        <div class="modal-body p-3">
+            <div class="form-group w-100 mb-2">
+                <label for="group_name" class="">Nombre del grupo</label>
+                <input formControlName="nombre" id="nombreGrupoE" type="text" class="form-control" placeholder="Ingrese el nombre del grupo"/>
+                <div *ngIf="editForm.get('nombre')!.touched && editForm.get('nombre')!.invalid" class="alert alert-danger">
+                    <div *ngIf="editForm.get('nombre')!.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <div class="form-group w-100 mb-4">
+                <label for="group_description" class="">Descripción del grupo</label>
+                <textarea formControlName="descripcion" id="group_descriptionE" class="form-control" placeholder="Ingrese una descripción" required></textarea>
+                <div *ngIf="editForm.get('descripcion')!.touched && editForm.get('descripcion')!.invalid" class="alert alert-danger">
+                    <div *ngIf="editForm.get('descripcion')!.errors?.required">El campo es requerido</div>
+                </div>
+            </div>
+            <input formControlName="idGrupo" type="text" class="form-control" hidden>
+            <input formControlName="urlImagen" type="text" class="form-control" hidden>
+        </div>
+        <div class="modal-footer">
+            <div class="row col-12">
+                <div class="col-6"><button type="button" class="btn btn-secondary w-100" (click)="modal.dismiss('Cross click')">Cancelar</button></div>
+                <div class="col-6"><button class="btn btn-yellow w-100" [disabled]="!isValid()" >Guardar grupo</button></div>
+            </div>
+        </div>
+    </form>
+</ng-template>

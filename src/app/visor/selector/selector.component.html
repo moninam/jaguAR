@@ -1,0 +1,82 @@
+<!-- BOTONES DE NAVEGACION -->
+<nav class="buttons navbar p-3" *ngIf="idMuseo && idMuseo != 0">
+    <button class="btn circle btn-danger float-left mr-3" (click)="openMenuModal(content)">
+        <span class="mdi mdi-cube-outline"></span>
+    </button>
+</nav>
+
+<!-- GRUPOS Y COMPONENTES -->
+<ng-template #content let-modal>
+<div class="modal-rainbow" id="modalClase" >
+    <div class="modal-header pb-2">
+        <div class="col-2"></div>
+        <h2 class="modal-title text-center col">EXPLORA</h2>
+        <button type="button" class="close col-2 my-auto" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" class="mdi mdi-close-thick"></span>
+        </button>
+    </div>
+    <div class="modal-body p-0">
+        <div [ngbNavOutlet]="nav"></div>
+    </div>
+    <div class="modal-footer">
+        <ul ngbNav #nav="ngbNav" class="nav-pills col-12">
+            <li ngbNavItem class="col-6 text-center">
+                <a ngbNavLink>Grupos</a>
+                <ng-template ngbNavContent>
+                    <div class="text-center bb-rainbow backg-charcoal">
+                        <h5>Selecciona un grupo</h5>
+                    </div>
+                    <div class="p-3 modal-content-container">
+                        <p *ngIf="!hasGroups" class="text-center">No se encontró ningún grupo registrado</p>
+                       <!--GRUPOS-->
+                        <div class="row">
+                            <div *ngFor="let g of grupos"
+                                 class="selector-img grupo-img col-6 p-0 my-2 mx-auto text-center clickable"
+                                 (click)="getComponentes(g.IdGrupo!)"
+                                 [id]="'grupo-' + g.IdGrupo"
+                            >
+                                <img [src]="g.UrlImagen"/>
+                                <input [value]="g.IdGrupo" hidden/>
+                                <div class="selector-background"></div>
+                                <div class="selector-info">
+                                    <p>{{g.Nombre}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem class="col-6 text-center">
+                <a ngbNavLink>Componentes</a>
+                <ng-template ngbNavContent>
+                    <div class="text-center bb-rainbow backg-charcoal">
+                        <h5>Selecciona un componente</h5>
+                    </div>
+                    <div class="p-3 modal-content-container">
+                        <p *ngIf="!hasComponentes" class="text-center">No se encontró ningún componente registrado</p>
+                        <!--COMPONENTES-->
+                        <div class="row" *ngIf="hasComponentes">
+                            <div *ngFor="let c of componentes"
+                                class="selector-img componente-img col-6 p-0 my-2 mx-auto text-center clickable"
+                                 (click)="modal.dismiss('Cross click'); showComponente(c)"
+                                 [id]="'componente-' + c.IdComponente"
+                            >
+                                <img [src]="c.UrlImagenComponente"/>
+                                <div class="selector-background"></div>
+                                <div class="selector-info">
+                                    <p class="clickable font-sm" >
+                                        <span class="mdi mdi-qrcode"></span>
+                                        {{c.NombreComponente}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+</div>
+</ng-template>
+
+

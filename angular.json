@@ -28,9 +28,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@mdi/font/css/materialdesignicons.min.css",
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/lib/aframe.min.js",
+              "src/lib/aframe-ar.js",
+              "src/lib/aframe-extras.min.js",
+              "src/lib/aframe-gif-shader.min.js",
+              "src/lib/hammer.js"  
+            ]
           },
           "configurations": {
             "production": {
@@ -124,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "jaguAr"
+  "defaultProject": "jaguAr",
+  "cli": {
+    "analytics": false
+  }
 }

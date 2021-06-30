@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  urlApi: "https://50.21.190.243:4043/api/v1",
+  urlApi: "https://jaguar-api.herokuapp.com/api/v1",
   grupoFolder : "/root/jaguar/jaguAR/src/assets/usr/grupos/",
   grupoExternoFolder : "../../../assets/usr/grupos/",
   componentesFolder : "/root/jaguar/jaguAR/src/assets/usr/componentes/",

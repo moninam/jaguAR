@@ -38,7 +38,7 @@
               "src/lib/aframe-ar.js",
               "src/lib/aframe-extras.min.js",
               "src/lib/aframe-gif-shader.min.js",
-              "src/lib/hammer.js"  
+              "src/lib/hammer.js"
             ]
           },
           "configurations": {
@@ -129,6 +129,10 @@
               "devServerTarget": "jaguAr:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
